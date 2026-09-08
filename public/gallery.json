@@ -1,0 +1,372 @@
+{
+  "artworks": [
+    {
+      "id": "01",
+      "title": "光的序章",
+      "zone": "west",
+      "image": "artworks/01.svg",
+      "position": [
+        -4.785,
+        1.72,
+        -4.8
+      ],
+      "rotation": 90,
+      "width": 1.03,
+      "height": 0.74,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "02",
+      "title": "緋色軌跡",
+      "zone": "west",
+      "image": "artworks/02.svg",
+      "position": [
+        -4.785,
+        1.72,
+        -3.3499999999999996
+      ],
+      "rotation": 90,
+      "width": 0.78,
+      "height": 0.98,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "03",
+      "title": "日落之後",
+      "zone": "west",
+      "image": "artworks/03.svg",
+      "position": [
+        -4.785,
+        1.72,
+        -1.9
+      ],
+      "rotation": 90,
+      "width": 0.78,
+      "height": 0.98,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "04",
+      "title": "靜謐之境",
+      "zone": "west",
+      "image": "artworks/04.svg",
+      "position": [
+        -4.785,
+        1.72,
+        -0.4500000000000002
+      ],
+      "rotation": 90,
+      "width": 1.03,
+      "height": 0.74,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "05",
+      "title": "月的背面",
+      "zone": "west",
+      "image": "artworks/05.svg",
+      "position": [
+        -4.785,
+        1.72,
+        1.0
+      ],
+      "rotation": 90,
+      "width": 0.78,
+      "height": 0.98,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "06",
+      "title": "流動的記憶",
+      "zone": "west",
+      "image": "artworks/06.svg",
+      "position": [
+        -4.785,
+        1.72,
+        2.45
+      ],
+      "rotation": 90,
+      "width": 0.78,
+      "height": 0.98,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "07",
+      "title": "微光之間",
+      "zone": "west",
+      "image": "artworks/07.svg",
+      "position": [
+        -4.785,
+        1.72,
+        3.8999999999999995
+      ],
+      "rotation": 90,
+      "width": 1.03,
+      "height": 0.74,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "08",
+      "title": "夜色練習",
+      "zone": "east",
+      "image": "artworks/08.svg",
+      "position": [
+        4.785,
+        1.72,
+        -4.85
+      ],
+      "rotation": -90,
+      "width": 0.96,
+      "height": 0.78,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "09",
+      "title": "熙望的形狀",
+      "zone": "east",
+      "image": "artworks/09.svg",
+      "position": [
+        4.785,
+        1.72,
+        -3.3999999999999995
+      ],
+      "rotation": -90,
+      "width": 0.82,
+      "height": 1.02,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "10",
+      "title": "盛放",
+      "zone": "east",
+      "image": "artworks/10.svg",
+      "position": [
+        4.785,
+        1.72,
+        -1.9499999999999997
+      ],
+      "rotation": -90,
+      "width": 0.96,
+      "height": 0.78,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "11",
+      "title": "遠方來信",
+      "zone": "east",
+      "image": "artworks/11.svg",
+      "position": [
+        4.785,
+        1.72,
+        -0.5
+      ],
+      "rotation": -90,
+      "width": 0.82,
+      "height": 1.02,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "12",
+      "title": "光與回聲",
+      "zone": "east",
+      "image": "artworks/12.svg",
+      "position": [
+        4.785,
+        1.72,
+        0.9500000000000002
+      ],
+      "rotation": -90,
+      "width": 0.96,
+      "height": 0.78,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "13",
+      "title": "留下的溫度",
+      "zone": "east",
+      "image": "artworks/13.svg",
+      "position": [
+        4.785,
+        1.72,
+        2.4000000000000004
+      ],
+      "rotation": -90,
+      "width": 0.82,
+      "height": 1.02,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "14",
+      "title": "浮光",
+      "zone": "north",
+      "image": "artworks/14.svg",
+      "position": [
+        -4.12,
+        1.72,
+        -5.865
+      ],
+      "rotation": 0,
+      "width": 1.04,
+      "height": 0.74,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "15",
+      "title": "時間切片",
+      "zone": "north",
+      "image": "artworks/15.svg",
+      "position": [
+        -2.77,
+        1.72,
+        -5.865
+      ],
+      "rotation": 0,
+      "width": 0.85,
+      "height": 1.0,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "16",
+      "title": "未完的風景",
+      "zone": "north",
+      "image": "artworks/16.svg",
+      "position": [
+        -1.42,
+        1.72,
+        -5.865
+      ],
+      "rotation": 0,
+      "width": 1.04,
+      "height": 0.74,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "17",
+      "title": "相遇時刻",
+      "zone": "north",
+      "image": "artworks/17.svg",
+      "position": [
+        -0.0699999999999994,
+        1.72,
+        -5.865
+      ],
+      "rotation": 0,
+      "width": 0.85,
+      "height": 1.0,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "18",
+      "title": "日光收藏",
+      "zone": "north",
+      "image": "artworks/18.svg",
+      "position": [
+        1.2800000000000002,
+        1.72,
+        -5.865
+      ],
+      "rotation": 0,
+      "width": 1.04,
+      "height": 0.74,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "19",
+      "title": "柔軟的邊界",
+      "zone": "north",
+      "image": "artworks/19.svg",
+      "position": [
+        2.63,
+        1.72,
+        -5.865
+      ],
+      "rotation": 0,
+      "width": 0.85,
+      "height": 1.0,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "20",
+      "title": "再次，看見",
+      "zone": "north",
+      "image": "artworks/20.svg",
+      "position": [
+        3.9800000000000013,
+        1.72,
+        -5.865
+      ],
+      "rotation": 0,
+      "width": 1.04,
+      "height": 0.74,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    },
+    {
+      "id": "21",
+      "title": "熙望・序曲",
+      "zone": "reception",
+      "image": "artworks/21.svg",
+      "position": [
+        3.5,
+        1.85,
+        5.83
+      ],
+      "rotation": 180,
+      "width": 2.15,
+      "height": 1.25,
+      "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
+      "medium": "數位構成・示意圖"
+    }
+  ],
+  "colliders": [
+    {
+      "x": 0.77,
+      "z": 5.83,
+      "width": 0.42,
+      "depth": 0.38
+    },
+    {
+      "x": -1.35,
+      "z": -1.45,
+      "width": 0.48,
+      "depth": 0.5
+    },
+    {
+      "x": -1.35,
+      "z": 3.65,
+      "width": 0.48,
+      "depth": 0.5
+    },
+    {
+      "x": 3.4,
+      "z": 4.75,
+      "width": 2.25,
+      "depth": 0.82
+    }
+  ],
+  "bounds": {
+    "minX": -4.55,
+    "maxX": 4.55,
+    "minZ": -5.5,
+    "maxZ": 5.45
+  }
+}
