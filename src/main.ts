@@ -39,7 +39,7 @@ function toast(message:string) {
   $('#toast').textContent=message; $('#toast').hidden=false
   clearTimeout(toastTimer); toastTimer=setTimeout(()=>$('#toast').hidden=true,4000)
 }
-function dismissIntro() { $('.intro').classList.add('dismissed') }
+function dismissIntro() { $('.intro').classList.add('dismissed'); $('.intro').inert=true }
 function resetInput() { keys.clear(); drag=null; canvas.classList.remove('dragging'); $('#hover-label').hidden=true }
 function showModal(dialog:HTMLDialogElement) {
   resetInput()
@@ -108,7 +108,7 @@ $('#locate-art').addEventListener('click',()=>{
   const pos=new THREE.Vector3(...a.position).add(new THREE.Vector3(Math.sin(angle)*1.65,0,Math.cos(angle)*1.65));pos.y=1.65
   // Reception tabletop needs more clearance than a regular wall artwork.
   if(a.zone==='reception')pos.z=3.3
-  artDialog.close();goTo(pos,angle,a.zone)
+  returnFocus=canvas;artDialog.close();goTo(pos,angle,a.zone)
 })
 $('#fullscreen-button').addEventListener('click',async()=>{
   try {if(document.fullscreenElement)await document.exitFullscreen();else await $('#gallery').requestFullscreen()} catch {toast('此瀏覽器不支援全螢幕，仍可直接瀏覽展間。')}
@@ -196,7 +196,7 @@ function addLighting() {
 }
 function failScene(error:unknown) {
   console.error(error);sceneAvailable=false;renderer?.setAnimationLoop(null)
-  $('#loading-text').textContent='3D 空間暫時無法開啟，仍可瀏覽作品目錄。'
+  $('#loading-text').textContent=ready?'3D 空間暫時無法開啟，仍可瀏覽作品目錄。':'展覽資料暫時無法載入，請重新載入。'
   $<HTMLProgressElement>('#load-progress').hidden=true
   if(!$('#retry-scene')){const b=document.createElement('button');b.id='retry-scene';b.className='primary-button';b.style.width='180px';b.style.marginTop='20px';b.textContent='重新載入展間';b.onclick=()=>location.reload();$('#loading').append(b)}
   $('#loading').classList.remove('done')
