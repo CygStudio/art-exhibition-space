@@ -2,6 +2,7 @@ import './style.css'
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { movePosition } from './navigation.mjs'
+import { createCelEnvironment } from './environment'
 
 type Zone = 'north' | 'west' | 'east' | 'reception'
 interface Artwork { id: string; title: string; zone: Zone; image: string; position: [number, number, number]; rotation: number; width: number; height: number; description: string; medium: string }
@@ -14,6 +15,7 @@ const aboutDialog = $<HTMLDialogElement>('#about-dialog')
 const zoneNames: Record<Zone,string> = {north:'主展牆',west:'西側展區',east:'東側展區',reception:'接待區'}
 const base = import.meta.env.BASE_URL
 const scene = new THREE.Scene()
+const environment = createCelEnvironment()
 scene.background = new THREE.Color('#bcb8aa')
 const camera = new THREE.PerspectiveCamera(65, 1, .05, 45)
 camera.rotation.order = 'YXZ'
@@ -182,18 +184,6 @@ function animate() {
   $('#map-marker').setAttribute('transform',`translate(${mx} ${mz}) rotate(${-yaw*180/Math.PI})`)
   renderer.render(scene,camera)
 }
-function addLighting() {
-  scene.add(new THREE.HemisphereLight('#fff4df','#817969',2.3))
-  scene.add(new THREE.AmbientLight('#fff6e9',.45))
-  const key=new THREE.DirectionalLight('#fff3dc',2.1);key.position.set(-3,7,4);scene.add(key)
-  // Fixtures are modelled in Blender. Light pools are inexpensive, non-shadowed lights.
-  const spots=[[-3.8,2.7,-4.2,-4.8,1.4,-4.2],[-3.8,2.7,0,-4.8,1.4,0],[-3.8,2.7,3.6,-4.8,1.4,3.6],[3.8,2.7,-4.2,4.8,1.4,-4.2],[3.8,2.7,0,4.8,1.4,0],[-3,2.7,-4.8,-3,1.3,-5.9],[0,2.7,-4.8,0,1.3,-5.9],[3,2.7,-4.8,3,1.3,-5.9]]
-  spots.forEach(p=>{const light=new THREE.SpotLight('#fff2d8',14,6,.86,.82,2);light.position.set(p[0],p[1],p[2]);light.target.position.set(p[3],p[4],p[5]);scene.add(light,light.target)})
-  // Soft contact shading under the columns, baked-style without real-time shadow maps.
-  const c=document.createElement('canvas');c.width=c.height=128;const ctx=c.getContext('2d')!;const g=ctx.createRadialGradient(64,64,5,64,64,64);g.addColorStop(0,'rgba(20,16,10,.42)');g.addColorStop(1,'rgba(20,16,10,0)');ctx.fillStyle=g;ctx.fillRect(0,0,128,128)
-  const shadowMat=new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(c),transparent:true,depthWrite:false})
-  data.colliders.forEach(o=>{const m=new THREE.Mesh(new THREE.PlaneGeometry(o.width+1.2,o.depth+1.2),shadowMat);m.rotation.x=-Math.PI/2;m.position.set(o.x,.005,o.z);m.userData.solid=false;scene.add(m)})
-}
 function failScene(error:unknown) {
   console.error(error);sceneAvailable=false;renderer?.setAnimationLoop(null)
   $('#loading-text').textContent=ready?'3D 空間暫時無法開啟，仍可瀏覽作品目錄。':'展覽資料暫時無法載入，請重新載入。'
@@ -207,8 +197,8 @@ async function init() {
     data=await response.json();buildCatalog();ready=true
     renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'})
     renderer.setPixelRatio(Math.min(devicePixelRatio,1.25));renderer.outputColorSpace=THREE.SRGBColorSpace
-    renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05
-    camera.position.set(1.25,1.65,4.1);addLighting();resize()
+    renderer.toneMapping=THREE.NoToneMapping
+    camera.position.set(1.25,1.65,4.1);environment.light(scene,data.colliders);resize()
     const loader=new GLTFLoader()
     const gltf=await loader.loadAsync(base+'models/gallery.glb',p=>{if(p.total)$<HTMLProgressElement>('#load-progress').value=p.loaded/p.total*75})
     const textureLoader=new THREE.TextureLoader()
@@ -220,6 +210,7 @@ async function init() {
       if(!(o instanceof THREE.Mesh))return
       if(o.userData.artworkId){const id=o.userData.artworkId;o.material=new THREE.MeshBasicMaterial({map:textures.get(id)});artworks.set(id,o)}
     })
+    environment.apply(gltf.scene)
     scene.add(gltf.scene);sceneAvailable=true
     $<HTMLProgressElement>('#load-progress').value=100
     await renderer.compileAsync(scene,camera)
