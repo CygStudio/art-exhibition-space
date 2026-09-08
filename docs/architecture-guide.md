@@ -46,7 +46,7 @@ flowchart TD
 | `src/style.css` | 排版、RWD、DOM 外觀、減少動態效果 | 一般 CSS；不會改變展牆材質 |
 | `src/main.ts` | 載入、共用狀態、輸入事件、點選、動畫迴圈、DOM 更新 | 入口與 controller，目前多數協調邏輯集中於此 |
 | `src/environment.ts` | 建築色票、toon 材質、邊線、燈光、接觸陰影色塊 | 3D 的外觀設定層；類比 design tokens，但運作方式不同於 CSS |
-| `src/stations.ts` | 四個展區的攝影機位置與水平朝向 | 導覽設定資料 |
+| `src/stations.ts` | 六個導覽站位的攝影機位置與水平朝向 | 導覽設定資料 |
 | `src/navigation.mjs` | 可站立判斷、移動碰撞、地板尋路 | 不依賴 DOM／Three.js 的純函式 |
 | `public/gallery.json` | 作品內容、定位資料、障礙物矩形、可走邊界 | 靜態資料契約 |
 | `blender/build_gallery.py` | 建築、畫框、作品平面、識別碼、資產匯出 | 可重跑的資產產生器 |
@@ -109,25 +109,25 @@ flowchart LR
 
 在 `init()` 中，程式依序讀 JSON、建立 DOM 目錄、建立 Renderer、載入 GLB，再並行載入作品圖片。之後走訪 GLB 中的 Mesh：有 `artworkId` 的套上圖片材質，其餘交給 `environment.apply()`。
 
-**ID 是資料與模型的接點。** `gallery.json` 中的 `position`、`rotation` 主要供「前往作品位置」計算使用；真正顯示的畫作位置與幾何來自 GLB。只改 JSON 座標，不會把牆上的畫搬走。
+**ID 是資料與模型的接點。** `gallery.json` 中的 `position`、`rotation` 主要供「前往作品位置」計算使用，桌前或柱旁作品另有 `viewPosition` 指定安全站位；真正顯示的畫作位置與幾何來自 GLB。只改 JSON 座標，不會把牆上的畫搬走。
 
 目前 TypeScript 的 `GalleryData` interface 只提供編譯期型別；沒有 JSON 執行期 schema 驗證。
 
 ## 5. 空間座標：先把 3D 拆成平面與高度
 
-Three.js 這邊採 Y-up：X 左右、Y 高度、Z 前後。本專案把世界單位當作公尺使用，但 Three.js 本身不強制單位。展場約 10 × 12 公尺，仍是影像推估。
+Three.js 這邊採 Y-up：X 左右、Y 高度、Z 前後。本專案把世界單位當作公尺使用，但 Three.js 本身不強制單位。外框約 10.8 × 10.2 公尺，依標註圖比例與 30 坪主空間推估，尚未量測。
 
 ```text
-                  -Z：主展牆
+                  -Z：簽到桌／服務台
                   ↑
-     -X：西側 ← 地板原點 → +X：東側
+     -X：左側展牆 ← 地板原點 → +X：落地窗
                   ↓
-                  +Z：入口／接待區
+                  +Z：主展牆
 
      Y 軸垂直地板；攝影機眼高固定在 Y = 1.65
 ```
 
-入口位置是 `[1.25, 1.65, 4.1]`：距中心往東 1.25、離地 1.65、往入口方向 4.1。這不是 CSS 的 left／top，也不是相對目前視窗的像素。
+初始導覽位置由 `gallery.json` 的 `layout.entrance` 提供，目前是 `[3.9, 1.65, -0.35]`；位置靠平面圖右側，入口本身仍未經現場確認。這不是 CSS 的 left／top，也不是相對目前視窗的像素。
 
 `yaw` 是左右轉頭，`pitch` 是上下看；程式使用 radians。`yaw = 0` 朝 -Z，`yaw = π/2` 朝 -X。W 鍵代表沿目前朝向前進，因此轉頭後 W 的世界座標方向也會改變。現在沒有跳躍、樓梯或重力；行走只更新 X、Z。
 
@@ -157,7 +157,7 @@ flowchart TD
 
 ## 7. 看起來是 3D，碰撞卻是 2D
 
-顯示幾何與碰撞幾何是不同資料。GLB 有樑、管線、畫框等細節；`gallery.json` 的 colliders 只有門柱、兩根方柱、接待桌，共四個 XZ 矩形。外牆由可站立中心的 `bounds` 限制，並非每個可見 Mesh 都會自動阻擋行走。
+顯示幾何與碰撞幾何是不同資料。GLB 有樑、管線、畫框等細節；`gallery.json` 的 colliders 包含整個未使用房間、兩根方柱、服務台、簽到桌及三張椅子，共八個 XZ 矩形。外牆由可站立中心的 `bounds` 限制，並非每個可見 Mesh 都會自動阻擋行走。
 
 訪客以半徑 0.24 的圓代表地板占位，不是沒有體積的一個點。
 
