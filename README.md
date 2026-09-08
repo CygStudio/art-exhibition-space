@@ -6,7 +6,7 @@
 
 ## 啟動
 
-需要 Node.js 22.12+ 與 pnpm 10。
+需要 Node.js 22.18+ 與 pnpm 10。
 
 ```sh
 pnpm install --frozen-lockfile
@@ -26,9 +26,12 @@ pnpm test      # 碰撞、作品位置、GLB 與圖檔一致性
 ## 操作
 
 - 滑鼠／單指拖曳環視，點擊畫作開啟原生 DOM `<dialog>` 燈箱。
+- 點擊空曠地板後，攝影機會沿可通行路線平順前進；目的地以圓環標示，沿途避開柱子與桌子。
+- 拖曳、使用方向鍵、切換展區、開啟燈箱或離開頁面焦點，會停止自動移動。無法到達的位置會顯示提示。
+- 啟用系統「減少動態效果」時，點地板直接切換至可到達的目的地。
 - 點一下場景或「開始探索」後，使用 WASD／方向鍵移動。
 - 手機左下角方向按鈕可持續按住移動，支援 pointer cancel，放開即停止。
-- 右下角導覽跳至各展區；平面圖同步顯示位置與朝向。
+- 右下角導覽跳至各展區；站位距離展牆約 4～5 公尺，鏡頭垂直視角為 72°，平面圖同步顯示位置與朝向。
 - 作品目錄提供不依賴 3D 選取的鍵盤瀏覽方式。
 - 燈箱支援上一件／下一件、左右方向鍵、Esc、背景點擊及焦點還原。
 - 「前往作品位置」會關閉燈箱並定位到作品前方。
@@ -56,7 +59,14 @@ pnpm model
 
 這個指令會覆寫 `.blend`、GLB、`gallery.json` 與全部示意 SVG。若已手動修改模型或替換圖片，請先 commit，或先修改產生腳本再執行。
 
-建模腳本內以 Three.js 的 Y-up 座標定義尺寸，轉換至 Blender 的 Z-up 後建立物件。靜態建築依材質合併，作品保留 `artworkId` extras。GLB 約 5,380 個三角形；入口視角測得約 24 次 draw call（視角會影響裁切結果）。使用小型內嵌混凝土材質、非即時陰影的燈光與簡化接觸陰影。
+建模腳本內以 Three.js 的 Y-up 座標定義尺寸，轉換至 Blender 的 Z-up 後建立物件。靜態建築依材質合併，作品保留 `artworkId` extras。GLB 約 5,380 個三角形；視角會影響實際繪製量。網頁透過 `src/environment.ts` 將建築材質轉為共用的 `MeshToonMaterial`，搭配三階明暗、奶油色牆面、灰紫色梁架／地板與細描邊。原始 GLB 的混凝土材質保留在資產內，網頁不使用其噪點貼圖；接觸陰影改為平塗色塊。作品圖片維持原色。
+
+## 調整導覽與風格
+
+- `src/environment.ts`：共用色票、三階 gradient map、描邊與燈光。
+- `src/stations.ts`：四個展區站位與朝向。
+- `src/navigation.mjs`：攝影機碰撞及地板移動路線；以障礙物外側轉折點建立可通行路線，檢查整段攝影機半徑。
+- `src/main.ts`：點選、目的地標記、攝影機動畫及燈箱。
 
 ## 換成正式作品
 
@@ -74,4 +84,5 @@ pnpm model
 ## 技術參考
 
 - [Three.js 官方文件](https://threejs.org/docs/)
+- [MeshToonMaterial 官方文件](https://threejs.org/docs/pages/MeshToonMaterial.html)
 - [Blender glTF 匯出文件](https://docs.blender.org/manual/en/latest/addons/import_export/scene_gltf2.html)
