@@ -15,7 +15,7 @@
       <nav aria-label="展覽選單"><button id="catalog-button">作品目錄 <span class="count">21</span></button><button id="about-button" class="icon-button" aria-label="關於展覽與操作說明">?</button></nav>
     </header>
     <main id="gallery">
-      <canvas id="scene" tabindex="0" aria-label="3D 展覽空間。拖曳環視，WASD 或方向鍵移動，點擊畫作開啟詳情。亦可使用作品目錄。"></canvas>
+      <canvas id="scene" tabindex="0" aria-label="3D 展覽空間。點擊地板移動，拖曳環視，WASD 或方向鍵移動，點擊畫作開啟詳情。亦可使用作品目錄。"></canvas>
       <div class="scene-vignette" aria-hidden="true"></div>
       <section class="intro" aria-labelledby="exhibition-title">
         <p class="eyebrow"><span></span> A VIRTUAL EXHIBITION</p>
@@ -40,7 +40,7 @@
         </svg>
         <div class="map-links"><button data-zone="north">主展牆 <span>01</span></button><button data-zone="west">西側展區 <span>02</span></button><button data-zone="east">東側展區 <span>03</span></button><button data-zone="reception">接待區 <span>04</span></button></div>
       </section>
-      <div class="bottom-bar"><p><span class="mouse-icon" aria-hidden="true"></span> 拖曳環視 <i></i> <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 移動 <i></i> 點擊畫作，閱讀故事</p><button id="quality-button" aria-pressed="false">畫質：標準</button><button id="fullscreen-button" aria-label="切換全螢幕">⛶</button></div>
+      <div class="bottom-bar"><p><span class="mouse-icon" aria-hidden="true"></span> 拖曳環視 <i></i> <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 移動 <i></i> 點地板前往 <i></i> 點畫作看詳情</p><button id="quality-button" aria-pressed="false">畫質：標準</button><button id="fullscreen-button" aria-label="切換全螢幕">⛶</button></div>
       <div class="touch-controls" role="group" aria-label="移動控制"><button data-move="forward" aria-label="向前移動">↑</button><div><button data-move="left" aria-label="向左移動">←</button><button data-move="backward" aria-label="向後移動">↓</button><button data-move="right" aria-label="向右移動">→</button></div></div>
       <div id="loading" class="loading" role="status"><span class="loading-mark">◒</span><p id="loading-text">正在為你打開展間</p><progress id="load-progress" max="100" value="0" aria-label="模型載入進度"></progress></div>
       <div id="toast" class="toast" role="status" hidden></div>
@@ -51,7 +51,7 @@
       <div class="art-details"><p class="eyebrow">THE COLLECTION <span id="art-index"></span></p><h2 id="art-title"></h2><p id="art-medium" class="medium"></p><div class="detail-rule"></div><p id="art-description"></p><dl><div><dt>展區</dt><dd id="art-zone"></dd></div><div><dt>作品狀態</dt><dd>空間展示用示意圖</dd></div></dl><button id="locate-art" class="primary-button">前往作品位置 <span>↗</span></button><div class="art-pagination"><button id="prev-art" aria-label="上一件作品">← 上一件</button><span id="art-page"></span><button id="next-art" aria-label="下一件作品">下一件 →</button></div></div>
     </dialog>
     <dialog id="catalog-dialog" aria-labelledby="catalog-title"><div class="catalog-header"><div><p class="eyebrow">THE COLLECTION</p><h2 id="catalog-title">作品目錄</h2></div><button class="dialog-close" data-close aria-label="關閉作品目錄">×</button></div><p class="catalog-note">21 件示意作品，在光與記憶之間漫遊。</p><div id="catalog-grid"></div></dialog>
-    <dialog id="about-dialog" aria-labelledby="about-title"><button class="dialog-close" data-close aria-label="關閉操作說明">×</button><p class="eyebrow">ABOUT THE SPACE</p><h2 id="about-title">把相遇，留在空間裡。</h2><p>以「熙元 × 三周年」畫展的現場照片與影片為參考，重建濕地 venue 5 樓 A 區的展覽氛圍。</p><p>保留裸露梁架、白色展牆、混凝土地坪與接待區。空間尺寸及未拍攝區域為推估；畫作、名稱與介紹均為示意內容。</p><div class="detail-rule"></div><h3>慢慢走，慢慢看。</h3><ul><li>滑鼠或手指拖曳：環視空間。</li><li>WASD、方向鍵或畫面方向按鈕：移動。</li><li>點擊畫作：開啟作品燈箱與詳情。</li><li>空間導覽：快速前往各展區。</li><li>作品目錄：使用鍵盤即可瀏覽所有作品。</li><li>Esc：關閉燈箱；左右方向鍵：切換作品。</li></ul><button class="primary-button" data-close>走進展間 <span>↗</span></button></dialog>
+    <dialog id="about-dialog" aria-labelledby="about-title"><button class="dialog-close" data-close aria-label="關閉操作說明">×</button><p class="eyebrow">ABOUT THE SPACE</p><h2 id="about-title">把相遇，留在空間裡。</h2><p>以「熙元 × 三周年」畫展的現場照片與影片為參考，重建濕地 venue 5 樓 A 區的展覽氛圍。</p><p>保留裸露梁架、白色展牆、混凝土地坪與接待區。空間尺寸及未拍攝區域為推估；畫作、名稱與介紹均為示意內容。</p><div class="detail-rule"></div><h3>慢慢走，慢慢看。</h3><ul><li>滑鼠或手指拖曳：環視空間。</li><li>點擊空曠地板：自動移動至該處，沿途避開柱子與桌子。</li><li>拖曳、按方向鍵或開啟燈箱：停止自動移動。</li><li>WASD、方向鍵或畫面方向按鈕：移動。</li><li>點擊畫作：開啟作品燈箱與詳情。</li><li>空間導覽：快速前往各展區。</li><li>作品目錄：使用鍵盤即可瀏覽所有作品。</li><li>Esc：關閉燈箱；左右方向鍵：切換作品。</li></ul><button class="primary-button" data-close>走進展間 <span>↗</span></button></dialog>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
