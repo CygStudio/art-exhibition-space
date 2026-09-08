@@ -15,6 +15,8 @@ pnpm dev
 
 開啟終端機顯示的本機網址（預設 `http://127.0.0.1:5173/`）。
 
+手機測試時，讓手機與電腦連上同一個區域網路，停止原本的 dev server 後執行 `pnpm dev:lan`，再於手機開啟終端機顯示的 Network 網址。此指令監聽 `0.0.0.0:5173`；若連接埠已被占用會直接提示，避免測試網址悄悄變動。
+
 ```sh
 pnpm build     # TypeScript 檢查與正式建置
 pnpm preview   # 預覽 dist
