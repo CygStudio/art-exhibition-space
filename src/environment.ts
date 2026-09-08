@@ -17,6 +17,9 @@ export function createCelEnvironment() {
     'Paper labels': '#fff7e8',
     'Concrete': '#d6d0dc',
     'Lamp diffuser': '#fff2c9',
+    'Window glass': '#849dad',
+    'Exterior ambient': '#657785',
+    'Exhibition accent': '#c88691',
   }
   const materials = new Map<string, THREE.MeshToonMaterial>()
   const ink = new THREE.LineBasicMaterial({ color: '#635c72', transparent: true, opacity: .28, depthWrite: false })
@@ -28,6 +31,15 @@ export function createCelEnvironment() {
         color: palette[source.name] ?? '#e1d9d1',
         gradientMap: gradient,
       })
+      if (source.name === 'Window glass') {
+        material.transparent = true
+        material.opacity = .3
+        material.depthWrite = false
+      }
+      if (source.name === 'Exterior ambient') {
+        material.emissive.set('#657785')
+        material.emissiveIntensity = .5
+      }
       if (source.name === 'Lamp diffuser') {
         material.emissive.set('#fff1c7')
         material.emissiveIntensity = .45
@@ -45,7 +57,7 @@ export function createCelEnvironment() {
       const original = Array.isArray(mesh.material) ? mesh.material : [mesh.material]
       mesh.userData.walkable = original.some(m => m.name === 'Concrete')
       mesh.material = original.length === 1 ? materialFor(original[0]) : original.map(materialFor)
-      if (original.some(m => ['Paper labels', 'Lamp diffuser', 'Concrete'].includes(m.name))) continue
+      if (original.some(m => ['Paper labels', 'Lamp diffuser', 'Concrete', 'Window glass', 'Exterior ambient'].includes(m.name))) continue
       const edges = new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry, 55), ink)
       edges.name = 'Cel architectural ink'
       edges.userData.solid = false
@@ -64,6 +76,7 @@ export function createCelEnvironment() {
     // Flat translucent shadow shapes replace photographic radial gradients.
     const contact = new THREE.MeshBasicMaterial({color:'#706780',transparent:true,opacity:.12,depthWrite:false})
     for (const c of colliders) {
+      if (c.width > 3 && c.depth > 3) continue
       const shadow = new THREE.Mesh(new THREE.CircleGeometry(1, 12), contact)
       shadow.rotation.x = -Math.PI / 2
       shadow.scale.set(c.width * .65 + .25, c.depth * .65 + .25, 1)

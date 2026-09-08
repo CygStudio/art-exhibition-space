@@ -5,14 +5,15 @@ import { canOccupy, findWalkPath, movePosition } from './navigation.mjs'
 import { createCelEnvironment } from './environment'
 
 import { stations, type Zone } from './stations'
-interface Artwork { id: string; title: string; zone: Zone; image: string; position: [number, number, number]; rotation: number; width: number; height: number; description: string; medium: string }
-interface GalleryData { artworks: Artwork[]; colliders: {x:number;z:number;width:number;depth:number}[]; bounds: {minX:number;maxX:number;minZ:number;maxZ:number} }
+import { drawFloorPlan, mapPoint, type Layout } from './floor-plan'
+interface Artwork { viewPosition?: [number, number, number]; id: string; title: string; zone: Zone; image: string; position: [number, number, number]; rotation: number; width: number; height: number; description: string; medium: string }
+interface GalleryData { layout: Layout; artworks: Artwork[]; colliders: {x:number;z:number;width:number;depth:number}[]; bounds: {minX:number;maxX:number;minZ:number;maxZ:number} }
 const $ = <T extends HTMLElement = HTMLElement>(selector: string) => document.querySelector<T>(selector)!
 const canvas = $<HTMLCanvasElement>('#scene')
 const artDialog = $<HTMLDialogElement>('#art-dialog')
 const catalogDialog = $<HTMLDialogElement>('#catalog-dialog')
 const aboutDialog = $<HTMLDialogElement>('#about-dialog')
-const zoneNames: Record<Zone,string> = {north:'主展牆',west:'西側展區',east:'東側展區',reception:'接待區'}
+const zoneNames: Record<Zone,string> = {south:'主展牆',west:'左側展牆',east:'隔間外展牆',reception:'服務台・人員協助',guestbook:'簽到簿',windows:'對外落地窗'}
 const base = import.meta.env.BASE_URL
 const scene = new THREE.Scene()
 const environment = createCelEnvironment()
@@ -122,13 +123,13 @@ function goTo(position:THREE.Vector3,newYaw:number,zone:Zone|null) {
   canvas.focus({preventScroll:true})
 }
 document.querySelectorAll<HTMLElement>('[data-zone]').forEach(b=>b.addEventListener('click',()=>{ const z=b.dataset.zone as Zone;goTo(new THREE.Vector3(...stations[z].position),stations[z].yaw,z) }))
-$('#reset-button').addEventListener('click',()=>goTo(new THREE.Vector3(1.25,1.65,4.1),.16,null))
+$('#reset-button').addEventListener('click',()=>{if(ready)goTo(new THREE.Vector3(...data.layout.entrance.position),data.layout.entrance.yaw,null)})
 $('#explore-button').addEventListener('click',()=>{dismissIntro();canvas.focus();toast('點擊地板前往該處；拖曳環視，WASD 也能移動。')})
 $('#locate-art').addEventListener('click',()=>{
   const a=data.artworks[selected], angle=THREE.MathUtils.degToRad(a.rotation)
   const pos=new THREE.Vector3(...a.position).add(new THREE.Vector3(Math.sin(angle)*1.65,0,Math.cos(angle)*1.65));pos.y=1.65
-  // Reception tabletop needs more clearance than a regular wall artwork.
-  if(a.zone==='reception')pos.z=3.3
+  if(a.viewPosition)pos.set(...a.viewPosition)
+  if(!canOccupy(pos.x,pos.z,data.bounds,data.colliders)){toast('此作品前方無法通行，請使用展區導覽。');return}
   returnFocus=canvas;artDialog.close();goTo(pos,angle,a.zone)
 })
 $('#fullscreen-button').addEventListener('click',async()=>{
@@ -221,7 +222,7 @@ function animate() {
     }
   }
   camera.rotation.set(pitch,yaw,0,'YXZ')
-  const mx=8+(camera.position.x+5)*10.4,mz=8+(camera.position.z+6)*10.5
+  const {x:mx,y:mz}=mapPoint(camera.position.x,camera.position.z,data.layout)
   $('#map-marker').setAttribute('transform',`translate(${mx} ${mz}) rotate(${-yaw*180/Math.PI})`)
   renderer.render(scene,camera)
 }
@@ -235,11 +236,11 @@ function failScene(error:unknown) {
 async function init() {
   try {
     const response=await fetch(base+'gallery.json');if(!response.ok)throw new Error(`Gallery data: ${response.status}`)
-    data=await response.json();buildCatalog();ready=true
+    data=await response.json();buildCatalog();drawFloorPlan(document.querySelector<SVGGElement>('#map-geometry')!,data.layout);ready=true
     renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:'high-performance'})
     renderer.setPixelRatio(Math.min(devicePixelRatio,1.25));renderer.outputColorSpace=THREE.SRGBColorSpace
     renderer.toneMapping=THREE.NoToneMapping
-    camera.position.set(1.25,1.65,4.1);environment.light(scene,data.colliders);resize()
+    camera.position.set(...data.layout.entrance.position);yaw=data.layout.entrance.yaw;environment.light(scene,data.colliders);resize()
     const loader=new GLTFLoader()
     const gltf=await loader.loadAsync(base+'models/gallery.glb',p=>{if(p.total)$<HTMLProgressElement>('#load-progress').value=p.loaded/p.total*75})
     const textureLoader=new THREE.TextureLoader()

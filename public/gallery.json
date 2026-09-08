@@ -6,9 +6,9 @@
       "zone": "west",
       "image": "artworks/01.svg",
       "position": [
-        -4.785,
+        -5.185,
         1.72,
-        -4.8
+        -3.2
       ],
       "rotation": 90,
       "width": 1.03,
@@ -22,9 +22,9 @@
       "zone": "west",
       "image": "artworks/02.svg",
       "position": [
-        -4.785,
+        -5.185,
         1.72,
-        -3.3499999999999996
+        -2.0300000000000002
       ],
       "rotation": 90,
       "width": 0.78,
@@ -38,9 +38,9 @@
       "zone": "west",
       "image": "artworks/03.svg",
       "position": [
-        -4.785,
+        -5.185,
         1.72,
-        -1.9
+        -0.8600000000000003
       ],
       "rotation": 90,
       "width": 0.78,
@@ -54,9 +54,9 @@
       "zone": "west",
       "image": "artworks/04.svg",
       "position": [
-        -4.785,
+        -5.185,
         1.72,
-        -0.4500000000000002
+        0.3099999999999996
       ],
       "rotation": 90,
       "width": 1.03,
@@ -70,9 +70,9 @@
       "zone": "west",
       "image": "artworks/05.svg",
       "position": [
-        -4.785,
+        -5.185,
         1.72,
-        1.0
+        1.4799999999999995
       ],
       "rotation": 90,
       "width": 0.78,
@@ -86,9 +86,9 @@
       "zone": "west",
       "image": "artworks/06.svg",
       "position": [
-        -4.785,
+        -5.185,
         1.72,
-        2.45
+        2.6499999999999995
       ],
       "rotation": 90,
       "width": 0.78,
@@ -102,9 +102,9 @@
       "zone": "west",
       "image": "artworks/07.svg",
       "position": [
-        -4.785,
+        -5.185,
         1.72,
-        3.8999999999999995
+        3.8199999999999994
       ],
       "rotation": 90,
       "width": 1.03,
@@ -115,14 +115,14 @@
     {
       "id": "08",
       "title": "夜色練習",
-      "zone": "east",
+      "zone": "south",
       "image": "artworks/08.svg",
       "position": [
-        4.785,
+        -4.4,
         1.72,
-        -4.85
+        4.885
       ],
-      "rotation": -90,
+      "rotation": 180,
       "width": 0.96,
       "height": 0.78,
       "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
@@ -131,14 +131,14 @@
     {
       "id": "09",
       "title": "熙望的形狀",
-      "zone": "east",
+      "zone": "south",
       "image": "artworks/09.svg",
       "position": [
-        4.785,
+        -2.95,
         1.72,
-        -3.3999999999999995
+        4.885
       ],
-      "rotation": -90,
+      "rotation": 180,
       "width": 0.82,
       "height": 1.02,
       "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
@@ -147,30 +147,35 @@
     {
       "id": "10",
       "title": "盛放",
-      "zone": "east",
+      "zone": "south",
       "image": "artworks/10.svg",
       "position": [
-        4.785,
+        -1.5000000000000004,
         1.72,
-        -1.9499999999999997
+        4.885
       ],
-      "rotation": -90,
+      "rotation": 180,
       "width": 0.96,
       "height": 0.78,
       "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
-      "medium": "數位構成・示意圖"
+      "medium": "數位構成・示意圖",
+      "viewPosition": [
+        -1.5000000000000004,
+        1.65,
+        3.8
+      ]
     },
     {
       "id": "11",
       "title": "遠方來信",
-      "zone": "east",
+      "zone": "south",
       "image": "artworks/11.svg",
       "position": [
-        4.785,
+        -0.05000000000000071,
         1.72,
-        -0.5
+        4.885
       ],
-      "rotation": -90,
+      "rotation": 180,
       "width": 0.82,
       "height": 1.02,
       "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
@@ -179,14 +184,14 @@
     {
       "id": "12",
       "title": "光與回聲",
-      "zone": "east",
+      "zone": "south",
       "image": "artworks/12.svg",
       "position": [
-        4.785,
+        1.3999999999999995,
         1.72,
-        0.9500000000000002
+        4.885
       ],
-      "rotation": -90,
+      "rotation": 180,
       "width": 0.96,
       "height": 0.78,
       "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
@@ -195,14 +200,14 @@
     {
       "id": "13",
       "title": "留下的溫度",
-      "zone": "east",
+      "zone": "south",
       "image": "artworks/13.svg",
       "position": [
-        4.785,
+        2.8499999999999996,
         1.72,
-        2.4000000000000004
+        4.885
       ],
-      "rotation": -90,
+      "rotation": 180,
       "width": 0.82,
       "height": 1.02,
       "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
@@ -211,114 +216,129 @@
     {
       "id": "14",
       "title": "浮光",
-      "zone": "north",
+      "zone": "south",
       "image": "artworks/14.svg",
       "position": [
-        -4.12,
+        4.299999999999999,
         1.72,
-        -5.865
+        4.885
       ],
-      "rotation": 0,
-      "width": 1.04,
-      "height": 0.74,
+      "rotation": 180,
+      "width": 0.96,
+      "height": 0.78,
       "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
       "medium": "數位構成・示意圖"
     },
     {
       "id": "15",
       "title": "時間切片",
-      "zone": "north",
+      "zone": "east",
       "image": "artworks/15.svg",
       "position": [
-        -2.77,
+        3.42,
         1.72,
-        -5.865
+        -1.545
       ],
       "rotation": 0,
-      "width": 0.85,
-      "height": 1.0,
+      "width": 0.58,
+      "height": 0.8,
       "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
       "medium": "數位構成・示意圖"
     },
     {
       "id": "16",
       "title": "未完的風景",
-      "zone": "north",
+      "zone": "east",
       "image": "artworks/16.svg",
       "position": [
-        -1.42,
+        4.18,
         1.72,
-        -5.865
+        -1.545
       ],
       "rotation": 0,
-      "width": 1.04,
-      "height": 0.74,
+      "width": 0.58,
+      "height": 0.8,
       "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
       "medium": "數位構成・示意圖"
     },
     {
       "id": "17",
       "title": "相遇時刻",
-      "zone": "north",
+      "zone": "east",
       "image": "artworks/17.svg",
       "position": [
-        -0.0699999999999994,
+        4.93,
         1.72,
-        -5.865
+        -1.545
       ],
       "rotation": 0,
-      "width": 0.85,
-      "height": 1.0,
+      "width": 0.58,
+      "height": 0.8,
       "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
       "medium": "數位構成・示意圖"
     },
     {
       "id": "18",
       "title": "日光收藏",
-      "zone": "north",
+      "zone": "guestbook",
       "image": "artworks/18.svg",
       "position": [
-        1.2800000000000002,
-        1.72,
-        -5.865
+        -4.6,
+        1.85,
+        -4.965
       ],
       "rotation": 0,
-      "width": 1.04,
-      "height": 0.74,
+      "width": 0.75,
+      "height": 0.9,
       "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
-      "medium": "數位構成・示意圖"
+      "medium": "數位構成・示意圖",
+      "viewPosition": [
+        -4.6,
+        1.65,
+        -2.7
+      ]
     },
     {
       "id": "19",
       "title": "柔軟的邊界",
-      "zone": "north",
+      "zone": "guestbook",
       "image": "artworks/19.svg",
       "position": [
-        2.63,
-        1.72,
-        -5.865
+        -3.55,
+        1.85,
+        -4.965
       ],
       "rotation": 0,
-      "width": 0.85,
-      "height": 1.0,
+      "width": 0.75,
+      "height": 0.9,
       "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
-      "medium": "數位構成・示意圖"
+      "medium": "數位構成・示意圖",
+      "viewPosition": [
+        -3.55,
+        1.65,
+        -2.7
+      ]
     },
     {
       "id": "20",
       "title": "再次，看見",
-      "zone": "north",
+      "zone": "guestbook",
       "image": "artworks/20.svg",
       "position": [
-        3.9800000000000013,
-        1.72,
-        -5.865
+        -2.5,
+        1.85,
+        -4.965
       ],
       "rotation": 0,
-      "width": 1.04,
-      "height": 0.74,
+      "width": 0.75,
+      "height": 0.9,
       "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
-      "medium": "數位構成・示意圖"
+      "medium": "數位構成・示意圖",
+      "viewPosition": [
+        -2.5,
+        1.65,
+        -2.7
+      ]
     },
     {
       "id": "21",
@@ -326,47 +346,138 @@
       "zone": "reception",
       "image": "artworks/21.svg",
       "position": [
-        3.5,
-        1.85,
-        5.83
+        0.1,
+        1.87,
+        -4.965
       ],
-      "rotation": 180,
-      "width": 2.15,
+      "rotation": 0,
+      "width": 2.7,
       "height": 1.25,
       "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
-      "medium": "數位構成・示意圖"
+      "medium": "數位構成・示意圖",
+      "viewPosition": [
+        0.1,
+        1.65,
+        -2.2
+      ]
     }
   ],
   "colliders": [
     {
-      "x": 0.77,
-      "z": 5.83,
-      "width": 0.42,
-      "depth": 0.38
+      "name": "Unused room",
+      "x": 3.725,
+      "z": -3.375,
+      "width": 3.5100000000000002,
+      "depth": 3.6100000000000003
     },
     {
-      "x": -1.35,
-      "z": -1.45,
+      "name": "Square structural column",
+      "x": -1.25,
+      "z": -2.94,
       "width": 0.48,
       "depth": 0.5
     },
     {
-      "x": -1.35,
-      "z": 3.65,
+      "name": "Square structural column",
+      "x": -1.25,
+      "z": 3.0,
       "width": 0.48,
       "depth": 0.5
     },
     {
-      "x": 3.4,
-      "z": 4.75,
-      "width": 2.25,
+      "name": "Staff service counter",
+      "x": 0.075,
+      "z": -3.95,
+      "width": 3.25,
       "depth": 0.82
+    },
+    {
+      "name": "Folding chair",
+      "x": -0.7,
+      "z": -4.72,
+      "width": 0.46,
+      "depth": 0.48
+    },
+    {
+      "name": "Folding chair",
+      "x": 0.85,
+      "z": -4.72,
+      "width": 0.46,
+      "depth": 0.48
+    },
+    {
+      "name": "Guestbook table",
+      "x": -3.8,
+      "z": -4.55,
+      "width": 2.8,
+      "depth": 0.72
+    },
+    {
+      "name": "Folding chair",
+      "x": -4.65,
+      "z": -3.65,
+      "width": 0.46,
+      "depth": 0.48
     }
   ],
   "bounds": {
-    "minX": -4.55,
-    "maxX": 4.55,
-    "minZ": -5.5,
-    "maxZ": 5.45
+    "minX": -4.95,
+    "maxX": 4.95,
+    "minZ": -4.65,
+    "maxZ": 4.65
+  },
+  "layout": {
+    "outer": {
+      "minX": -5.4,
+      "maxX": 5.4,
+      "minZ": -5.1,
+      "maxZ": 5.1
+    },
+    "unusedRoom": {
+      "x": 3.725,
+      "z": -3.375,
+      "width": 3.35,
+      "depth": 3.45
+    },
+    "serviceDesk": {
+      "x": 0.075,
+      "z": -3.95,
+      "width": 3.25,
+      "depth": 0.82
+    },
+    "guestbook": {
+      "x": -3.8,
+      "z": -4.55,
+      "width": 2.8,
+      "depth": 0.72
+    },
+    "window": {
+      "x": 5.4,
+      "z": 2.45,
+      "width": 0.12,
+      "depth": 4.5
+    },
+    "entrance": {
+      "position": [
+        3.9,
+        1.65,
+        -0.35
+      ],
+      "yaw": 0.95
+    },
+    "columns": [
+      {
+        "x": -1.25,
+        "z": -2.94,
+        "width": 0.48,
+        "depth": 0.5
+      },
+      {
+        "x": -1.25,
+        "z": 3.0,
+        "width": 0.48,
+        "depth": 0.5
+      }
+    ]
   }
 }
