@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f3f0e8" />
+    <meta name="description" content="走進光與記憶之間。依現場照片重建的線上畫展空間。" />
+    <title>熙望之間｜線上展覽</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%237b433b'/%3E%3Cpath d='M10 30V18a10 10 0 0 1 20 0v12M16 30V18a4 4 0 0 1 8 0v12' fill='none' stroke='%23f3f0e8' stroke-width='2'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <header class="header">
+      <a class="brand" href="./" aria-label="熙望之間首頁"><span class="brand-mark" aria-hidden="true">◒</span><span>熙望之間<small>LIGHT & MEMORY</small></span></a>
+      <div class="header-caption">熙元 × 三周年 <span>／</span> 線上展覽空間</div>
+      <nav aria-label="展覽選單"><button id="catalog-button">作品目錄 <span class="count">21</span></button><button id="about-button" class="icon-button" aria-label="關於展覽與操作說明">?</button></nav>
+    </header>
+    <main id="gallery">
+      <canvas id="scene" tabindex="0" aria-label="3D 展覽空間。拖曳環視，WASD 或方向鍵移動，點擊畫作開啟詳情。亦可使用作品目錄。"></canvas>
+      <div class="scene-vignette" aria-hidden="true"></div>
+      <section class="intro" aria-labelledby="exhibition-title">
+        <p class="eyebrow"><span></span> A VIRTUAL EXHIBITION</p>
+        <h1 id="exhibition-title">以光為筆，<br>走進熙望。</h1>
+        <p class="intro-copy">讓時間慢下來，<br>在影與光之間，重新相遇。</p>
+        <div class="intro-rule"></div>
+        <p class="location">濕地 venue <span>／</span> 5F A 區</p>
+        <p class="small-muted">依現場影像重建・展品為示意圖</p>
+        <button id="explore-button" class="text-button">開始探索 <span>↗</span></button>
+      </section>
+      <div class="view-label"><span class="live-dot"></span><span id="zone-label">展間全景</span><span class="view-mode">3D LIVE</span></div>
+      <button id="reset-button" class="reset-button" aria-label="回到入口視角">↺ <span>回到入口</span></button>
+      <div id="hover-label" class="hover-label" hidden></div>
+      <section class="map-panel" aria-label="展間導覽">
+        <div class="map-title"><span>空間導覽</span><small>FLOOR 05</small></div>
+        <svg id="floor-map" viewBox="0 0 120 142" role="img" aria-label="展間平面圖，目前位置以紅點表示">
+          <path d="M8 8H112V134H90M58 134H8Z" fill="#e5e0d6" stroke="#9c978c" stroke-width="2"/>
+          <path d="M15 20V111M105 20V102M20 15H99" stroke="#b69371" stroke-width="3" stroke-dasharray="7 5"/>
+          <path d="M94 120H76" stroke="#aaa292" stroke-width="9"/>
+          <path d="M46 103v6M46 50v6" stroke="#8d897f" stroke-width="6"/>
+          <g id="map-marker"><path d="M0 0L-10 -20Q0 -27 10 -20Z" fill="#965047" opacity=".16"/><circle r="3.5" fill="#8e473d" stroke="#faf6ed" stroke-width="1.5"/></g>
+        </svg>
+        <div class="map-links"><button data-zone="north">主展牆 <span>01</span></button><button data-zone="west">西側展區 <span>02</span></button><button data-zone="east">東側展區 <span>03</span></button><button data-zone="reception">接待區 <span>04</span></button></div>
+      </section>
+      <div class="bottom-bar"><p><span class="mouse-icon" aria-hidden="true"></span> 拖曳環視 <i></i> <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 移動 <i></i> 點擊畫作，閱讀故事</p><button id="quality-button" aria-pressed="false">畫質：標準</button><button id="fullscreen-button" aria-label="切換全螢幕">⛶</button></div>
+      <div class="touch-controls" aria-label="移動控制"><button data-move="forward" aria-label="向前移動">↑</button><div><button data-move="left" aria-label="向左移動">←</button><button data-move="backward" aria-label="向後移動">↓</button><button data-move="right" aria-label="向右移動">→</button></div></div>
+      <div id="loading" class="loading" role="status"><span class="loading-mark">◒</span><p id="loading-text">正在為你打開展間</p><progress id="load-progress" max="100" value="0" aria-label="模型載入進度"></progress></div>
+      <div id="toast" class="toast" role="status" hidden></div>
+    </main>
+    <dialog id="art-dialog" aria-labelledby="art-title">
+      <button class="dialog-close" data-close aria-label="關閉作品詳情">×</button>
+      <div class="art-image-wrap"><img id="art-image" alt="" /><span>PLACEHOLDER ARTWORK</span></div>
+      <div class="art-details"><p class="eyebrow">THE COLLECTION <span id="art-index"></span></p><h2 id="art-title"></h2><p id="art-medium" class="medium"></p><div class="detail-rule"></div><p id="art-description"></p><dl><div><dt>展區</dt><dd id="art-zone"></dd></div><div><dt>作品狀態</dt><dd>空間展示用示意圖</dd></div></dl><button id="locate-art" class="primary-button">前往作品位置 <span>↗</span></button><div class="art-pagination"><button id="prev-art" aria-label="上一件作品">← 上一件</button><span id="art-page"></span><button id="next-art" aria-label="下一件作品">下一件 →</button></div></div>
+    </dialog>
+    <dialog id="catalog-dialog" aria-labelledby="catalog-title"><div class="catalog-header"><div><p class="eyebrow">THE COLLECTION</p><h2 id="catalog-title">作品目錄</h2></div><button class="dialog-close" data-close aria-label="關閉作品目錄">×</button></div><p class="catalog-note">21 件示意作品，在光與記憶之間漫遊。</p><div id="catalog-grid"></div></dialog>
+    <dialog id="about-dialog" aria-labelledby="about-title"><button class="dialog-close" data-close aria-label="關閉操作說明">×</button><p class="eyebrow">ABOUT THE SPACE</p><h2 id="about-title">把相遇，留在空間裡。</h2><p>以「熙元 × 三周年」畫展的現場照片與影片為參考，重建濕地 venue 5 樓 A 區的展覽氛圍。</p><p>保留裸露梁架、白色展牆、混凝土地坪與接待區。空間尺寸及未拍攝區域為推估；畫作、名稱與介紹均為示意內容。</p><div class="detail-rule"></div><h3>慢慢走，慢慢看。</h3><ul><li>滑鼠或手指拖曳：環視空間。</li><li>WASD、方向鍵或畫面方向按鈕：移動。</li><li>點擊畫作：開啟作品燈箱與詳情。</li><li>空間導覽：快速前往各展區。</li><li>作品目錄：使用鍵盤即可瀏覽所有作品。</li><li>Esc：關閉燈箱；左右方向鍵：切換作品。</li></ul><button class="primary-button" data-close>走進展間 <span>↗</span></button></dialog>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
