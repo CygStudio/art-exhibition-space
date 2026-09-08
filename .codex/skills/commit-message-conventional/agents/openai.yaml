@@ -1,0 +1,4 @@
+interface:
+  display_name: "Conventional Commit 訊息規範"
+  short_description: "產生、檢查與修正符合 Conventional Commits 的 commit message"
+  default_prompt: "使用 $commit-message-conventional 根據目前的程式碼變更撰寫合規的 commit message。"
