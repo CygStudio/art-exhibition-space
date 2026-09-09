@@ -2,6 +2,7 @@
   "artworks": [
     {
       "id": "01",
+      "detailsEnabled": true,
       "title": "光的序章",
       "zone": "west",
       "image": "artworks/01.svg",
@@ -18,6 +19,7 @@
     },
     {
       "id": "02",
+      "detailsEnabled": true,
       "title": "緋色軌跡",
       "zone": "west",
       "image": "artworks/02.svg",
@@ -34,6 +36,7 @@
     },
     {
       "id": "03",
+      "detailsEnabled": true,
       "title": "日落之後",
       "zone": "west",
       "image": "artworks/03.svg",
@@ -50,6 +53,7 @@
     },
     {
       "id": "04",
+      "detailsEnabled": true,
       "title": "靜謐之境",
       "zone": "west",
       "image": "artworks/04.svg",
@@ -66,6 +70,7 @@
     },
     {
       "id": "05",
+      "detailsEnabled": true,
       "title": "月的背面",
       "zone": "west",
       "image": "artworks/05.svg",
@@ -82,6 +87,7 @@
     },
     {
       "id": "06",
+      "detailsEnabled": true,
       "title": "流動的記憶",
       "zone": "west",
       "image": "artworks/06.svg",
@@ -98,6 +104,7 @@
     },
     {
       "id": "07",
+      "detailsEnabled": true,
       "title": "微光之間",
       "zone": "west",
       "image": "artworks/07.svg",
@@ -114,6 +121,7 @@
     },
     {
       "id": "08",
+      "detailsEnabled": true,
       "title": "夜色練習",
       "zone": "south",
       "image": "artworks/08.svg",
@@ -130,6 +138,7 @@
     },
     {
       "id": "09",
+      "detailsEnabled": true,
       "title": "熙望的形狀",
       "zone": "south",
       "image": "artworks/09.svg",
@@ -146,6 +155,7 @@
     },
     {
       "id": "10",
+      "detailsEnabled": true,
       "title": "盛放",
       "zone": "south",
       "image": "artworks/10.svg",
@@ -167,6 +177,7 @@
     },
     {
       "id": "11",
+      "detailsEnabled": true,
       "title": "遠方來信",
       "zone": "south",
       "image": "artworks/11.svg",
@@ -183,6 +194,7 @@
     },
     {
       "id": "12",
+      "detailsEnabled": true,
       "title": "光與回聲",
       "zone": "south",
       "image": "artworks/12.svg",
@@ -199,6 +211,7 @@
     },
     {
       "id": "13",
+      "detailsEnabled": true,
       "title": "留下的溫度",
       "zone": "south",
       "image": "artworks/13.svg",
@@ -215,6 +228,7 @@
     },
     {
       "id": "14",
+      "detailsEnabled": true,
       "title": "浮光",
       "zone": "south",
       "image": "artworks/14.svg",
@@ -231,11 +245,12 @@
     },
     {
       "id": "15",
+      "detailsEnabled": true,
       "title": "時間切片",
       "zone": "east",
       "image": "artworks/15.svg",
       "position": [
-        3.42,
+        3.62,
         1.72,
         -1.545
       ],
@@ -247,11 +262,12 @@
     },
     {
       "id": "16",
+      "detailsEnabled": true,
       "title": "未完的風景",
       "zone": "east",
       "image": "artworks/16.svg",
       "position": [
-        4.18,
+        4.27,
         1.72,
         -1.545
       ],
@@ -263,6 +279,7 @@
     },
     {
       "id": "17",
+      "detailsEnabled": true,
       "title": "相遇時刻",
       "zone": "east",
       "image": "artworks/17.svg",
@@ -279,69 +296,63 @@
     },
     {
       "id": "18",
+      "detailsEnabled": false,
       "title": "日光收藏",
       "zone": "guestbook",
       "image": "artworks/18.svg",
       "position": [
-        -4.6,
-        1.85,
+        -3.8,
+        1.87,
         -4.965
       ],
       "rotation": 0,
-      "width": 0.75,
-      "height": 0.9,
+      "width": 2.7,
+      "height": 1.25,
       "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
       "medium": "數位構成・示意圖",
       "viewPosition": [
-        -4.6,
+        -3.8,
         1.65,
         -2.7
       ]
     },
     {
       "id": "19",
+      "detailsEnabled": true,
       "title": "柔軟的邊界",
-      "zone": "guestbook",
+      "zone": "east",
       "image": "artworks/19.svg",
       "position": [
-        -3.55,
-        1.85,
-        -4.965
+        5.185,
+        1.72,
+        -0.725
       ],
-      "rotation": 0,
-      "width": 0.75,
-      "height": 0.9,
+      "rotation": -90,
+      "width": 0.92,
+      "height": 1.15,
       "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
-      "medium": "數位構成・示意圖",
-      "viewPosition": [
-        -3.55,
-        1.65,
-        -2.7
-      ]
+      "medium": "數位構成・示意圖"
     },
     {
       "id": "20",
+      "detailsEnabled": true,
       "title": "再次，看見",
-      "zone": "guestbook",
+      "zone": "reception",
       "image": "artworks/20.svg",
       "position": [
-        -2.5,
-        1.85,
-        -4.965
+        -0.95,
+        0.725,
+        -2.94
       ],
-      "rotation": 0,
-      "width": 0.75,
-      "height": 0.9,
+      "rotation": 90,
+      "width": 0.46,
+      "height": 1.395,
       "description": "以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。",
-      "medium": "數位構成・示意圖",
-      "viewPosition": [
-        -2.5,
-        1.65,
-        -2.7
-      ]
+      "medium": "數位構成・示意圖"
     },
     {
       "id": "21",
+      "detailsEnabled": false,
       "title": "熙望・序曲",
       "zone": "reception",
       "image": "artworks/21.svg",
@@ -364,11 +375,32 @@
   ],
   "colliders": [
     {
-      "name": "Unused room",
-      "x": 3.725,
+      "name": "Entry lobby west partition",
+      "x": 2.05,
       "z": -3.375,
-      "width": 3.5100000000000002,
-      "depth": 3.6100000000000003
+      "width": 0.16,
+      "depth": 3.45
+    },
+    {
+      "name": "Door left pier",
+      "x": 2.115,
+      "z": -1.65,
+      "width": 0.13000000000000034,
+      "depth": 0.16
+    },
+    {
+      "name": "Entry lobby south partition",
+      "x": 4.315,
+      "z": -1.65,
+      "width": 2.1700000000000004,
+      "depth": 0.16
+    },
+    {
+      "name": "Open entrance door",
+      "x": 2.18,
+      "z": -2.175,
+      "width": 0.045,
+      "depth": 1.05
     },
     {
       "name": "Square structural column",
@@ -418,6 +450,13 @@
       "z": -3.65,
       "width": 0.46,
       "depth": 0.48
+    },
+    {
+      "name": "Floor-standing column artwork",
+      "x": -0.95,
+      "z": -2.94,
+      "width": 0.1,
+      "depth": 0.515
     }
   ],
   "bounds": {
@@ -433,7 +472,7 @@
       "minZ": -5.1,
       "maxZ": 5.1
     },
-    "unusedRoom": {
+    "entranceLobby": {
       "x": 3.725,
       "z": -3.375,
       "width": 3.35,
@@ -459,11 +498,17 @@
     },
     "entrance": {
       "position": [
-        3.9,
+        2.72,
         1.65,
-        -0.35
+        -0.65
       ],
-      "yaw": 0.95
+      "yaw": 1.1,
+      "door": {
+        "x": 2.705,
+        "z": -1.65,
+        "width": 1.05,
+        "height": 2.25
+      }
     },
     "columns": [
       {

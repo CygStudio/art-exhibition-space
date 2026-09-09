@@ -3,7 +3,8 @@ import assert from 'node:assert/strict'
 import { readFileSync, existsSync } from 'node:fs'
 import { canOccupy, movePosition, segmentClear, findWalkPath } from '../src/navigation.mjs'
 import { stations } from '../src/stations.ts'
-import { mapPoint } from '../src/floor-plan.ts'
+import { mapPoint, drawFloorPlan } from '../src/floor-plan.ts'
+import { canOpenDetails, getDetailArtworks } from '../src/artwork.ts'
 const gallery=JSON.parse(readFileSync(new URL('../public/gallery.json',import.meta.url),'utf8'))
 const {bounds,colliders}=gallery
 
@@ -86,23 +87,29 @@ test('every guide station and artwork can be reached from the entrance',()=>{
     assert.ok(findWalkPath(start,{x,z},bounds,colliders),a.id)
   }
 })
-test('unused room rejects destinations and routes across its entire footprint',()=>{
-  const r=gallery.layout.unusedRoom
-  for(let x=r.x-r.width/2;x<=r.x+r.width/2;x+=.2){
-    for(let z=r.z-r.depth/2;z<=r.z+r.depth/2;z+=.2){
-      assert.equal(canOccupy(x,z,bounds,colliders),false)
-    }
-  }
-  assert.equal(findWalkPath({x:0,z:0},{x:r.x,z:r.z},bounds,colliders),null)
-  assert.equal(segmentClear({x:1.4,z:-4.2},{x:4.5,z:0},bounds,colliders),false)
+test('entry lobby connects to the gallery only through the doorway',()=>{
+  const d=gallery.layout.entrance.door
+  const start={x:d.x,z:d.z-.6},end={x:d.x,z:d.z+.6}
+  assert.ok(segmentClear(start,end,bounds,colliders))
+  assert.ok(findWalkPath(start,{x:0,z:0},bounds,colliders))
+  assert.equal(segmentClear({x:4,z:-2.3},{x:4,z:-1},bounds,colliders),false)
+  assert.equal(segmentClear({x:2.7,z:-3.2},{x:1.5,z:-3.2},bounds,colliders),false)
+})
+test('entry view places the service desk to the right and the column ahead',()=>{
+  const {entrance:e,serviceDesk:s,columns}=gallery.layout
+  const [x,,z]=e.position
+  assert.ok((s.x-x)*Math.cos(e.yaw)-(s.z-z)*Math.sin(e.yaw)>0)
+  const c=columns[0]
+  assert.ok(-(c.x-x)*Math.sin(e.yaw)-(c.z-z)*Math.cos(e.yaw)>0)
+  assert.ok(Math.abs(x-e.door.x)<e.door.width/2)
 })
 test('staff counter and signing desk are separate and match blocked furniture',()=>{
   const {serviceDesk:s,guestbook:g}=gallery.layout
   assert.ok(g.x+g.width/2<s.x-s.width/2)
   for(const desk of [s,g])assert.ok(colliders.some(c=>c.x===desk.x&&c.z===desk.z&&c.width===desk.width&&c.depth===desk.depth))
 })
-test('no artwork occupies the unused room or the exterior window wall',()=>{
-  const r=gallery.layout.unusedRoom,w=gallery.layout.window
+test('no artwork occupies the entry lobby or the exterior window wall',()=>{
+  const r=gallery.layout.entranceLobby,w=gallery.layout.window
   for(const a of gallery.artworks){
     const [x,,z]=a.position
     assert.ok(!(x>r.x-r.width/2&&z<r.z+r.depth/2),a.id)
@@ -122,6 +129,38 @@ test('floor plan uses the model proportions and keeps annotated areas oriented c
   assert.deepEqual(mapPoint(l.outer.minX,l.outer.minZ,l),{x:8,y:8})
   assert.ok(Math.abs(mapPoint(l.outer.maxX,0,l).x-112)<1e-9)
   assert.ok(mapPoint(l.guestbook.x,l.guestbook.z,l).x<mapPoint(l.serviceDesk.x,l.serviceDesk.z,l).x)
-  const room=mapPoint(l.unusedRoom.x,l.unusedRoom.z,l)
+  const room=mapPoint(l.entranceLobby.x,l.entranceLobby.z,l)
   assert.ok(room.x>60&&room.y<55)
+})
+
+test('only the two large desk backdrops disable details in JSON and GLB',()=>{
+  const displays=gallery.artworks.filter(a=>!canOpenDetails(a))
+  assert.equal(displays.length,2)
+  assert.deepEqual(displays.map(a=>a.zone).sort(),['guestbook','reception'])
+  assert.ok(displays.every(a=>a.width>2&&a.height>1))
+  assert.ok(gallery.artworks.every(a=>typeof a.detailsEnabled==='boolean'))
+  const details=getDetailArtworks(gallery.artworks)
+  assert.equal(details.length,19)
+  assert.ok(details.every(a=>!displays.includes(a)))
+  const glb=readFileSync(new URL('../public/models/gallery.glb',import.meta.url))
+  const json=JSON.parse(glb.subarray(20,20+glb.readUInt32LE(12)).toString())
+  for(const a of gallery.artworks){
+    assert.equal(json.nodes.find(n=>n.extras?.artworkId===a.id).extras.detailsEnabled,a.detailsEnabled)
+  }
+})
+test('column artwork reaches the floor and is 145 cm high including its frame',()=>{
+  const a=gallery.artworks.find(a=>a.id==='20')
+  assert.ok(Math.abs(a.height+.055-1.45)<1e-9)
+  assert.ok(Math.abs(a.position[1]-(a.height+.055)/2)<1e-9)
+  assert.equal(a.rotation,90)
+  assert.ok(a.width<.6)
+  assert.ok(canOpenDetails(a))
+  assert.ok(gallery.artworks.some(a=>a.rotation===-90&&Math.abs(a.position[2]+.725)<.01))
+})
+test('floor plan draws the doorway swing and entrance label',()=>{
+  const group={innerHTML:''}
+  drawFloorPlan(group,gallery.layout)
+  assert.ok(group.innerHTML.includes('入口'))
+  assert.ok(!group.innerHTML.includes('未使用'))
+  assert.match(group.innerHTML,/ A[\d.]+ [\d.]+ 0 0 1 /)
 })

@@ -83,11 +83,11 @@ def rod(name, start, end, radius, material):
 # Coordinates follow the annotated plan: top is -Z, right is +X.
 layout = {
     'outer': {'minX':-5.4,'maxX':5.4,'minZ':-5.1,'maxZ':5.1},
-    'unusedRoom': {'x':3.725,'z':-3.375,'width':3.35,'depth':3.45},
+    'entranceLobby': {'x':3.725,'z':-3.375,'width':3.35,'depth':3.45},
     'serviceDesk': {'x':.075,'z':-3.95,'width':3.25,'depth':.82},
     'guestbook': {'x':-3.8,'z':-4.55,'width':2.8,'depth':.72},
     'window': {'x':5.4,'z':2.45,'width':.12,'depth':4.5},
-    'entrance': {'position':[3.9,1.65,-.35],'yaw':.95},
+    'entrance': {'position':[2.72,1.65,-.65],'yaw':1.1,'door':{'x':2.705,'z':-1.65,'width':1.05,'height':2.25}},
     'columns': [{'x':-1.25,'z':z,'width':.48,'depth':.5} for z in [-2.94,3.0]],
 }
 box('Floor slab',(0,-.1,0),(11,.2,10.4),concrete)
@@ -107,19 +107,23 @@ for y in [.07,.95,2.88]:
 for z in [.7625,1.8875,3.0125,4.1375]:
     box('Exterior window pane',(5.38,1.47,z),(.025,2.8,1.06),glass,merge=False)
 box('Exterior ambient backdrop',(5.7,1.5,2.45),(.02,3.1,4.5),exterior)
-# A plain inset entry remains provisional: its exact position is not confirmed.
-box('Provisional entry door',(5.285,1.14,-.75),(.05,2.28,1.1),dark)
-rod('Entry handle',(5.24,.9,-1.1),(5.24,1.25,-1.1),.016,steel)
+# The former provisional entrance is an exhibition wall beside the glazing.
+box('Former entrance exhibition panel',(5.26,1.26,-.725),(.09,2.52,1.65),panel)
 
-# The unused room is a physical enclosure and a fully blocked navigation area.
-r=layout['unusedRoom']
-colliders.append({'name':'Unused room',**r,'width':r['width']+.16,'depth':r['depth']+.16})
-box('Unused room west partition',(2.05,1.55,-3.375),(.16,3.1,3.45),panel)
-box('Unused room south partition',(3.725,1.55,-1.65),(3.35,3.1,.16),panel)
-box('Closed unused room door',(2.6,1.12,-1.748),(.85,2.24,.04),plaster)
-for x in [2.15,3.05]: box('Closed door jamb',(x,1.14,-1.79),(.04,2.28,.06),steel)
-box('Closed door header',(2.6,2.28,-1.79),(.94,.04,.06),steel)
-rod('Closed door handle',(2.92,.96,-1.81),(2.92,1.12,-1.81),.012,dark)
+# Entry lobby: no exhibition, but the door opening connects it to the main room.
+r=layout['entranceLobby']
+door=layout['entrance']['door']
+left=door['x']-door['width']/2
+right=door['x']+door['width']/2
+box('Entry lobby west partition',(2.05,1.55,-3.375),(.16,3.1,3.45),panel,collision=True)
+box('Door left pier',((2.05+left)/2,1.55,door['z']),(left-2.05,3.1,.16),panel,collision=True)
+box('Entry lobby south partition',((right+5.4)/2,1.55,door['z']),(5.4-right,3.1,.16),panel,collision=True)
+box('Entrance lintel',(door['x'],2.675,door['z']),(door['width'],.85,.16),panel)
+for x in [left,right]: box('Entrance jamb',(x,1.125,door['z']),(.045,2.25,.18),steel)
+# Door swings inward against the lobby's west side, matching the plan's arc.
+box('Open entrance door',(left,1.125,door['z']-door['width']/2),(.045,2.25,door['width']),plaster,merge=False,collision=True)
+rod('Entrance door handle',(left+.055,.96,door['z']-.85),(left+.055,1.12,door['z']-.85),.012,dark)
+
 for c in layout['columns']:
     x,z=c['x'],c['z']
     box('Square structural column',(x,1.57,z),(.48,3.14,.5),plaster,collision=True)
@@ -185,7 +189,7 @@ chair(-4.65,-3.65,-1)
 arts=[]
 titles=['光的序章','緋色軌跡','日落之後','靜謐之境','月的背面','流動的記憶','微光之間','夜色練習','熙望的形狀','盛放','遠方來信','光與回聲','留下的溫度','浮光','時間切片','未完的風景','相遇時刻','日光收藏','柔軟的邊界','再次，看見','熙望・序曲']
 palettes=[['#e5d9c5','#b84f3d','#292c35','#c99567'],['#dddace','#364a50','#a48a66','#ecb666'],['#ebe0d0','#723642','#c78072','#303241'],['#d2d7cc','#647d71','#c7a36e','#283a38']]
-def art(pos,w,h,rot,zone,view_position=None):
+def art(pos,w,h,rot,zone,view_position=None,details_enabled=True,floor_standing=False):
     idx=len(arts)+1; ident=f'{idx:02}'
     # Thin framed panel, front is local +Z; rotation about Three.js Y.
     a=math.radians(rot)
@@ -198,15 +202,17 @@ def art(pos,w,h,rot,zone,view_position=None):
     uv=mesh.uv_layers.new()
     for i,co in enumerate([(0,0),(1,0),(1,1),(0,1)]): uv.data[i].uv=co
     obj=bpy.data.objects.new('Artwork_'+ident,mesh); bpy.context.collection.objects.link(obj)
-    obj.data.materials.append(white); obj['artworkId']=ident
-    label=box('Label_'+ident,local(0,-h/2-.095,0),(.2,.045,.013),white)
-    label.rotation_euler.z=a
-    # Hanging wires continue above each frame.
-    for dx in [-w*.32,w*.32]: rod('Picture wire',local(dx,h/2+.02,-.02),local(dx,2.53-pos[1],-.02),.003,steel)
+    obj.data.materials.append(white); obj['artworkId']=ident; obj['detailsEnabled']=details_enabled
+    if not floor_standing:
+        label=box('Label_'+ident,local(0,-h/2-.095,0),(.2,.045,.013),white)
+        label.rotation_euler.z=a
+        for dx in [-w*.32,w*.32]: rod('Picture wire',local(dx,h/2+.02,-.02),local(dx,2.53-pos[1],-.02),.003,steel)
+    else:
+        colliders.append({'name':'Floor-standing column artwork','x':pos[0],'z':pos[2],'width':.1,'depth':w+.055})
     p=palettes[(idx-1)%len(palettes)]
     svg=f'''<svg xmlns="http://www.w3.org/2000/svg" width="720" height="900" viewBox="0 0 720 900"><rect width="720" height="900" fill="{p[0]}"/><defs><pattern id="lines" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M0 0V12" stroke="{p[3]}" stroke-opacity=".18"/></pattern></defs><rect x="38" y="38" width="644" height="824" fill="url(#lines)"/><circle cx="{245+idx%3*90}" cy="320" r="{155+idx%4*12}" fill="{p[1]}"/><path d="M90 780V490a180 180 0 0 1 360 0v290Z" fill="{p[2]}"/><path d="M310 780V530a150 150 0 0 1 300 0v250Z" fill="{p[3]}"/><circle cx="505" cy="205" r="58" fill="{p[0]}"/><path d="M50 {590+idx%5*22} Q340 270 655 670 M70 810 Q320 510 670 720" fill="none" stroke="{p[0]}" stroke-width="3"/><text x="55" y="85" fill="{p[2]}" font-family="serif" font-size="22" letter-spacing="5">STUDY / {ident}</text><text x="55" y="855" fill="{p[2]}" font-family="sans-serif" font-size="12" letter-spacing="4">LIGHT &amp; MEMORY — PLACEHOLDER</text></svg>'''
     (OUT/'artworks'/f'{ident}.svg').write_text(svg)
-    arts.append({'id':ident,'title':titles[idx-1],'zone':zone,'image':f'artworks/{ident}.svg','position':list(pos),'rotation':rot,'width':w,'height':h,'description':'以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。','medium':'數位構成・示意圖'})
+    arts.append({'id':ident,'detailsEnabled':details_enabled,'title':titles[idx-1],'zone':zone,'image':f'artworks/{ident}.svg','position':list(pos),'rotation':rot,'width':w,'height':h,'description':'以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。','medium':'數位構成・示意圖'})
     if view_position is not None: arts[-1]['viewPosition'] = view_position
     start=local(0,2.69-pos[1],1.0); end=local(0,2.52-pos[1],.84)
     rod('Spotlight housing',start,end,.055,steel)
@@ -216,9 +222,12 @@ for i in range(7): art((-5.185,1.72,-3.2+i*1.17),.78 if i%3 else 1.03,.98 if i%3
 for i in range(7):
     x=-4.4+i*1.45
     art((x,1.72,4.885),.82 if i%2 else .96,1.02 if i%2 else .78,180,'south',[x,1.65,3.8] if i==2 else None)
-for x in [3.42,4.18,4.93]: art((x,1.72,-1.545),.58,.8,0,'east')
-for x in [-4.6,-3.55,-2.5]: art((x,1.85,-4.965),.75,.9,0,'guestbook',[x,1.65,-2.7])
-art((.1,1.87,-4.965),2.7,1.25,0,'reception',[.1,1.65,-2.2])
+for x in [3.62,4.27,4.93]: art((x,1.72,-1.545),.58,.8,0,'east')
+art((-3.8,1.87,-4.965),2.7,1.25,0,'guestbook',[-3.8,1.65,-2.7],details_enabled=False)
+art((5.185,1.72,-.725),.92,1.15,-90,'east')
+# Frame adds .055 m: total floor-standing height is exactly 1.45 m.
+art((-.95,.725,-2.94),.46,1.395,90,'reception',floor_standing=True)
+art((.1,1.87,-4.965),2.7,1.25,0,'reception',[.1,1.65,-2.2],details_enabled=False)
 
 # Merge architectural pieces per material to keep web draw calls small.
 for material in list(bpy.data.materials):

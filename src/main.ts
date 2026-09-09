@@ -6,7 +6,7 @@ import { createCelEnvironment } from './environment'
 
 import { stations, type Zone } from './stations'
 import { drawFloorPlan, mapPoint, type Layout } from './floor-plan'
-interface Artwork { viewPosition?: [number, number, number]; id: string; title: string; zone: Zone; image: string; position: [number, number, number]; rotation: number; width: number; height: number; description: string; medium: string }
+import { canOpenDetails, getDetailArtworks, type Artwork } from './artwork'
 interface GalleryData { layout: Layout; artworks: Artwork[]; colliders: {x:number;z:number;width:number;depth:number}[]; bounds: {minX:number;maxX:number;minZ:number;maxZ:number} }
 const $ = <T extends HTMLElement = HTMLElement>(selector: string) => document.querySelector<T>(selector)!
 const canvas = $<HTMLCanvasElement>('#scene')
@@ -23,6 +23,7 @@ camera.rotation.order = 'YXZ'
 let renderer: THREE.WebGLRenderer | undefined
 let data: GalleryData
 let selected = 0
+let detailArtworks: Artwork[] = []
 let yaw = .16, pitch = 0
 let ready = false
 let sceneAvailable = false
@@ -84,7 +85,7 @@ for (const dialog of document.querySelectorAll<HTMLDialogElement>('dialog')) {
 $('#about-button').addEventListener('click',()=>showModal(aboutDialog))
 $('#catalog-button').addEventListener('click',()=>{if(ready)showModal(catalogDialog)})
 function renderArt() {
-  const a=data.artworks[selected]
+  const a=detailArtworks[selected]
   $('#art-title').textContent=a.title
   $<HTMLImageElement>('#art-image').src=base+a.image
   $<HTMLImageElement>('#art-image').alt=`${a.title}：抽象色塊與弧線的示意作品`
@@ -92,16 +93,19 @@ function renderArt() {
   $('#art-medium').textContent=a.medium
   $('#art-description').textContent=a.description
   $('#art-zone').textContent=zoneNames[a.zone]
-  $('#art-page').textContent=`${a.id} / ${data.artworks.length}`
+  $('#art-page').textContent=`${selected+1} / ${detailArtworks.length}`
   $<HTMLButtonElement>('#locate-art').disabled=!sceneAvailable
 }
-function openArt(id:string) { selected=data.artworks.findIndex(a=>a.id===id); if(selected<0)return; renderArt(); showModal(artDialog) }
-function stepArt(delta:number) { selected=(selected+delta+data.artworks.length)%data.artworks.length; renderArt() }
+function openArt(id:string) { const index=detailArtworks.findIndex(a=>a.id===id); if(index<0)return; selected=index; renderArt(); showModal(artDialog) }
+function stepArt(delta:number) { if(!detailArtworks.length)return; selected=(selected+delta+detailArtworks.length)%detailArtworks.length; renderArt() }
 $('#prev-art').addEventListener('click',()=>stepArt(-1))
 $('#next-art').addEventListener('click',()=>stepArt(1))
 function buildCatalog() {
+  detailArtworks=getDetailArtworks(data.artworks)
+  $('.count').textContent=String(detailArtworks.length)
+  $('.catalog-note').textContent=`${detailArtworks.length} 件可瀏覽詳情的示意作品。另有 ${data.artworks.length-detailArtworks.length} 張大型背板於場景中展示。`
   const frag=document.createDocumentFragment()
-  data.artworks.forEach(a=>{
+  detailArtworks.forEach(a=>{
     const b=document.createElement('button'); b.className='catalog-card'; b.dataset.artId=a.id
     const thumb=document.createElement('div');thumb.className='catalog-thumb'
     const img=document.createElement('img');img.src=base+a.image;img.alt='';img.loading='lazy';thumb.append(img)
@@ -126,7 +130,7 @@ document.querySelectorAll<HTMLElement>('[data-zone]').forEach(b=>b.addEventListe
 $('#reset-button').addEventListener('click',()=>{if(ready)goTo(new THREE.Vector3(...data.layout.entrance.position),data.layout.entrance.yaw,null)})
 $('#explore-button').addEventListener('click',()=>{dismissIntro();canvas.focus();toast('點擊地板前往該處；拖曳環視，WASD 也能移動。')})
 $('#locate-art').addEventListener('click',()=>{
-  const a=data.artworks[selected], angle=THREE.MathUtils.degToRad(a.rotation)
+  const a=detailArtworks[selected], angle=THREE.MathUtils.degToRad(a.rotation)
   const pos=new THREE.Vector3(...a.position).add(new THREE.Vector3(Math.sin(angle)*1.65,0,Math.cos(angle)*1.65));pos.y=1.65
   if(a.viewPosition)pos.set(...a.viewPosition)
   if(!canOccupy(pos.x,pos.z,data.bounds,data.colliders)){toast('此作品前方無法通行，請使用展區導覽。');return}
@@ -173,7 +177,7 @@ canvas.addEventListener('pointermove',e=>{
     yaw-=dx*.003;pitch=THREE.MathUtils.clamp(pitch-dy*.003,-1.0,.95);drag.lastX=e.clientX;drag.lastY=e.clientY
     if(drag.distance>6)dismissIntro();$('#hover-label').hidden=true
   }else if(e.pointerType==='mouse'){
-    const hit=hitAt(e.clientX,e.clientY);const isArt=!!hit?.object.userData.artworkId
+    const hit=hitAt(e.clientX,e.clientY);const isArt=canOpenDetails(data.artworks.find(a=>a.id===hit?.object.userData.artworkId))
     const isFloor=!!hit?.object.userData.walkable&&Math.abs(hit.point.y)<.03
     const accessible=isFloor&&canOccupy(hit!.point.x,hit!.point.z,data.bounds,data.colliders)
     canvas.style.cursor=isArt?'pointer':isFloor?(accessible?'crosshair':'not-allowed'):'grab'
@@ -250,7 +254,7 @@ async function init() {
     const textures=new Map(images)
     gltf.scene.traverse(o=>{
       if(!(o instanceof THREE.Mesh))return
-      if(o.userData.artworkId){const id=o.userData.artworkId;o.material=new THREE.MeshBasicMaterial({map:textures.get(id)});artworks.set(id,o)}
+      if(o.userData.artworkId){const id=o.userData.artworkId;o.material=new THREE.MeshBasicMaterial({map:textures.get(id)});o.userData.detailsEnabled=canOpenDetails(data.artworks.find(a=>a.id===id));artworks.set(id,o)}
     })
     environment.apply(gltf.scene)
     scene.add(gltf.scene);sceneAvailable=true
