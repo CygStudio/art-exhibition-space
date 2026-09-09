@@ -111,7 +111,7 @@ flowchart LR
 
 **ID 是資料與模型的接點。** `gallery.json` 中的 `position`、`rotation` 主要供「前往作品位置」計算使用，桌前或柱旁作品另有 `viewPosition` 指定安全站位；真正顯示的畫作位置與幾何來自 GLB。只改 JSON 座標，不會把牆上的畫搬走。
 
-目前 TypeScript 的 `GalleryData` interface 只提供編譯期型別；沒有 JSON 執行期 schema 驗證。
+`src/artwork.ts` 定義作品資料契約，`detailsEnabled` 是必要 boolean。兩張大型背板設為 `false`，仍套用圖片並保留射線遮擋；可互動目錄由 `getDetailArtworks()` 篩選，開啟詳情與上下件共用該清單。缺少或非 `true` 的值不啟用詳情。TypeScript interface 提供編譯期型別，目前沒有完整 JSON 執行期 schema 驗證。
 
 ## 5. 空間座標：先把 3D 拆成平面與高度
 
@@ -127,7 +127,7 @@ Three.js 這邊採 Y-up：X 左右、Y 高度、Z 前後。本專案把世界單
      Y 軸垂直地板；攝影機眼高固定在 Y = 1.65
 ```
 
-初始導覽位置由 `gallery.json` 的 `layout.entrance` 提供，目前是 `[3.9, 1.65, -0.35]`；位置靠平面圖右側，入口本身仍未經現場確認。這不是 CSS 的 left／top，也不是相對目前視窗的像素。
+初始導覽位置由 `gallery.json` 的 `layout.entrance` 提供，目前是 `[2.72, 1.65, -0.65]`；位置在已確認的右上門口內側，`yaw=1.1` 朝柱子與展場觀看，服務台在右側。這不是 CSS 的 left／top，也不是相對目前視窗的像素。
 
 `yaw` 是左右轉頭，`pitch` 是上下看；程式使用 radians。`yaw = 0` 朝 -Z，`yaw = π/2` 朝 -X。W 鍵代表沿目前朝向前進，因此轉頭後 W 的世界座標方向也會改變。現在沒有跳躍、樓梯或重力；行走只更新 X、Z。
 
@@ -157,7 +157,7 @@ flowchart TD
 
 ## 7. 看起來是 3D，碰撞卻是 2D
 
-顯示幾何與碰撞幾何是不同資料。GLB 有樑、管線、畫框等細節；`gallery.json` 的 colliders 包含整個未使用房間、兩根方柱、服務台、簽到桌及三張椅子，共八個 XZ 矩形。外牆由可站立中心的 `bounds` 限制，並非每個可見 Mesh 都會自動阻擋行走。
+顯示幾何與碰撞幾何是不同資料。GLB 有樑、管線、畫框等細節；`gallery.json` 的 colliders 包含入口隔間、開啟的門扇、兩根方柱、柱前落地畫作、服務台、簽到桌及三張椅子；門洞保留可通行空間。外牆由可站立中心的 `bounds` 限制，並非每個可見 Mesh 都會自動阻擋行走。
 
 訪客以半徑 0.24 的圓代表地板占位，不是沒有體積的一個點。
 
