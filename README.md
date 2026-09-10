@@ -1,6 +1,6 @@
 # 熙望之間｜線上畫展
 
-以 `refs/` 的照片與影片為參考，使用 Blender 製作展場，再透過 Three.js 顯示。依使用者標註平面圖配置白色梁架、方柱、展牆、服務台、獨立簽到桌與黑框落地窗；右上隔間保留入場門口與通道，進場後右側為服務台，前方柱子有含框約 145 公分高的落地畫作。場景沒有任何人物，21 件作品均為示意圖，其中 19 件可開啟詳情、2 張大型背板僅展示。
+以 `refs/` 的照片與影片為參考，使用 Blender 製作展場，再透過 Three.js 顯示。依使用者標註平面圖配置白色梁架、方柱、展牆、服務台、獨立簽到桌與黑框落地窗；右上隔間保留入場門口與通道，進場後右側為服務台，門洞位於服務台旁的隔間左側牆。前方柱子懸掛長條無框畫，旁有黃色身高尺；畫作上緣約 180 公分、中心約 145 公分。場景不加入人物模型，柱畫使用現場照片對位，其餘為示意圖，其中 19 件可開啟詳情、2 張大型背板僅展示。
 
 外框約 10.8 × 10.2 公尺，扣除右上房間後主空間約 98.6 平方公尺。入口依使用者補充確認，尺寸仍是推估，並非測量結果。詳見 [影片與平面圖修正依據](docs/scene-correction.md) 及 [重建判讀](docs/reconstruction.md)。
 
@@ -43,9 +43,10 @@ pnpm test      # 碰撞、作品位置、GLB 與圖檔一致性
 
 - `blender/gallery.blend`：可直接開啟編輯的 Blender 原始檔。
 - `blender/build_gallery.py`：建模與資產匯出腳本。
-- `public/models/gallery.glb`：Three.js 實際載入的 GLB，約 765 KiB。
+- `public/models/gallery.glb`：Three.js 實際載入的 GLB，約 1.04 MiB。
 - `public/gallery.json`：作品資料、安全定位點、碰撞範圍、場地邊界與平面配置。
 - `public/artworks/*.svg`：本地抽象示意圖，DOM 燈箱與 3D 展品共用。
+- `public/artworks/column-reference.png`：保留的原始現場照片，約 6.8 MiB。3D 透過 UV 對位只顯示畫作區域，詳情標示並顯示原始參考照片。
 
 已使用 Blender 4.5.11 LTS 執行。重新產生：
 
@@ -77,7 +78,7 @@ pnpm model
 1. 把圖片放到 `public/artworks/`，建議 WebP／JPEG、長邊約 1,024–2,048 px。
 2. 更新 `public/gallery.json` 中對應作品的 `image`、`title`、`description`、`medium`。
 3. `id` 必須與 GLB 中的 `artworkId` 相同；`detailsEnabled` 必須是 boolean。設為 `false` 時仍渲染且遮擋射線，但不顯示點擊提示、不開啟詳情，也不列入目錄或上下件切換。
-4. 若改變畫框比例、位置或場地尺寸，修改建模腳本並重新匯出；目前前端會將圖片套到固定畫框比例。
+4. 若改變畫布比例、位置或場地尺寸，修改建模腳本並重新匯出；目前前端會將圖片套到固定畫布比例。
 
 若需要在重新建模後仍保留正式內容，應把正式作品資料從產生腳本抽成獨立來源；目前版本的產生器用於建立完整示意場景。
 
@@ -90,3 +91,5 @@ pnpm model
 - [Three.js 官方文件](https://threejs.org/docs/)
 - [MeshToonMaterial 官方文件](https://threejs.org/docs/pages/MeshToonMaterial.html)
 - [Blender glTF 匯出文件](https://docs.blender.org/manual/en/latest/addons/import_export/scene_gltf2.html)
+
+所有作品為厚約 3.5 公分的無框畫，正面與四個包覆側面共用圖像；側面頂點顏色稍暗以呈現折角。`depth` 由建模腳本匯出。柱畫以原始照片對位，若改換已裁好的正式圖片，也須同步改回完整圖片的 UV。

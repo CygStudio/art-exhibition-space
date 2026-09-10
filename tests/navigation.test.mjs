@@ -184,3 +184,28 @@ test('floor plan draws the doorway swing and entrance label',()=>{
   assert.ok(!group.innerHTML.includes('未使用'))
   assert.match(group.innerHTML,/ A[\d.]+ [\d.]+ 0 0 1 /)
 })
+
+test('column photo UVs sample only the painting and preserve folded-side shading',()=>{
+  const glb=readFileSync(new URL('../public/models/gallery.glb',import.meta.url))
+  const jsonLength=glb.readUInt32LE(12),binaryOffset=28+jsonLength
+  const json=JSON.parse(glb.subarray(20,20+jsonLength).toString())
+  const n=json.nodes.find(n=>n.extras?.artworkId==='20')
+  const p=json.meshes[n.mesh].primitives[0]
+  const uv=json.accessors[p.attributes.TEXCOORD_0],view=json.bufferViews[uv.bufferView]
+  const offset=binaryOffset+(view.byteOffset??0)+(uv.byteOffset??0)
+  for(let i=0;i<uv.count;i++){
+    const at=offset+i*(view.byteStride??8)
+    const u=glb.readFloatLE(at),v=glb.readFloatLE(at+4)
+    assert.ok(u>.58&&u<.81,`u=${u}`)
+    assert.ok(v>.12&&v<.43,`v=${v}`)
+  }
+  const colors=json.accessors[p.attributes.COLOR_0],cv=json.bufferViews[colors.bufferView]
+  const bytes=colors.componentType===5121?1:colors.componentType===5123?2:4
+  const channel=[]
+  for(let i=0;i<colors.count;i++){
+    const at=binaryOffset+(cv.byteOffset??0)+(colors.byteOffset??0)+i*(cv.byteStride??4*bytes)
+    channel.push(bytes===1?glb.readUInt8(at)/255:bytes===2?glb.readUInt16LE(at)/65535:glb.readFloatLE(at))
+  }
+  assert.ok(channel.some(c=>c>.99))
+  assert.ok(channel.some(c=>c>.5&&c<.9))
+})

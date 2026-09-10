@@ -30,6 +30,10 @@ dark = mat('Charcoal metal', (.026,.031,.029), .55, .3)
 seam = mat('Panel seams', (.48,.47,.43))
 cloth = mat('Ochre table linen', (.48,.39,.25))
 white = mat('Paper labels', (.93,.9,.81))
+canvas_material = mat('Canvas wrap', (1,1,1))
+canvas_color = canvas_material.node_tree.nodes.new('ShaderNodeVertexColor')
+canvas_color.layer_name = 'Canvas fold shading'
+canvas_material.node_tree.links.new(canvas_color.outputs['Color'], next(n for n in canvas_material.node_tree.nodes if n.type == 'BSDF_PRINCIPLED').inputs['Base Color'])
 concrete = mat('Concrete', (.5,.48,.43))
 glass = mat('Window glass', (.32,.43,.49), .15)
 glass.diffuse_color = (.32,.43,.49,.32)
@@ -213,13 +217,15 @@ def art(pos,w,h,rot,zone,view_position=None,details_enabled=True,column_mounted=
     mesh.from_pydata([xyz(local(*v)) for v in vertices],[],faces); mesh.update()
     uv=mesh.uv_layers.new()
     colors=mesh.color_attributes.new(name='Canvas fold shading',type='FLOAT_COLOR',domain='CORNER')
+    # Adding a color layer reallocates CustomData; reacquire the UV layer.
+    uv=mesh.uv_layers.active
     for polygon,coords in zip(mesh.polygons,face_uvs):
         shade=1 if polygon.index==0 else .72
         for loop,co in zip(polygon.loop_indices,coords):
             uv.data[loop].uv=image_uv(*co)
             colors.data[loop].color=(shade,shade,shade,1)
     obj=bpy.data.objects.new('Artwork_'+ident,mesh); bpy.context.collection.objects.link(obj)
-    obj.data.materials.append(white); obj['artworkId']=ident; obj['detailsEnabled']=details_enabled; obj['canvasDepth']=depth
+    obj.data.materials.append(canvas_material); obj['artworkId']=ident; obj['detailsEnabled']=details_enabled; obj['canvasDepth']=depth
     label=box('Label_'+ident,local(0,-h/2-.07,0),(.16,.035,.008),white)
     label.rotation_euler.z=a
     if not column_mounted:
