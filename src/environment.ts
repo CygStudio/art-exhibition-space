@@ -20,6 +20,9 @@ export function createCelEnvironment() {
     'Window glass': '#849dad',
     'Exterior ambient': '#657785',
     'Exhibition accent': '#c88691',
+    'Ruler yellow': '#f4c340',
+    'Ruler ink': '#382c1b',
+    'Ruler spots': '#bc6a32',
   }
   const materials = new Map<string, THREE.MeshToonMaterial>()
   const ink = new THREE.LineBasicMaterial({ color: '#635c72', transparent: true, opacity: .28, depthWrite: false })
@@ -57,7 +60,7 @@ export function createCelEnvironment() {
       const original = Array.isArray(mesh.material) ? mesh.material : [mesh.material]
       mesh.userData.walkable = original.some(m => m.name === 'Concrete')
       mesh.material = original.length === 1 ? materialFor(original[0]) : original.map(materialFor)
-      if (original.some(m => ['Paper labels', 'Lamp diffuser', 'Concrete', 'Window glass', 'Exterior ambient'].includes(m.name))) continue
+      if (original.some(m => ['Paper labels', 'Lamp diffuser', 'Concrete', 'Window glass', 'Exterior ambient', 'Ruler ink', 'Ruler yellow', 'Ruler spots'].includes(m.name))) continue
       const edges = new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry, 55), ink)
       edges.name = 'Cel architectural ink'
       edges.userData.solid = false

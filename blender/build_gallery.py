@@ -87,7 +87,8 @@ layout = {
     'serviceDesk': {'x':.075,'z':-3.95,'width':3.25,'depth':.82},
     'guestbook': {'x':-3.8,'z':-4.55,'width':2.8,'depth':.72},
     'window': {'x':5.4,'z':2.45,'width':.12,'depth':4.5},
-    'entrance': {'position':[2.72,1.65,-.65],'yaw':1.1,'door':{'x':2.705,'z':-1.65,'width':1.05,'height':2.25}},
+    'entrance': {'position':[1.45,1.65,-2.45],'yaw':math.pi/2,'door':{'x':2.05,'z':-2.45,'width':1.05,'height':2.25,'wall':'west'}},
+    'heightRuler': {'x':-.953,'z':-2.77,'minCm':0,'maxCm':180},
     'columns': [{'x':-1.25,'z':z,'width':.48,'depth':.5} for z in [-2.94,3.0]],
 }
 box('Floor slab',(0,-.1,0),(11,.2,10.4),concrete)
@@ -113,16 +114,18 @@ box('Former entrance exhibition panel',(5.26,1.26,-.725),(.09,2.52,1.65),panel)
 # Entry lobby: no exhibition, but the door opening connects it to the main room.
 r=layout['entranceLobby']
 door=layout['entrance']['door']
-left=door['x']-door['width']/2
-right=door['x']+door['width']/2
-box('Entry lobby west partition',(2.05,1.55,-3.375),(.16,3.1,3.45),panel,collision=True)
-box('Door left pier',((2.05+left)/2,1.55,door['z']),(left-2.05,3.1,.16),panel,collision=True)
-box('Entry lobby south partition',((right+5.4)/2,1.55,door['z']),(5.4-right,3.1,.16),panel,collision=True)
-box('Entrance lintel',(door['x'],2.675,door['z']),(door['width'],.85,.16),panel)
-for x in [left,right]: box('Entrance jamb',(x,1.125,door['z']),(.045,2.25,.18),steel)
-# Door swings inward against the lobby's west side, matching the plan's arc.
-box('Open entrance door',(left,1.125,door['z']-door['width']/2),(.045,2.25,door['width']),plaster,merge=False,collision=True)
-rod('Entrance door handle',(left+.055,.96,door['z']-.85),(left+.055,1.12,door['z']-.85),.012,dark)
+near=door['z']+door['width']/2
+far=door['z']-door['width']/2
+box('Entry lobby west upper partition',(2.05,1.55,(-5.1+far)/2),(.16,3.1,far+5.1),panel,collision=True)
+box('Entry lobby west lower pier',(2.05,1.55,(near-1.65)/2),(.16,3.1,-1.65-near),panel,collision=True)
+# Close the former opening in the south wall.
+box('Entry lobby south partition',(3.725,1.55,-1.65),(3.35,3.1,.16),panel,collision=True)
+box('Entrance lintel',(door['x'],2.675,door['z']),(.16,.85,door['width']),panel)
+for z in [far,near]: box('Black entrance jamb',(door['x'],1.125,z),(.2,2.25,.055),dark)
+box('Black entrance header',(door['x'],2.25,door['z']),(.2,.055,door['width']),dark)
+# Open inward into the lobby, on the north hinge.
+box('Open entrance door',(door['x']+door['width']/2,1.125,far),(door['width'],2.25,.045),plaster,merge=False,collision=True)
+rod('Entrance door handle',(door['x']+.85,.96,far+.055),(door['x']+.85,1.12,far+.055),.012,dark)
 
 for c in layout['columns']:
     x,z=c['x'],c['z']
@@ -189,30 +192,44 @@ chair(-4.65,-3.65,-1)
 arts=[]
 titles=['光的序章','緋色軌跡','日落之後','靜謐之境','月的背面','流動的記憶','微光之間','夜色練習','熙望的形狀','盛放','遠方來信','光與回聲','留下的溫度','浮光','時間切片','未完的風景','相遇時刻','日光收藏','柔軟的邊界','再次，看見','熙望・序曲']
 palettes=[['#e5d9c5','#b84f3d','#292c35','#c99567'],['#dddace','#364a50','#a48a66','#ecb666'],['#ebe0d0','#723642','#c78072','#303241'],['#d2d7cc','#647d71','#c7a36e','#283a38']]
-def art(pos,w,h,rot,zone,view_position=None,details_enabled=True,floor_standing=False):
+def art(pos,w,h,rot,zone,view_position=None,details_enabled=True,column_mounted=False):
     idx=len(arts)+1; ident=f'{idx:02}'
-    # Thin framed panel, front is local +Z; rotation about Three.js Y.
+    # Frameless wrapped canvas: front and four folded sides belong to one mesh.
     a=math.radians(rot)
+    depth=.035
     def local(dx,dy,dz): return (pos[0]+dx*math.cos(a)+dz*math.sin(a),pos[1]+dy,pos[2]-dx*math.sin(a)+dz*math.cos(a))
-    frame=box('Frame_'+ident,local(0,0,-.025),(w+.055,h+.055,.065),dark)
-    frame.rotation_euler.z=a
-    # Front plane is generated directly for precise UV orientation.
-    verts=[xyz(local(-w/2,-h/2,.013)),xyz(local(w/2,-h/2,.013)),xyz(local(w/2,h/2,.013)),xyz(local(-w/2,h/2,.013))]
-    mesh=bpy.data.meshes.new('Canvas_'+ident); mesh.from_pydata(verts,[],[(0,1,2,3)]); mesh.update()
+    # Original photograph coordinates, counterclockwise from bottom left.
+    # Sampling only the painting with mesh UVs leaves the source bitmap untouched.
+    corners=[(682/1153,1-863/2048),(896/1153,1-863/2048),(921/1153,1-264/2048),(691/1153,1-255/2048)] if column_mounted else [(0,0),(1,0),(1,1),(0,1)]
+    def image_uv(u,v):
+        bl,br,tr,tl=corners
+        return tuple((1-v)*((1-u)*bl[k]+u*br[k])+v*((1-u)*tl[k]+u*tr[k]) for k in range(2))
+    front=[(-w/2,-h/2,0),(w/2,-h/2,0),(w/2,h/2,0),(-w/2,h/2,0)]
+    back=[(x,y,-depth) for x,y,_ in front]
+    vertices=front+back
+    faces=[(0,1,2,3),(4,0,3,7),(1,5,6,2),(3,2,6,7),(4,5,1,0),(5,4,7,6)]
+    face_uvs=[[(0,0),(1,0),(1,1),(0,1)],[(.04,0),(0,0),(0,1),(.04,1)],[(1,0),(.96,0),(.96,1),(1,1)],[(0,1),(1,1),(1,.96),(0,.96)],[(0,.04),(1,.04),(1,0),(0,0)],[(1,0),(0,0),(0,1),(1,1)]]
+    mesh=bpy.data.meshes.new('WrappedCanvas_'+ident)
+    mesh.from_pydata([xyz(local(*v)) for v in vertices],[],faces); mesh.update()
     uv=mesh.uv_layers.new()
-    for i,co in enumerate([(0,0),(1,0),(1,1),(0,1)]): uv.data[i].uv=co
+    colors=mesh.color_attributes.new(name='Canvas fold shading',type='FLOAT_COLOR',domain='CORNER')
+    for polygon,coords in zip(mesh.polygons,face_uvs):
+        shade=1 if polygon.index==0 else .72
+        for loop,co in zip(polygon.loop_indices,coords):
+            uv.data[loop].uv=image_uv(*co)
+            colors.data[loop].color=(shade,shade,shade,1)
     obj=bpy.data.objects.new('Artwork_'+ident,mesh); bpy.context.collection.objects.link(obj)
-    obj.data.materials.append(white); obj['artworkId']=ident; obj['detailsEnabled']=details_enabled
-    if not floor_standing:
-        label=box('Label_'+ident,local(0,-h/2-.095,0),(.2,.045,.013),white)
-        label.rotation_euler.z=a
-        for dx in [-w*.32,w*.32]: rod('Picture wire',local(dx,h/2+.02,-.02),local(dx,2.53-pos[1],-.02),.003,steel)
-    else:
-        colliders.append({'name':'Floor-standing column artwork','x':pos[0],'z':pos[2],'width':.1,'depth':w+.055})
+    obj.data.materials.append(white); obj['artworkId']=ident; obj['detailsEnabled']=details_enabled; obj['canvasDepth']=depth
+    label=box('Label_'+ident,local(0,-h/2-.07,0),(.16,.035,.008),white)
+    label.rotation_euler.z=a
+    if not column_mounted:
+        for dx in [-w*.32,w*.32]: rod('Picture wire',local(dx,h/2+.02,-.025),local(dx,2.53-pos[1],-.025),.003,steel)
     p=palettes[(idx-1)%len(palettes)]
     svg=f'''<svg xmlns="http://www.w3.org/2000/svg" width="720" height="900" viewBox="0 0 720 900"><rect width="720" height="900" fill="{p[0]}"/><defs><pattern id="lines" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M0 0V12" stroke="{p[3]}" stroke-opacity=".18"/></pattern></defs><rect x="38" y="38" width="644" height="824" fill="url(#lines)"/><circle cx="{245+idx%3*90}" cy="320" r="{155+idx%4*12}" fill="{p[1]}"/><path d="M90 780V490a180 180 0 0 1 360 0v290Z" fill="{p[2]}"/><path d="M310 780V530a150 150 0 0 1 300 0v250Z" fill="{p[3]}"/><circle cx="505" cy="205" r="58" fill="{p[0]}"/><path d="M50 {590+idx%5*22} Q340 270 655 670 M70 810 Q320 510 670 720" fill="none" stroke="{p[0]}" stroke-width="3"/><text x="55" y="85" fill="{p[2]}" font-family="serif" font-size="22" letter-spacing="5">STUDY / {ident}</text><text x="55" y="855" fill="{p[2]}" font-family="sans-serif" font-size="12" letter-spacing="4">LIGHT &amp; MEMORY — PLACEHOLDER</text></svg>'''
     (OUT/'artworks'/f'{ident}.svg').write_text(svg)
-    arts.append({'id':ident,'detailsEnabled':details_enabled,'title':titles[idx-1],'zone':zone,'image':f'artworks/{ident}.svg','position':list(pos),'rotation':rot,'width':w,'height':h,'description':'以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。','medium':'數位構成・示意圖'})
+    arts.append({'id':ident,'detailsEnabled':details_enabled,'title':titles[idx-1],'zone':zone,'image':f'artworks/{ident}.svg','position':list(pos),'rotation':rot,'width':w,'height':h,'depth':depth,'description':'以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。','medium':'數位構成・示意圖'})
+    if column_mounted:
+        arts[-1].update({'image':'artworks/column-reference.png','title':'CYGNUS · THE LONG LEG','medium':'現場照片對位・無框畫','description':'依使用者提供的現場照片對位至柱上長條無框畫，旁附 180 公分身高尺。詳情顯示原始參考照片；尺寸與位置為照片判讀。','imageKind':'reference-photo'})
     if view_position is not None: arts[-1]['viewPosition'] = view_position
     start=local(0,2.69-pos[1],1.0); end=local(0,2.52-pos[1],.84)
     rod('Spotlight housing',start,end,.055,steel)
@@ -225,9 +242,35 @@ for i in range(7):
 for x in [3.62,4.27,4.93]: art((x,1.72,-1.545),.58,.8,0,'east')
 art((-3.8,1.87,-4.965),2.7,1.25,0,'guestbook',[-3.8,1.65,-2.7],details_enabled=False)
 art((5.185,1.72,-.725),.92,1.15,-90,'east')
-# Frame adds .055 m: total floor-standing height is exactly 1.45 m.
-art((-.95,.725,-2.94),.46,1.395,90,'reception',floor_standing=True)
+# Photo's ruler places the top at 180 cm, bottom near 110 cm.
+art((-.952,1.45,-3.015),.28,.7,90,'reception',view_position=[.2,1.65,-2.94],column_mounted=True)
 art((.1,1.87,-4.965),2.7,1.25,0,'reception',[.1,1.65,-2.2],details_enabled=False)
+
+# Height ruler on the same column face: actual centimetres from the floor.
+ruler_yellow=mat('Ruler yellow',(.95,.64,.08))
+ruler_ink=mat('Ruler ink',(.045,.032,.016))
+ruler_spots=mat('Ruler spots',(.63,.27,.07))
+ruler=layout['heightRuler']; rx,rz=ruler['x'],ruler['z']
+box('Height ruler strip',(rx,.9,rz),(.008,1.8,.075),ruler_yellow)
+for cm in range(0,181):
+    length=.028 if cm%10==0 else .019 if cm%5==0 else .011
+    box('Ruler tick '+str(cm),(rx+.006,cm/100,rz+.036-length/2),(.004,.0015,length),ruler_ink)
+    if cm%10==0:
+        bpy.ops.object.text_add(location=xyz((rx+.01,cm/100-.006,rz-.011)))
+        o=bpy.context.object; o.name='Ruler number '+str(cm)
+        o.data.body=str(cm); o.data.size=.017; o.data.align_x='CENTER'
+        o.rotation_euler=(math.pi/2,0,math.pi/2)
+        o.data.materials.append(ruler_ink)
+        bpy.ops.object.convert(target='MESH'); static.append(bpy.context.object)
+# Simple giraffe silhouette above 180 cm, with ears, horns, eye and patterned neck.
+box('Giraffe head',(rx,1.87,rz),(.008,.14,.11),ruler_yellow)
+for z in [rz-.032,rz+.032]:
+    rod('Giraffe horn',(rx,1.93,z),(rx,1.98,z),.007,ruler_spots)
+    box('Giraffe ear',(rx,1.915,z*1+(z-rz)*.75),(.009,.035,.027),ruler_yellow)
+box('Giraffe eye',(rx+.008,1.89,rz+.019),(.004,.016,.013),ruler_ink)
+box('Giraffe cheek',(rx+.008,1.851,rz+.022),(.004,.018,.019),ruler_spots)
+for y in [.14,.34,.54,.74,.94,1.14,1.34,1.54,1.74]:
+    box('Giraffe neck spot',(rx+.005,y,rz-.029),(.003,.035,.018),ruler_spots)
 
 # Merge architectural pieces per material to keep web draw calls small.
 for material in list(bpy.data.materials):
@@ -245,7 +288,7 @@ scene.world.color=(.4,.4,.4)
 # Camera retained in source for easy inspection, excluded from web export.
 bpy.ops.object.camera_add(location=xyz(layout['entrance']['position']))
 cam=bpy.context.object; cam.name='Entrance preview'
-cam.rotation_euler=(Vector(xyz((-.6,1.65,-4)))-cam.location).to_track_quat('-Z','Y').to_euler()
+cam.rotation_euler=(Vector(xyz((layout['entrance']['position'][0]-math.sin(layout['entrance']['yaw']),1.65,layout['entrance']['position'][2]-math.cos(layout['entrance']['yaw']))))-cam.location).to_track_quat('-Z','Y').to_euler()
 cam.data.lens=22; scene.camera=cam
 for p in [(-2,2.6,-3),(2,2.6,2)]:
     bpy.ops.object.light_add(type='AREA',location=xyz(p))

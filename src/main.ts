@@ -88,9 +88,11 @@ function renderArt() {
   const a=detailArtworks[selected]
   $('#art-title').textContent=a.title
   $<HTMLImageElement>('#art-image').src=base+a.image
-  $<HTMLImageElement>('#art-image').alt=`${a.title}：抽象色塊與弧線的示意作品`
+  $<HTMLImageElement>('#art-image').alt=a.imageKind==='reference-photo'?`${a.title}：使用者提供的現場參考照片`:`${a.title}：抽象色塊與弧線的示意作品`
   $('#art-index').textContent=a.id
   $('#art-medium').textContent=a.medium
+  $('.art-image-wrap > span').textContent=a.imageKind==='reference-photo'?'ON-SITE REFERENCE PHOTO':'PLACEHOLDER ARTWORK'
+  $('#art-status').textContent=a.imageKind==='reference-photo'?'現場參考照片':'空間展示用示意圖'
   $('#art-description').textContent=a.description
   $('#art-zone').textContent=zoneNames[a.zone]
   $('#art-page').textContent=`${selected+1} / ${detailArtworks.length}`
@@ -103,14 +105,14 @@ $('#next-art').addEventListener('click',()=>stepArt(1))
 function buildCatalog() {
   detailArtworks=getDetailArtworks(data.artworks)
   $('.count').textContent=String(detailArtworks.length)
-  $('.catalog-note').textContent=`${detailArtworks.length} 件可瀏覽詳情的示意作品。另有 ${data.artworks.length-detailArtworks.length} 張大型背板於場景中展示。`
+  $('.catalog-note').textContent=`${detailArtworks.length} 件可瀏覽詳情的作品。另有 ${data.artworks.length-detailArtworks.length} 張大型背板於場景中展示。`
   const frag=document.createDocumentFragment()
   detailArtworks.forEach(a=>{
     const b=document.createElement('button'); b.className='catalog-card'; b.dataset.artId=a.id
     const thumb=document.createElement('div');thumb.className='catalog-thumb'
     const img=document.createElement('img');img.src=base+a.image;img.alt='';img.loading='lazy';thumb.append(img)
     const p=document.createElement('p');const num=document.createElement('span');num.textContent=a.id;p.append(num,document.createTextNode(a.title))
-    const small=document.createElement('small');small.textContent=`${zoneNames[a.zone]} / 示意作品`
+    const small=document.createElement('small');small.textContent=`${zoneNames[a.zone]} / ${a.imageKind==='reference-photo'?'現場參考照片':'示意作品'}`
     b.append(thumb,p,small);b.addEventListener('click',()=>openArt(a.id));frag.append(b)
   });$('#catalog-grid').append(frag)
 }
@@ -254,7 +256,7 @@ async function init() {
     const textures=new Map(images)
     gltf.scene.traverse(o=>{
       if(!(o instanceof THREE.Mesh))return
-      if(o.userData.artworkId){const id=o.userData.artworkId;o.material=new THREE.MeshBasicMaterial({map:textures.get(id)});o.userData.detailsEnabled=canOpenDetails(data.artworks.find(a=>a.id===id));artworks.set(id,o)}
+      if(o.userData.artworkId){const id=o.userData.artworkId;o.material=new THREE.MeshBasicMaterial({map:textures.get(id),vertexColors:true});o.userData.detailsEnabled=canOpenDetails(data.artworks.find(a=>a.id===id));artworks.set(id,o)}
     })
     environment.apply(gltf.scene)
     scene.add(gltf.scene);sceneAvailable=true

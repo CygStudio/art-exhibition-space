@@ -89,7 +89,8 @@ test('every guide station and artwork can be reached from the entrance',()=>{
 })
 test('entry lobby connects to the gallery only through the doorway',()=>{
   const d=gallery.layout.entrance.door
-  const start={x:d.x,z:d.z-.6},end={x:d.x,z:d.z+.6}
+  assert.equal(d.wall,'west')
+  const start={x:d.x+.6,z:d.z},end={x:d.x-.6,z:d.z}
   assert.ok(segmentClear(start,end,bounds,colliders))
   assert.ok(findWalkPath(start,{x:0,z:0},bounds,colliders))
   assert.equal(segmentClear({x:4,z:-2.3},{x:4,z:-1},bounds,colliders),false)
@@ -101,7 +102,8 @@ test('entry view places the service desk to the right and the column ahead',()=>
   assert.ok((s.x-x)*Math.cos(e.yaw)-(s.z-z)*Math.sin(e.yaw)>0)
   const c=columns[0]
   assert.ok(-(c.x-x)*Math.sin(e.yaw)-(c.z-z)*Math.cos(e.yaw)>0)
-  assert.ok(Math.abs(x-e.door.x)<e.door.width/2)
+  assert.ok(x<e.door.x)
+  assert.ok(Math.abs(z-e.door.z)<e.door.width/2)
 })
 test('staff counter and signing desk are separate and match blocked furniture',()=>{
   const {serviceDesk:s,guestbook:g}=gallery.layout
@@ -148,14 +150,32 @@ test('only the two large desk backdrops disable details in JSON and GLB',()=>{
     assert.equal(json.nodes.find(n=>n.extras?.artworkId===a.id).extras.detailsEnabled,a.detailsEnabled)
   }
 })
-test('column artwork reaches the floor and is 145 cm high including its frame',()=>{
+test('column canvas is wall-mounted at the photo ruler heights',()=>{
   const a=gallery.artworks.find(a=>a.id==='20')
-  assert.ok(Math.abs(a.height+.055-1.45)<1e-9)
-  assert.ok(Math.abs(a.position[1]-(a.height+.055)/2)<1e-9)
+  assert.ok(Math.abs(a.position[1]+a.height/2-1.8)<1e-9)
+  assert.ok(Math.abs(a.position[1]-a.height/2-1.1)<1e-9)
+  assert.equal(a.imageKind,'reference-photo')
+  assert.ok(existsSync(new URL('../public/'+a.image,import.meta.url)))
   assert.equal(a.rotation,90)
-  assert.ok(a.width<.6)
   assert.ok(canOpenDetails(a))
-  assert.ok(gallery.artworks.some(a=>a.rotation===-90&&Math.abs(a.position[2]+.725)<.01))
+  assert.equal(gallery.layout.heightRuler.maxCm,180)
+})
+test('all canvases have thickness, wrapped sides and no border frames',()=>{
+  const glb=readFileSync(new URL('../public/models/gallery.glb',import.meta.url))
+  const json=JSON.parse(glb.subarray(20,20+glb.readUInt32LE(12)).toString())
+  assert.ok(!json.nodes.some(n=>n.name.startsWith('Frame_')))
+  for(const a of gallery.artworks){
+    assert.ok(a.depth>0&&a.depth<.1)
+    const node=json.nodes.find(n=>n.extras?.artworkId===a.id)
+    assert.equal(node.extras.canvasDepth,a.depth)
+    const primitive=json.meshes[node.mesh].primitives[0]
+    assert.equal(json.accessors[primitive.indices].count,36)
+    assert.ok(primitive.attributes.COLOR_0!==undefined)
+    const bounds=json.accessors[primitive.attributes.POSITION]
+    const sizes=bounds.max.map((v,i)=>v-bounds.min[i]).sort((a,b)=>a-b)
+    const expected=[a.width,a.height,a.depth].sort((a,b)=>a-b)
+    sizes.forEach((v,i)=>assert.ok(Math.abs(v-expected[i])<1e-5,a.id))
+  }
 })
 test('floor plan draws the doorway swing and entrance label',()=>{
   const group={innerHTML:''}

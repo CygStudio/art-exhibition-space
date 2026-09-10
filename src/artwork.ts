@@ -9,6 +9,8 @@ export interface Artwork {
   rotation: number
   width: number
   height: number
+  depth: number
+  imageKind?: 'reference-photo'
   description: string
   medium: string
   detailsEnabled: boolean
