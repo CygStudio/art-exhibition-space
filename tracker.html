@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f3ed" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="description" content="熙歌三周年畫展的作品意願聯絡追蹤面板。" />
+    <title>熙歌三周年畫展｜聯絡追蹤</title>
+  </head>
+  <body>
+    <main class="tracker-shell">
+      <header class="tracker-header">
+        <a class="back-link" href="./">← 回到線上展覽</a>
+        <p class="eyebrow">CONSENT TRACKER · LOCAL ONLY</p>
+        <div class="title-row">
+          <div>
+            <h1>熙歌三周年畫展<br /><em>聯絡追蹤</em></h1>
+            <p class="intro">確認每件作品的展示意願；所有進度和備註僅儲存在這台裝置的瀏覽器中。</p>
+          </div>
+          <aside class="privacy-note" aria-label="資料儲存說明">
+            <span aria-hidden="true">⌁</span>
+            <p><strong>本機儲存</strong><br />不會上傳或自動傳送訊息</p>
+          </aside>
+        </div>
+      </header>
+
+      <section class="summary" aria-label="聯絡進度摘要">
+        <div class="summary-main"><span id="progress-value">0 / 0</span><small>已完成處理</small></div>
+        <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
+        <div id="status-summary" class="status-summary"></div>
+      </section>
+
+      <section class="controls" aria-label="篩選聯絡清單">
+        <label class="search-control">
+          <span class="sr-only">搜尋</span>
+          <input id="search-input" type="search" placeholder="搜尋繪師、提供者或檔名" autocomplete="off" />
+        </label>
+        <label class="select-control">
+          <span>進度</span>
+          <select id="status-filter">
+            <option value="all">全部進度</option>
+          </select>
+        </label>
+        <label class="select-control">
+          <span>聯絡類型</span>
+          <select id="role-filter">
+            <option value="all">全部類型</option>
+            <option value="繪師">繪師</option>
+            <option value="委託粉絲">委託粉絲</option>
+            <option value="作品提供者">作品提供者</option>
+          </select>
+        </label>
+        <button id="reset-button" class="reset-button" type="button">重設本機進度</button>
+      </section>
+
+      <p id="result-count" class="result-count" aria-live="polite"></p>
+      <section id="contact-list" class="contact-list" aria-label="聯絡對象清單"></section>
+    </main>
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script type="module" src="/src/tracker.ts"></script>
+  </body>
+</html>
