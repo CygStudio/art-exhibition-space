@@ -13,7 +13,7 @@
     <header class="header">
       <a class="brand" href="./" aria-label="熙望之間首頁"><span class="brand-mark" aria-hidden="true">◒</span><span>熙望之間<small>LIGHT & MEMORY</small></span></a>
       <div class="header-caption">熙元 × 三周年 <span>／</span> 線上展覽空間</div>
-      <nav aria-label="展覽選單"><a class="tracker-link" href="./tracker.html">聯絡追蹤</a><button id="catalog-button">作品目錄 <span class="count">19</span></button><button id="about-button" class="icon-button" aria-label="關於展覽與操作說明">?</button></nav>
+      <nav aria-label="展覽選單"><a class="tracker-link" href="./tracker.html">聯絡追蹤</a><button id="catalog-button">作品目錄 <span class="count">27</span></button><button id="about-button" class="icon-button" aria-label="關於展覽與操作說明">?</button></nav>
     </header>
     <main id="gallery">
       <canvas id="scene" tabindex="0" aria-label="3D 展覽空間。點擊地板移動，拖曳環視，WASD 或方向鍵移動，點擊畫作開啟詳情。亦可使用作品目錄。"></canvas>
@@ -24,7 +24,7 @@
         <p class="intro-copy">讓時間慢下來，<br>在影與光之間，重新相遇。</p>
         <div class="intro-rule"></div>
         <p class="location">濕地 venue <span>／</span> 5F A 區</p>
-        <p class="small-muted">依現場影像重建・展品為示意圖</p>
+        <p class="small-muted">依現場影像重建・呈現原始作品</p>
         <button id="explore-button" class="text-button">開始探索 <span>↗</span></button>
       </section>
       <div class="view-label"><span class="live-dot"></span><span id="zone-label">展間全景</span><span class="view-mode">3D LIVE</span></div>
@@ -46,11 +46,11 @@
     </main>
     <dialog id="art-dialog" aria-labelledby="art-title">
       <button class="dialog-close" data-close aria-label="關閉作品詳情">×</button>
-      <div class="art-image-wrap"><img id="art-image" alt="" /><span>PLACEHOLDER ARTWORK</span></div>
-      <div class="art-details"><p class="eyebrow">THE COLLECTION <span id="art-index"></span></p><h2 id="art-title"></h2><p id="art-medium" class="medium"></p><div class="detail-rule"></div><p id="art-description"></p><dl><div><dt>展區</dt><dd id="art-zone"></dd></div><div><dt>作品狀態</dt><dd id="art-status">空間展示用示意圖</dd></div></dl><button id="locate-art" class="primary-button">前往作品位置 <span>↗</span></button><div class="art-pagination"><button id="prev-art" aria-label="上一件作品">← 上一件</button><span id="art-page"></span><button id="next-art" aria-label="下一件作品">下一件 →</button></div></div>
+      <div class="art-image-wrap"><img id="art-image" alt="" /><span>ORIGINAL ARTWORK</span></div>
+      <div class="art-details"><p class="eyebrow">THE COLLECTION <span id="art-index"></span></p><h2 id="art-title"></h2><p id="art-medium" class="medium"></p><div class="detail-rule"></div><p id="art-description"></p><dl><div><dt>展區</dt><dd id="art-zone"></dd></div><div><dt>作品狀態</dt><dd id="art-status">原始圖檔</dd></div></dl><button id="locate-art" class="primary-button">前往作品位置 <span>↗</span></button><div class="art-pagination"><button id="prev-art" aria-label="上一件作品">← 上一件</button><span id="art-page"></span><button id="next-art" aria-label="下一件作品">下一件 →</button></div></div>
     </dialog>
-    <dialog id="catalog-dialog" aria-labelledby="catalog-title"><div class="catalog-header"><div><p class="eyebrow">THE COLLECTION</p><h2 id="catalog-title">作品目錄</h2></div><button class="dialog-close" data-close aria-label="關閉作品目錄">×</button></div><p class="catalog-note">19 件可瀏覽詳情的作品，另有 2 張大型背板於場景中展示。</p><div id="catalog-grid"></div></dialog>
-    <dialog id="about-dialog" aria-labelledby="about-title"><button class="dialog-close" data-close aria-label="關閉操作說明">×</button><p class="eyebrow">ABOUT THE SPACE</p><h2 id="about-title">把相遇，留在空間裡。</h2><p>以「熙元 × 三周年」畫展的現場照片與影片為參考，重建濕地 venue 5 樓 A 區的展覽氛圍。</p><p>依標註平面圖配置服務台、獨立簽到桌與對外落地窗；入口位於右上隔間左側、服務台旁，進場後右側為服務台。保留裸露梁架、白色展牆與混凝土地坪。入口位置依現場補充校正，未量測尺寸仍為推估；柱上畫作採現場參考照片，其餘畫作、名稱與介紹為示意內容。</p><div class="detail-rule"></div><h3>慢慢走，慢慢看。</h3><ul><li>滑鼠或手指拖曳：環視空間。</li><li>點擊空曠地板：自動移動至該處，沿途避開柱子與桌子。</li><li>拖曳、按方向鍵或開啟燈箱：停止自動移動。</li><li>WASD、方向鍵或畫面方向按鈕：移動。</li><li>點擊畫作：開啟作品燈箱與詳情。</li><li>空間導覽：快速前往各展區。</li><li>作品目錄：使用鍵盤即可瀏覽所有作品。</li><li>Esc：關閉燈箱；左右方向鍵：切換作品。</li></ul><button class="primary-button" data-close>走進展間 <span>↗</span></button></dialog>
+    <dialog id="catalog-dialog" aria-labelledby="catalog-title"><div class="catalog-header"><div><p class="eyebrow">THE COLLECTION</p><h2 id="catalog-title">作品目錄</h2></div><button class="dialog-close" data-close aria-label="關閉作品目錄">×</button></div><p class="catalog-note">27 件可瀏覽詳情的作品，另有 2 張大型背板於場景中展示。</p><div id="catalog-grid"></div></dialog>
+    <dialog id="about-dialog" aria-labelledby="about-title"><button class="dialog-close" data-close aria-label="關閉操作說明">×</button><p class="eyebrow">ABOUT THE SPACE</p><h2 id="about-title">把相遇，留在空間裡。</h2><p>以「熙元 × 三周年」畫展的現場照片與影片為參考，重建濕地 venue 5 樓 A 區的展覽氛圍。</p><p>依標註平面圖配置服務台、獨立簽到桌與對外落地窗；入口位於右上隔間左側、服務台旁，進場後右側為服務台。保留裸露梁架、白色展牆與混凝土地坪。入口位置依現場補充校正，未量測尺寸仍為推估；27 件掛畫依現場順序配置並使用原始圖檔，繪師以提供資料署名。紅旗與活動背板採現場影像對位。作品名稱沿用檔名，非正式命名。</p><div class="detail-rule"></div><h3>慢慢走，慢慢看。</h3><ul><li>滑鼠或手指拖曳：環視空間。</li><li>點擊空曠地板：自動移動至該處，沿途避開柱子與桌子。</li><li>拖曳、按方向鍵或開啟燈箱：停止自動移動。</li><li>WASD、方向鍵或畫面方向按鈕：移動。</li><li>點擊畫作：開啟作品燈箱與詳情。</li><li>空間導覽：快速前往各展區。</li><li>作品目錄：使用鍵盤即可瀏覽所有作品。</li><li>Esc：關閉燈箱；左右方向鍵：切換作品。</li></ul><button class="primary-button" data-close>走進展間 <span>↗</span></button></dialog>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

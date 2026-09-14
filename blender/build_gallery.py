@@ -2,7 +2,6 @@
 import bpy
 import math
 import json
-import random
 from pathlib import Path
 from mathutils import Vector
 import numpy as np
@@ -11,7 +10,6 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'public'
 bpy.ops.object.select_all(action='SELECT')
 bpy.ops.object.delete(use_global=False)
-random.seed(28)
 
 def mat(name, color, rough=0.85, metal=0):
     m = bpy.data.materials.new(name)
@@ -30,10 +28,6 @@ dark = mat('Charcoal metal', (.026,.031,.029), .55, .3)
 seam = mat('Panel seams', (.48,.47,.43))
 cloth = mat('Ochre table linen', (.48,.39,.25))
 white = mat('Paper labels', (.93,.9,.81))
-canvas_material = mat('Canvas wrap', (1,1,1))
-canvas_color = canvas_material.node_tree.nodes.new('ShaderNodeVertexColor')
-canvas_color.layer_name = 'Canvas fold shading'
-canvas_material.node_tree.links.new(canvas_color.outputs['Color'], next(n for n in canvas_material.node_tree.nodes if n.type == 'BSDF_PRINCIPLED').inputs['Base Color'])
 concrete = mat('Concrete', (.5,.48,.43))
 glass = mat('Window glass', (.32,.43,.49), .15)
 glass.diffuse_color = (.32,.43,.49,.32)
@@ -90,7 +84,7 @@ layout = {
     'entranceLobby': {'x':3.725,'z':-3.375,'width':3.35,'depth':3.45},
     'serviceDesk': {'x':.075,'z':-3.95,'width':3.25,'depth':.82},
     'guestbook': {'x':-3.8,'z':-4.55,'width':2.8,'depth':.72},
-    'window': {'x':5.4,'z':2.45,'width':.12,'depth':4.5},
+    'window': {'x':5.4,'z':3.025,'width':.12,'depth':3.35},
     'entrance': {'position':[1.45,1.65,-2.45],'yaw':math.pi/2,'door':{'x':2.05,'z':-2.45,'width':1.05,'height':2.25,'wall':'west'}},
     'heightRuler': {'x':-.953,'z':-2.77,'minCm':0,'maxCm':180},
     'columns': [{'x':-1.25,'z':z,'width':.48,'depth':.5} for z in [-2.94,3.0]],
@@ -101,19 +95,24 @@ box('North plaster wall',(0,1.55,-5.1),(10.8,3.1,.18),plaster)
 box('South plaster wall',(0,1.55,5.1),(10.8,3.1,.18),plaster)
 box('West plaster wall',(-5.4,1.55,0),(.18,3.1,10.2),plaster)
 # Only the short solid portions remain on the window side.
-box('East wall above glazing',(5.4,1.55,-2.45),(.18,3.1,5.3),plaster)
+box('East wall above glazing',(5.4,1.55,-1.875),(.18,3.1,6.45),plaster)
 box('East wall below glazing',(5.4,1.55,4.9),(.18,3.1,.4),plaster)
-box('Window lintel',(5.4,2.99,2.45),(.2,.22,4.5),plaster)
-box('Window sill',(5.4,.035,2.45),(.24,.07,4.5),dark)
-for z in [.2,1.325,2.45,3.575,4.7]:
-    box('Window mullion',(5.34,1.46,z),(.14,2.92,.065),dark)
+window = layout['window']
+window_start = window['z'] - window['depth']/2
+pane_width = window['depth']/4
+box('Window lintel',(5.4,2.99,window['z']),(.2,.22,window['depth']),plaster)
+box('Window sill',(5.4,.035,window['z']),(.24,.07,window['depth']),dark)
+for i in range(5):
+    box('Window mullion',(5.34,1.46,window_start+i*pane_width),(.14,2.92,.065),dark)
 for y in [.07,.95,2.88]:
-    box('Window horizontal frame',(5.34,y,2.45),(.14,.05,4.5),dark)
-for z in [.7625,1.8875,3.0125,4.1375]:
-    box('Exterior window pane',(5.38,1.47,z),(.025,2.8,1.06),glass,merge=False)
-box('Exterior ambient backdrop',(5.7,1.5,2.45),(.02,3.1,4.5),exterior)
-# The former provisional entrance is an exhibition wall beside the glazing.
-box('Former entrance exhibition panel',(5.26,1.26,-.725),(.09,2.52,1.65),panel)
+    box('Window horizontal frame',(5.34,y,window['z']),(.14,.05,window['depth']),dark)
+for i in range(4):
+    box('Exterior window pane',(5.38,1.47,window_start+(i+.5)*pane_width),(.025,2.8,pane_width-.065),glass,merge=False)
+box('Exterior ambient backdrop',(5.7,1.5,window['z']),(.02,3.1,window['depth']),exterior)
+# Three real artworks occupy the solid return before the glazing.
+box('Window return exhibition panel',(5.26,1.26,-.15),(.09,2.52,3),panel)
+box('Window return ribbon',(5.204,1.45,-.15),(.012,.018,3),accent)
+box('Partition exhibition ribbon',(3.725,1.45,-1.561),(3.35,.018,.012),accent)
 
 # Entry lobby: no exhibition, but the door opening connects it to the main room.
 r=layout['entranceLobby']
@@ -194,17 +193,21 @@ rod('Signing pen',(-3.26,.868,-4.49),(-3.2,.868,-4.29),.012,dark)
 chair(-4.65,-3.65,-1)
 
 arts=[]
-titles=['光的序章','緋色軌跡','日落之後','靜謐之境','月的背面','流動的記憶','微光之間','夜色練習','熙望的形狀','盛放','遠方來信','光與回聲','留下的溫度','浮光','時間切片','未完的風景','相遇時刻','日光收藏','柔軟的邊界','再次，看見','熙望・序曲']
-palettes=[['#e5d9c5','#b84f3d','#292c35','#c99567'],['#dddace','#364a50','#a48a66','#ecb666'],['#ebe0d0','#723642','#c78072','#303241'],['#d2d7cc','#647d71','#c7a36e','#283a38']]
-def art(pos,w,h,rot,zone,view_position=None,details_enabled=True,column_mounted=False):
-    idx=len(arts)+1; ident=f'{idx:02}'
+placements=json.loads((ROOT/'blender/artwork-layout.json').read_text())
+assets=json.loads((ROOT/'blender/artwork-assets.json').read_text())
+
+def art(spec):
+    ident=spec['id']
+    pos,w,h,rot=spec['position'],spec['width'],spec['height'],spec['rotation']
+    column_mounted=spec.get('columnMounted',False)
+    details_enabled=spec['detailsEnabled']
     # Frameless wrapped canvas: front and four folded sides belong to one mesh.
     a=math.radians(rot)
     depth=.035
     def local(dx,dy,dz): return (pos[0]+dx*math.cos(a)+dz*math.sin(a),pos[1]+dy,pos[2]-dx*math.sin(a)+dz*math.cos(a))
-    # Original photograph coordinates, counterclockwise from bottom left.
-    # Sampling only the painting with mesh UVs leaves the source bitmap untouched.
-    corners=[(682/1153,1-863/2048),(896/1153,1-863/2048),(921/1153,1-264/2048),(691/1153,1-255/2048)] if column_mounted else [(0,0),(1,0),(1,1),(0,1)]
+    # Normalized photo corners are bottom-left, bottom-right, top-right, top-left.
+    # Blender UV uses a bottom-left origin; source metadata uses top-left.
+    corners=[(u,1-v) for u,v in spec['uvCorners']] if 'uvCorners' in spec else [(0,0),(1,0),(1,1),(0,1)]
     def image_uv(u,v):
         bl,br,tr,tl=corners
         return tuple((1-v)*((1-u)*bl[k]+u*br[k])+v*((1-u)*tl[k]+u*tr[k]) for k in range(2))
@@ -225,32 +228,34 @@ def art(pos,w,h,rot,zone,view_position=None,details_enabled=True,column_mounted=
             uv.data[loop].uv=image_uv(*co)
             colors.data[loop].color=(shade,shade,shade,1)
     obj=bpy.data.objects.new('Artwork_'+ident,mesh); bpy.context.collection.objects.link(obj)
-    obj.data.materials.append(canvas_material); obj['artworkId']=ident; obj['detailsEnabled']=details_enabled; obj['canvasDepth']=depth
-    label=box('Label_'+ident,local(0,-h/2-.07,0),(.16,.035,.008),white)
-    label.rotation_euler.z=a
-    if not column_mounted:
+    # Pack authentic image materials into both the editable Blender file and GLB.
+    material=mat('Artwork image '+spec['key'],(1,1,1))
+    image=bpy.data.images.load(str(ROOT/'blender'/assets[spec['key']]['modelImage']),check_existing=True)
+    image.pack()
+    texture=material.node_tree.nodes.new('ShaderNodeTexImage'); texture.image=image
+    material.node_tree.links.new(texture.outputs['Color'],next(n for n in material.node_tree.nodes if n.type=='BSDF_PRINCIPLED').inputs['Base Color'])
+    obj.data.materials.append(material)
+    obj['artworkId']=ident; obj['detailsEnabled']=details_enabled; obj['canvasDepth']=depth
+    obj['sourceKey']=spec['key']; obj['imageKind']=spec['imageKind']
+    if details_enabled:
+        label_pos=local(w/2+.045,-h/2+.02,0) if spec.get('labelSide') else local(0,-h/2-.065,0)
+        label=box('Label_'+ident,label_pos,(.12 if spec.get('labelSide') else .16,.035,.008),white)
+        label.rotation_euler.z=a
+    if not column_mounted and details_enabled:
         for dx in [-w*.32,w*.32]: rod('Picture wire',local(dx,h/2+.02,-.025),local(dx,2.53-pos[1],-.025),.003,steel)
-    p=palettes[(idx-1)%len(palettes)]
-    svg=f'''<svg xmlns="http://www.w3.org/2000/svg" width="720" height="900" viewBox="0 0 720 900"><rect width="720" height="900" fill="{p[0]}"/><defs><pattern id="lines" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M0 0V12" stroke="{p[3]}" stroke-opacity=".18"/></pattern></defs><rect x="38" y="38" width="644" height="824" fill="url(#lines)"/><circle cx="{245+idx%3*90}" cy="320" r="{155+idx%4*12}" fill="{p[1]}"/><path d="M90 780V490a180 180 0 0 1 360 0v290Z" fill="{p[2]}"/><path d="M310 780V530a150 150 0 0 1 300 0v250Z" fill="{p[3]}"/><circle cx="505" cy="205" r="58" fill="{p[0]}"/><path d="M50 {590+idx%5*22} Q340 270 655 670 M70 810 Q320 510 670 720" fill="none" stroke="{p[0]}" stroke-width="3"/><text x="55" y="85" fill="{p[2]}" font-family="serif" font-size="22" letter-spacing="5">STUDY / {ident}</text><text x="55" y="855" fill="{p[2]}" font-family="sans-serif" font-size="12" letter-spacing="4">LIGHT &amp; MEMORY — PLACEHOLDER</text></svg>'''
-    (OUT/'artworks'/f'{ident}.svg').write_text(svg)
-    arts.append({'id':ident,'detailsEnabled':details_enabled,'title':titles[idx-1],'zone':zone,'image':f'artworks/{ident}.svg','position':list(pos),'rotation':rot,'width':w,'height':h,'depth':depth,'description':'以色塊、弧線與留白，練習光與記憶之間的關係。這是為空間導覽製作的示意作品，並非原展覽畫作。','medium':'數位構成・示意圖'})
-    if column_mounted:
-        arts[-1].update({'image':'artworks/column-reference.png','title':'CYGNUS · THE LONG LEG','medium':'現場照片對位・無框畫','description':'依使用者提供的現場照片對位至柱上長條無框畫，旁附 180 公分身高尺。詳情顯示原始參考照片；尺寸與位置為照片判讀。','imageKind':'reference-photo'})
-    if view_position is not None: arts[-1]['viewPosition'] = view_position
-    start=local(0,2.69-pos[1],1.0); end=local(0,2.52-pos[1],.84)
-    rod('Spotlight housing',start,end,.055,steel)
-    rod('Spotlight lens',end,local(0,2.51-pos[1],.83),.047,lightmat)
+    entry={k:v for k,v in spec.items() if k not in ['columnMounted','labelSide','uvCorners']}
+    entry['depth']=depth
+    entry['medium']='現場影像對位' if spec['imageKind']=='reference-photo' else '數位插畫・無框畫'
+    entry['description']='依現場影像對位的展示背板。' if spec['imageKind']=='reference-photo' else f"{spec['artist']}的作品，依原始圖檔完整比例呈現。"
+    if spec['imageKind']=='original-artwork':
+        entry['sourceSize']=assets[spec['key']]['sourceSize']
+    arts.append(entry)
+    if details_enabled and not column_mounted:
+        start=local(0,2.69-pos[1],1.0); end=local(0,2.52-pos[1],.84)
+        rod('Spotlight housing',start,end,.055,steel)
+        rod('Spotlight lens',end,local(0,2.51-pos[1],.83),.047,lightmat)
 
-for i in range(7): art((-5.185,1.72,-3.2+i*1.17),.78 if i%3 else 1.03,.98 if i%3 else .74,90,'west')
-for i in range(7):
-    x=-4.4+i*1.45
-    art((x,1.72,4.885),.82 if i%2 else .96,1.02 if i%2 else .78,180,'south',[x,1.65,3.8] if i==2 else None)
-for x in [3.62,4.27,4.93]: art((x,1.72,-1.545),.58,.8,0,'east')
-art((-3.8,1.87,-4.965),2.7,1.25,0,'guestbook',[-3.8,1.65,-2.7],details_enabled=False)
-art((5.185,1.72,-.725),.92,1.15,-90,'east')
-# Photo's ruler places the top at 180 cm, bottom near 110 cm.
-art((-.952,1.45,-3.015),.28,.7,90,'reception',view_position=[.2,1.65,-2.94],column_mounted=True)
-art((.1,1.87,-4.965),2.7,1.25,0,'reception',[.1,1.65,-2.2],details_enabled=False)
+for spec in placements['artworks']: art(spec)
 
 # Height ruler on the same column face: actual centimetres from the floor.
 ruler_yellow=mat('Ruler yellow',(.95,.64,.08))
@@ -303,7 +308,7 @@ for p in [(-2,2.6,-3),(2,2.6,2)]:
 scene.render.engine='CYCLES'; scene.cycles.samples=24
 scene.render.resolution_x=1440; scene.render.resolution_y=900; scene.render.resolution_percentage=100
 bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'blender'/'gallery.blend'))
-bpy.ops.export_scene.gltf(filepath=str(OUT/'models'/'gallery.glb'),export_format='GLB',export_extras=True,export_cameras=False,export_lights=False,export_yup=True)
-(OUT/'gallery.json').write_text(json.dumps({'artworks':arts,'colliders':colliders,'bounds':{'minX':-4.95,'maxX':4.95,'minZ':-4.65,'maxZ':4.65},'layout':layout},ensure_ascii=False,indent=2))
+bpy.ops.export_scene.gltf(filepath=str(OUT/'models'/'gallery.glb'),export_format='GLB',export_vertex_color='ACTIVE',export_all_vertex_colors=False,export_extras=True,export_cameras=False,export_lights=False,export_yup=True)
+(OUT/'gallery.json').write_text(json.dumps({'artworks':arts,'colliders':colliders,'bounds':{'minX':-4.95,'maxX':4.95,'minZ':-4.65,'maxZ':4.65},'layout':layout,'unplacedArtworks':placements['unplaced']},ensure_ascii=False,indent=2))
 triangles=sum(len(o.data.polygons) for o in bpy.data.objects if o.type=='MESH')
 print(f'Gallery exported: {len(arts)} artworks, {triangles} polygons, {(OUT/"models"/"gallery.glb").stat().st_size} bytes')

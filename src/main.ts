@@ -88,11 +88,11 @@ function renderArt() {
   const a=detailArtworks[selected]
   $('#art-title').textContent=a.title
   $<HTMLImageElement>('#art-image').src=base+a.image
-  $<HTMLImageElement>('#art-image').alt=a.imageKind==='reference-photo'?`${a.title}：使用者提供的現場參考照片`:`${a.title}：抽象色塊與弧線的示意作品`
+  $<HTMLImageElement>('#art-image').alt=a.imageKind==='reference-photo'?`${a.title}：現場參考照片`:`${a.title}，繪師：${a.artist}`
   $('#art-index').textContent=a.id
   $('#art-medium').textContent=a.medium
-  $('.art-image-wrap > span').textContent=a.imageKind==='reference-photo'?'ON-SITE REFERENCE PHOTO':'PLACEHOLDER ARTWORK'
-  $('#art-status').textContent=a.imageKind==='reference-photo'?'現場參考照片':'空間展示用示意圖'
+  $('.art-image-wrap > span').textContent=a.imageKind==='reference-photo'?'ON-SITE REFERENCE PHOTO':a.artist
+  $('#art-status').textContent=a.imageKind==='reference-photo'?'現場參考照片':'原始圖檔'
   $('#art-description').textContent=a.description
   $('#art-zone').textContent=zoneNames[a.zone]
   $('#art-page').textContent=`${selected+1} / ${detailArtworks.length}`
@@ -112,7 +112,7 @@ function buildCatalog() {
     const thumb=document.createElement('div');thumb.className='catalog-thumb'
     const img=document.createElement('img');img.src=base+a.image;img.alt='';img.loading='lazy';thumb.append(img)
     const p=document.createElement('p');const num=document.createElement('span');num.textContent=a.id;p.append(num,document.createTextNode(a.title))
-    const small=document.createElement('small');small.textContent=`${zoneNames[a.zone]} / ${a.imageKind==='reference-photo'?'現場參考照片':'示意作品'}`
+    const small=document.createElement('small');small.textContent=`${zoneNames[a.zone]} / ${a.artist || '現場參考照片'}`
     b.append(thumb,p,small);b.addEventListener('click',()=>openArt(a.id));frag.append(b)
   });$('#catalog-grid').append(frag)
 }
@@ -136,7 +136,8 @@ $('#locate-art').addEventListener('click',()=>{
   const pos=new THREE.Vector3(...a.position).add(new THREE.Vector3(Math.sin(angle)*1.65,0,Math.cos(angle)*1.65));pos.y=1.65
   if(a.viewPosition)pos.set(...a.viewPosition)
   if(!canOccupy(pos.x,pos.z,data.bounds,data.colliders)){toast('此作品前方無法通行，請使用展區導覽。');return}
-  returnFocus=canvas;artDialog.close();goTo(pos,angle,a.zone)
+  const facing=Math.atan2(pos.x-a.position[0],pos.z-a.position[2])
+  returnFocus=canvas;artDialog.close();goTo(pos,facing,a.zone)
 })
 $('#fullscreen-button').addEventListener('click',async()=>{
   try {if(document.fullscreenElement)await document.exitFullscreen();else await $('#gallery').requestFullscreen()} catch {toast('此瀏覽器不支援全螢幕，仍可直接瀏覽展間。')}
@@ -249,14 +250,20 @@ async function init() {
     camera.position.set(...data.layout.entrance.position);yaw=data.layout.entrance.yaw;environment.light(scene,data.colliders);resize()
     const loader=new GLTFLoader()
     const gltf=await loader.loadAsync(base+'models/gallery.glb',p=>{if(p.total)$<HTMLProgressElement>('#load-progress').value=p.loaded/p.total*75})
-    const textureLoader=new THREE.TextureLoader()
-    const images=await Promise.all(data.artworks.map(async a=>{
-      const t=await textureLoader.loadAsync(base+a.image);t.colorSpace=THREE.SRGBColorSpace;t.flipY=false;t.anisotropy=Math.min(4,renderer!.capabilities.getMaxAnisotropy());return [a.id,t] as const
-    }))
-    const textures=new Map(images)
     gltf.scene.traverse(o=>{
       if(!(o instanceof THREE.Mesh))return
-      if(o.userData.artworkId){const id=o.userData.artworkId;o.material=new THREE.MeshBasicMaterial({map:textures.get(id),vertexColors:true});o.userData.detailsEnabled=canOpenDetails(data.artworks.find(a=>a.id===id));artworks.set(id,o)}
+      if(o.userData.artworkId){
+        const id=o.userData.artworkId
+        const original=Array.isArray(o.material)?o.material[0]:o.material
+        const texture=(original as THREE.MeshStandardMaterial).map
+        if(!texture)throw new Error(`作品 ${id} 缺少模型貼圖`)
+        texture.colorSpace=THREE.SRGBColorSpace
+        texture.anisotropy=Math.min(4,renderer!.capabilities.getMaxAnisotropy())
+        o.material=new THREE.MeshBasicMaterial({map:texture,vertexColors:true})
+        original.dispose()
+        o.userData.detailsEnabled=canOpenDetails(data.artworks.find(a=>a.id===id))
+        artworks.set(id,o)
+      }
     })
     environment.apply(gltf.scene)
     scene.add(gltf.scene);sceneAvailable=true

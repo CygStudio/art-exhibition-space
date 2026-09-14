@@ -37,7 +37,7 @@ test('exported GLB has all artwork IDs and bounded asset size',()=>{
   const glb=readFileSync(new URL('../public/models/gallery.glb',import.meta.url))
   assert.equal(glb.readUInt32LE(0),0x46546c67)
   assert.equal(glb.readUInt32LE(4),2)
-  assert.ok(glb.length<2*1024*1024)
+  assert.ok(glb.length<12*1024*1024)
   const json=JSON.parse(glb.subarray(20,20+glb.readUInt32LE(12)).toString())
   const ids=json.nodes.filter(n=>n.extras?.artworkId).map(n=>n.extras.artworkId)
   assert.equal(new Set(ids).size,gallery.artworks.length)
@@ -142,7 +142,7 @@ test('only the two large desk backdrops disable details in JSON and GLB',()=>{
   assert.ok(displays.every(a=>a.width>2&&a.height>1))
   assert.ok(gallery.artworks.every(a=>typeof a.detailsEnabled==='boolean'))
   const details=getDetailArtworks(gallery.artworks)
-  assert.equal(details.length,19)
+  assert.equal(details.length,27)
   assert.ok(details.every(a=>!displays.includes(a)))
   const glb=readFileSync(new URL('../public/models/gallery.glb',import.meta.url))
   const json=JSON.parse(glb.subarray(20,20+glb.readUInt32LE(12)).toString())
@@ -154,7 +154,8 @@ test('column canvas is wall-mounted at the photo ruler heights',()=>{
   const a=gallery.artworks.find(a=>a.id==='20')
   assert.ok(Math.abs(a.position[1]+a.height/2-1.8)<1e-9)
   assert.ok(Math.abs(a.position[1]-a.height/2-1.1)<1e-9)
-  assert.equal(a.imageKind,'reference-photo')
+  assert.equal(a.imageKind,'original-artwork')
+  assert.equal(a.key,'virgil')
   assert.ok(existsSync(new URL('../public/'+a.image,import.meta.url)))
   assert.equal(a.rotation,90)
   assert.ok(canOpenDetails(a))
@@ -185,7 +186,7 @@ test('floor plan draws the doorway swing and entrance label',()=>{
   assert.match(group.innerHTML,/ A[\d.]+ [\d.]+ 0 0 1 /)
 })
 
-test('column photo UVs sample only the painting and preserve folded-side shading',()=>{
+test('column original uses full-image UVs and preserves folded-side shading',()=>{
   const glb=readFileSync(new URL('../public/models/gallery.glb',import.meta.url))
   const jsonLength=glb.readUInt32LE(12),binaryOffset=28+jsonLength
   const json=JSON.parse(glb.subarray(20,20+jsonLength).toString())
@@ -193,12 +194,16 @@ test('column photo UVs sample only the painting and preserve folded-side shading
   const p=json.meshes[n.mesh].primitives[0]
   const uv=json.accessors[p.attributes.TEXCOORD_0],view=json.bufferViews[uv.bufferView]
   const offset=binaryOffset+(view.byteOffset??0)+(uv.byteOffset??0)
+  const us=[],vs=[]
   for(let i=0;i<uv.count;i++){
     const at=offset+i*(view.byteStride??8)
     const u=glb.readFloatLE(at),v=glb.readFloatLE(at+4)
-    assert.ok(u>.58&&u<.81,`u=${u}`)
-    assert.ok(v>.12&&v<.43,`v=${v}`)
+    assert.ok(u>=0&&u<=1,`u=${u}`)
+    assert.ok(v>=0&&v<=1,`v=${v}`)
+    us.push(u);vs.push(v)
   }
+  assert.equal(Math.min(...us),0);assert.equal(Math.max(...us),1)
+  assert.equal(Math.min(...vs),0);assert.equal(Math.max(...vs),1)
   const colors=json.accessors[p.attributes.COLOR_0],cv=json.bufferViews[colors.bufferView]
   const bytes=colors.componentType===5121?1:colors.componentType===5123?2:4
   const channel=[]

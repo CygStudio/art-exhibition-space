@@ -1,8 +1,8 @@
 # 熙望之間｜線上畫展
 
-以 `refs/` 的照片與影片為參考，使用 Blender 製作展場，再透過 Three.js 顯示。依使用者標註平面圖配置白色梁架、方柱、展牆、服務台、獨立簽到桌與黑框落地窗；右上隔間保留入場門口與通道，進場後右側為服務台，門洞位於服務台旁的隔間左側牆。前方柱子懸掛長條無框畫，旁有黃色身高尺；畫作上緣約 180 公分、中心約 145 公分。場景不加入人物模型，柱畫使用現場照片對位，其餘為示意圖，其中 19 件可開啟詳情、2 張大型背板僅展示。
+以 `refs/` 的照片與影片為參考，使用 Blender 製作展場，再透過 Three.js 顯示。依使用者標註平面圖配置白色梁架、方柱、展牆、服務台、獨立簽到桌與黑框落地窗；右上隔間保留入場門口與通道，進場後右側為服務台，門洞位於服務台旁的隔間左側牆。前方柱子懸掛長條無框畫，旁有黃色身高尺；畫作上緣約 180 公分、中心約 145 公分。場景不加入人物模型；27 件掛畫使用原始圖檔，依現場照片與影片校正順序、比例及位置，均可開啟詳情。簽到桌紅旗與服務台背板使用現場影像對位，僅作展示。另有 2 件 For Adam 素材尚無可確認的位置，未任意放入場景。
 
-外框約 10.8 × 10.2 公尺，扣除右上房間後主空間約 98.6 平方公尺。入口依使用者補充確認，尺寸仍是推估，並非測量結果。詳見 [影片與平面圖修正依據](docs/scene-correction.md) 及 [重建判讀](docs/reconstruction.md)。
+外框約 10.8 × 10.2 公尺，扣除右上房間後主空間約 98.6 平方公尺。入口依使用者補充確認，尺寸仍是推估，並非測量結果。本次作品比對與短牆修正詳見 [原始作品配置](docs/artwork-placement.md)。早期模型紀錄見 [影片與平面圖修正依據](docs/scene-correction.md) 及 [重建判讀](docs/reconstruction.md)。
 
 ## 啟動
 
@@ -43,10 +43,14 @@ pnpm test      # 碰撞、作品位置、GLB 與圖檔一致性
 
 - `blender/gallery.blend`：可直接開啟編輯的 Blender 原始檔。
 - `blender/build_gallery.py`：建模與資產匯出腳本。
-- `public/models/gallery.glb`：Three.js 實際載入的 GLB，約 1.04 MiB。
+- `public/models/gallery.glb`：Three.js 實際載入的 GLB，約 7.47 MiB，內嵌全部作品貼圖。
 - `public/gallery.json`：作品資料、安全定位點、碰撞範圍、場地邊界與平面配置。
-- `public/artworks/*.svg`：本地抽象示意圖，DOM 燈箱與 3D 展品共用。
-- `public/artworks/column-reference.png`：保留的原始現場照片，約 6.8 MiB。3D 透過 UV 對位只顯示畫作區域，詳情標示並顯示原始參考照片。
+- `blender/artwork-layout.json`：作品來源、繪師、尺寸、位置、比對依據與背板 UV。
+- `blender/artwork-assets.json`：原始檔 SHA-256、像素尺寸、色彩轉換及衍生圖紀錄。
+- `blender/textures/*.jpg`：長邊最多 1,024 px 的模型貼圖，打包進 `.blend` 與 GLB。
+- `public/artworks/*.webp`：長邊最多 2,048 px 的詳情圖，維持原始比例。
+- `public/artworks/*-reference.jpg`：旗幟照片與背板影片影格，模型透過 UV 對位。
+- `refs/column-reference.png`：先前使用的柱畫參考照片，移回參考資料，不再打包至網站。
 
 已使用 Blender 4.5.11 LTS 執行。重新產生：
 
@@ -60,7 +64,7 @@ pnpm model
 /Applications/Blender.app/Contents/MacOS/Blender --background --python blender/build_gallery.py
 ```
 
-這個指令會覆寫 `.blend`、GLB、`gallery.json` 與全部示意 SVG。若已手動修改模型或替換圖片，請先 commit，或先修改產生腳本再執行。
+這個指令會依作品配置清單與既有貼圖，覆寫 `.blend`、GLB 與 `gallery.json`；不會重新產生示意圖。若已手動修改模型或替換圖片，請先 commit，或先修改產生腳本再執行。
 
 建模腳本內以 Three.js 的 Y-up 座標定義尺寸，轉換至 Blender 的 Z-up 後建立物件。靜態建築依材質合併，作品保留 `artworkId` extras。視角會影響實際繪製量；先前落地窗版本的繪製量見驗證文件；門洞與作品更新後數值會不同。網頁透過 `src/environment.ts` 將建築材質轉為共用的 `MeshToonMaterial`，搭配三階明暗、奶油色牆面、灰紫色梁架／地板與細描邊。原始 GLB 的混凝土材質保留在資產內，網頁不使用其噪點貼圖；接觸陰影改為平塗色塊。作品圖片維持原色，落地窗保留透明玻璃及簡化窗外環境色。
 
@@ -73,18 +77,18 @@ pnpm model
 - `src/navigation.mjs`：攝影機碰撞及地板移動路線；以障礙物外側轉折點建立可通行路線，檢查整段攝影機半徑。
 - `src/main.ts`：點選、目的地標記、攝影機動畫及燈箱。
 
-## 換成正式作品
+## 更新作品與重新匯出
 
-1. 把圖片放到 `public/artworks/`，建議 WebP／JPEG、長邊約 1,024–2,048 px。
-2. 更新 `public/gallery.json` 中對應作品的 `image`、`title`、`description`、`medium`。
-3. `id` 必須與 GLB 中的 `artworkId` 相同；`detailsEnabled` 必須是 boolean。設為 `false` 時仍渲染且遮擋射線，但不顯示點擊提示、不開啟詳情，也不列入目錄或上下件切換。
-4. 若改變畫布比例、位置或場地尺寸，修改建模腳本並重新匯出；目前前端會將圖片套到固定畫布比例。
+1. 在 `blender/artwork-layout.json` 更新作品來源、署名、比例、位置與比對依據。
+2. 原始素材變更時，使用含 Pillow、ImageCms 的 Python 執行 `scripts/prepare-artworks.py`，唯一參數為原始素材資料夾路徑；另需 ffmpeg。PNG 透明區域以白底呈現，內嵌 ICC 轉為 sRGB，PSD 讀取合成圖層。原始檔保持不變。
+3. 執行 `pnpm model`，再執行 `pnpm test` 與 `pnpm build`。配置與網頁資料由同一來源產生，重新建模不會遺失正式圖片。
+4. `detailsEnabled=false` 的兩張背板仍渲染、遮擋射線，但不進入目錄或上下件切換。
 
-若需要在重新建模後仍保留正式內容，應把正式作品資料從產生腳本抽成獨立來源；目前版本的產生器用於建立完整示意場景。
+Three.js 使用 GLB 已內嵌的貼圖，不再另外載入全部高解析度原圖；作品燈箱使用 WebP 衍生圖。作品名稱沿用檔名，未宣稱為繪師正式命名。
 
 ## 已知範圍
 
-目前是依影像推估的簡化空間重建，沒有精確測繪、掃描材質、真實畫作與逐一燈光烘焙。標註的四個區域依使用者說明配置；入口位置已確認，家具細節與其他尺寸仍有推估。不是照片級還原。需要支援 WebGL 2 的瀏覽器；模型或 WebGL 載入失敗時顯示重試介面，若作品資料已載入，仍可從頁首瀏覽 DOM 作品目錄。
+目前是依影像推估的簡化空間重建，沒有精確測繪、掃描建築材質與逐一燈光烘焙；作品本身使用提供的真實圖片。標註的四個區域依使用者說明配置；入口位置已確認，家具細節與其他尺寸仍有推估。不是照片級還原。需要支援 WebGL 2 的瀏覽器；模型或 WebGL 載入失敗時顯示重試介面，若作品資料已載入，仍可從頁首瀏覽 DOM 作品目錄。
 
 ## 技術參考
 
@@ -92,4 +96,4 @@ pnpm model
 - [MeshToonMaterial 官方文件](https://threejs.org/docs/pages/MeshToonMaterial.html)
 - [Blender glTF 匯出文件](https://docs.blender.org/manual/en/latest/addons/import_export/scene_gltf2.html)
 
-所有作品為厚約 3.5 公分的無框畫，正面與四個包覆側面共用圖像；側面頂點顏色稍暗以呈現折角。`depth` 由建模腳本匯出。柱畫以原始照片對位，若改換已裁好的正式圖片，也須同步改回完整圖片的 UV。
+所有作品為厚約 3.5 公分的無框畫，正面與四個包覆側面共用圖像；側面頂點顏色稍暗以呈現折角。`depth` 由建模腳本匯出。柱畫現已使用維吉爾原圖與完整 UV，只有兩張背板使用現場照片的局部 UV。

@@ -1,0 +1,521 @@
+{
+  "egg-01": {
+    "sourceFile": "直式/荷包蛋 - 1.png",
+    "sha256": "649f69710a48dea36066d0e025cb10c4f42d3e65b3d27bae9f436f2bec587973",
+    "sourceSize": [
+      1749,
+      2570
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": false,
+    "displaySize": [
+      1394,
+      2048
+    ],
+    "modelSize": [
+      697,
+      1024
+    ],
+    "modelImage": "textures/egg-01.jpg"
+  },
+  "didi": {
+    "sourceFile": "橫式/DiDi.png",
+    "sha256": "e4810d6aee496dd5bf09d92f55a5b9d350af260060f4b2d8529ca4329ef1d726",
+    "sourceSize": [
+      4093,
+      2894
+    ],
+    "sourceMode": "RGB",
+    "convertedICC": false,
+    "displaySize": [
+      2048,
+      1448
+    ],
+    "modelSize": [
+      1024,
+      724
+    ],
+    "modelImage": "textures/didi.jpg"
+  },
+  "css-portrait": {
+    "sourceFile": "直式/奶油醬油 - 1.png",
+    "sha256": "811a558a8c43f4dcd4619edf1681064f2c60709c87531c8fe9054cae3132dd1b",
+    "sourceSize": [
+      1400,
+      2100
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": true,
+    "displaySize": [
+      1365,
+      2048
+    ],
+    "modelSize": [
+      682,
+      1024
+    ],
+    "modelImage": "textures/css-portrait.jpg"
+  },
+  "lllokkk-portrait": {
+    "sourceFile": "直式/lllokkk - 2.png",
+    "sha256": "afe553c338faca14f5139c2d7feac31a0349a7cd70f705ff73ef336bfe0c5656",
+    "sourceSize": [
+      3508,
+      4961
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": false,
+    "displaySize": [
+      1448,
+      2048
+    ],
+    "modelSize": [
+      724,
+      1024
+    ],
+    "modelImage": "textures/lllokkk-portrait.jpg"
+  },
+  "hwaguwu": {
+    "sourceFile": "花故_熙歌三週年.psd",
+    "sha256": "4dfc8c15745a0b25884c357d8f36ed9de09d8cb4ceaa9332af1ee01f73c26e25",
+    "sourceSize": [
+      7234,
+      4134
+    ],
+    "sourceMode": "CMYK",
+    "convertedICC": true,
+    "displaySize": [
+      2048,
+      1170
+    ],
+    "modelSize": [
+      1024,
+      585
+    ],
+    "modelImage": "textures/hwaguwu.jpg"
+  },
+  "yukimura-portrait": {
+    "sourceFile": "直式/雪村信 - 1.png",
+    "sha256": "af90d75e7b2ddb4ae33c838ea24b674456908368c03ec0e7a22d89b6e70a309a",
+    "sourceSize": [
+      2048,
+      3508
+    ],
+    "sourceMode": "RGB",
+    "convertedICC": false,
+    "displaySize": [
+      1196,
+      2048
+    ],
+    "modelSize": [
+      598,
+      1024
+    ],
+    "modelImage": "textures/yukimura-portrait.jpg"
+  },
+  "yukimura-landscape": {
+    "sourceFile": "橫式/雪村信 - 2.png",
+    "sha256": "685ef8eb8b9783e06d1fe12af9edce39bea939913d1fcc42cbedfda6324a167f",
+    "sourceSize": [
+      4732,
+      2112
+    ],
+    "sourceMode": "RGB",
+    "convertedICC": false,
+    "displaySize": [
+      2048,
+      914
+    ],
+    "modelSize": [
+      1024,
+      457
+    ],
+    "modelImage": "textures/yukimura-landscape.jpg"
+  },
+  "css-landscape": {
+    "sourceFile": "橫式/奶油醬油 - 2.png",
+    "sha256": "093382c083a56c7385b1bc3515e366d518b2c3e5ad61ac9cbb14db0d83014587",
+    "sourceSize": [
+      4140,
+      2996
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": true,
+    "displaySize": [
+      2048,
+      1482
+    ],
+    "modelSize": [
+      1024,
+      741
+    ],
+    "modelImage": "textures/css-landscape.jpg"
+  },
+  "egg-02": {
+    "sourceFile": "直式/荷包蛋 - 2.png",
+    "sha256": "46679b288127109353cb479b195c3b28faf1e8f88cf4904d2eabc70a66a4dd5d",
+    "sourceSize": [
+      1181,
+      1748
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": false,
+    "displaySize": [
+      1181,
+      1748
+    ],
+    "modelSize": [
+      692,
+      1024
+    ],
+    "modelImage": "textures/egg-02.jpg"
+  },
+  "chill": {
+    "sourceFile": "直式/超二流—ChillAru.jpg",
+    "sha256": "314c7db7c1a33c624b87ca8d3fde9cca210c9241eac498c891c4d9578f1bcfa4",
+    "sourceSize": [
+      3508,
+      4961
+    ],
+    "sourceMode": "RGB",
+    "convertedICC": false,
+    "displaySize": [
+      1448,
+      2048
+    ],
+    "modelSize": [
+      724,
+      1024
+    ],
+    "modelImage": "textures/chill.jpg"
+  },
+  "bbibinbing": {
+    "sourceFile": "方的/BBiBinBing.jpg",
+    "sha256": "9228a249779fc674641a1659bdaf4c274c467a02f75d70d75394535cfb6dadc6",
+    "sourceSize": [
+      1111,
+      907
+    ],
+    "sourceMode": "RGB",
+    "convertedICC": false,
+    "displaySize": [
+      1111,
+      907
+    ],
+    "modelSize": [
+      1024,
+      836
+    ],
+    "modelImage": "textures/bbibinbing.jpg"
+  },
+  "bird-01": {
+    "sourceFile": "直式/鳥語 - 1.png",
+    "sha256": "3d1bb16ac980bfabaf69b28d8e2eb0884dec0ed1dc8565536b51655e5209ac79",
+    "sourceSize": [
+      1535,
+      2126
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": false,
+    "displaySize": [
+      1479,
+      2048
+    ],
+    "modelSize": [
+      739,
+      1024
+    ],
+    "modelImage": "textures/bird-01.jpg"
+  },
+  "zm": {
+    "sourceFile": "方的/ZM敏.png",
+    "sha256": "86b9c4aa4cf26491bf59ee5c3bec9a3fa39530dcba3f73748653ed7dbc46ad33",
+    "sourceSize": [
+      5972,
+      5560
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": false,
+    "displaySize": [
+      2048,
+      1907
+    ],
+    "modelSize": [
+      1024,
+      954
+    ],
+    "modelImage": "textures/zm.jpg"
+  },
+  "qb": {
+    "sourceFile": "方的/QB.png",
+    "sha256": "c216cb7a7e2da3fc3eac49811f5007ae250919b7c66a2e29d3483049937ae316",
+    "sourceSize": [
+      1024,
+      1024
+    ],
+    "sourceMode": "RGB",
+    "convertedICC": false,
+    "displaySize": [
+      1024,
+      1024
+    ],
+    "modelSize": [
+      1024,
+      1024
+    ],
+    "modelImage": "textures/qb.jpg"
+  },
+  "wz": {
+    "sourceFile": "橫式/花子.png",
+    "sha256": "c14d249a618d21576ab7eb93cffc3b384e76c79091860c6edd14b7c485f6f185",
+    "sourceSize": [
+      3059,
+      2067
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": true,
+    "displaySize": [
+      2048,
+      1384
+    ],
+    "modelSize": [
+      1024,
+      692
+    ],
+    "modelImage": "textures/wz.jpg"
+  },
+  "toyasan-portrait": {
+    "sourceFile": "直式/戶屋 - 1.png",
+    "sha256": "642611afd98e360dbe7be186fbfdeba044201f17b21a281f87fb944c03329b1d",
+    "sourceSize": [
+      724,
+      1122
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": false,
+    "displaySize": [
+      724,
+      1122
+    ],
+    "modelSize": [
+      661,
+      1024
+    ],
+    "modelImage": "textures/toyasan-portrait.jpg"
+  },
+  "bird-02": {
+    "sourceFile": "直式/鳥語 - 2.png",
+    "sha256": "13bc993e1442246dbe53bd03abc20cfdff039560591fdeee9491480f871fbe0a",
+    "sourceSize": [
+      1535,
+      2126
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": false,
+    "displaySize": [
+      1479,
+      2048
+    ],
+    "modelSize": [
+      739,
+      1024
+    ],
+    "modelImage": "textures/bird-02.jpg"
+  },
+  "medo": {
+    "sourceFile": "橫式/MEDO.png",
+    "sha256": "d223694b57c68dd8b5eb14fa668b24a980f0e9b97d69b3ef04e84fdc1e9da5fc",
+    "sourceSize": [
+      1800,
+      1250
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": true,
+    "displaySize": [
+      1800,
+      1250
+    ],
+    "modelSize": [
+      1024,
+      711
+    ],
+    "modelImage": "textures/medo.jpg"
+  },
+  "toyasan-square": {
+    "sourceFile": "方的/戶屋 - 2.png",
+    "sha256": "e3d87f510e199f2eb5acf7455d79ebdfdaef11769263acb6ac2b0c7d2d33cddb",
+    "sourceSize": [
+      1034,
+      1034
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": false,
+    "displaySize": [
+      1034,
+      1034
+    ],
+    "modelSize": [
+      1024,
+      1024
+    ],
+    "modelImage": "textures/toyasan-square.jpg"
+  },
+  "virgil": {
+    "sourceFile": "直式/維吉爾.png",
+    "sha256": "5878136fa5b1f8667fc07c02d42bf7d6a18f1ffcfbe1dbb61d0d44c05a538fa8",
+    "sourceSize": [
+      1786,
+      4502
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": true,
+    "displaySize": [
+      812,
+      2048
+    ],
+    "modelSize": [
+      406,
+      1024
+    ],
+    "modelImage": "textures/virgil.jpg"
+  },
+  "shiris": {
+    "sourceFile": "橫式/Shiris 惜霖.png",
+    "sha256": "60a61a0731258cfd58e879a3725eceda702544906dd3bde3afbc002fa5b6385f",
+    "sourceSize": [
+      6083,
+      4299
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": false,
+    "displaySize": [
+      2048,
+      1447
+    ],
+    "modelSize": [
+      1024,
+      724
+    ],
+    "modelImage": "textures/shiris.jpg"
+  },
+  "kakult-portrait": {
+    "sourceFile": "直式/翔 kakult2017 - 2.png",
+    "sha256": "4623ca5ea638ec6cc51ef60fae21bfb018867526535302f2ea42a132cdc04901",
+    "sourceSize": [
+      3307,
+      4677
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": false,
+    "displaySize": [
+      1448,
+      2048
+    ],
+    "modelSize": [
+      724,
+      1024
+    ],
+    "modelImage": "textures/kakult-portrait.jpg"
+  },
+  "chejan": {
+    "sourceFile": "橫式/成江.png",
+    "sha256": "09370ce37af6ac2f7d0b2d3cbdf7098087c8836943d22a6c9dd5d5840f4a60ef",
+    "sourceSize": [
+      2560,
+      1440
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": false,
+    "displaySize": [
+      2048,
+      1152
+    ],
+    "modelSize": [
+      1024,
+      576
+    ],
+    "modelImage": "textures/chejan.jpg"
+  },
+  "lllokkk-landscape": {
+    "sourceFile": "橫式/lllokkk - 1.png",
+    "sha256": "485cbfc40dbfda52b0d851bb561cc0b964fe1255b3b1e9bd1508a09694422529",
+    "sourceSize": [
+      6236,
+      3508
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": false,
+    "displaySize": [
+      2048,
+      1152
+    ],
+    "modelSize": [
+      1024,
+      576
+    ],
+    "modelImage": "textures/lllokkk-landscape.jpg"
+  },
+  "jen": {
+    "sourceFile": "橫式/JENˇ荏.png",
+    "sha256": "731df8bdd51ad93d965958d92c226b2b1dfb9cfccf3e314c85df4916d68b8cc1",
+    "sourceSize": [
+      2880,
+      1620
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": false,
+    "displaySize": [
+      2048,
+      1152
+    ],
+    "modelSize": [
+      1024,
+      576
+    ],
+    "modelImage": "textures/jen.jpg"
+  },
+  "kakult-landscape": {
+    "sourceFile": "橫式/翔 kakult2017 - 1.png",
+    "sha256": "0dd4ccb8bfaa75c3869dc7be630addc0b493a3a3e68f41fcdd76ea7cf8abf193",
+    "sourceSize": [
+      4827,
+      3307
+    ],
+    "sourceMode": "RGBA",
+    "convertedICC": false,
+    "displaySize": [
+      2048,
+      1403
+    ],
+    "modelSize": [
+      1024,
+      702
+    ],
+    "modelImage": "textures/kakult-landscape.jpg"
+  },
+  "enruzero": {
+    "sourceFile": "緣流.jpg",
+    "sha256": "8b9cc6f008f4aa677f2123e277c4d2d9abbea58891247577a2a8a06d99c76146",
+    "sourceSize": [
+      8268,
+      6614
+    ],
+    "sourceMode": "RGB",
+    "convertedICC": true,
+    "displaySize": [
+      2048,
+      1638
+    ],
+    "modelSize": [
+      1024,
+      819
+    ],
+    "modelImage": "textures/enruzero.jpg"
+  },
+  "guestbook-flag": {
+    "modelImage": "../public/artworks/guestbook-reference.jpg"
+  },
+  "service-backdrop": {
+    "modelImage": "../public/artworks/service-reference.jpg"
+  }
+}

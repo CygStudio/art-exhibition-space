@@ -10,7 +10,10 @@ export interface Artwork {
   width: number
   height: number
   depth: number
-  imageKind?: 'reference-photo'
+  imageKind: 'reference-photo' | 'original-artwork'
+  artist: string
+  sourceFile: string
+  sourceSize?: [number, number]
   description: string
   medium: string
   detailsEnabled: boolean
