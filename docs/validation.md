@@ -1,5 +1,24 @@
 # 驗證紀錄
 
+## 原始作品與現場配置（2026-09-14）
+
+目前版本已改為 27 件原始作品與 2 張現場影像背板。以下舊版紀錄中的示意圖、21 件總數及柱畫照片 UV，皆為歷史狀態。比對依據見 [原始作品配置](artwork-placement.md)。
+
+- `pnpm test`：27 項全部通過。除既有碰撞與導覽檢查，新增原圖長寬比、同牆間距、掛畫順序、窗前不掛畫、上下雙畫、未定位素材與 GLB 內嵌圖片驗證。
+- GLB 每件作品的 JPEG 內容均與相對應模型貼圖進行 SHA-256 比對，確認 `.blend`／GLB 真正帶有圖片；29 個作品網格均保有包邊的頂點顏色。柱畫使用完整 0–1 UV。
+- 27 份來源檔案的 SHA-256 均與匯入時相同，原始圖片未修改。花故的 CMYK PSD 使用內嵌 ICC 轉為 sRGB；長邊最多 1,024 px 的 JPEG 用於模型，最多 2,048 px 的 WebP 用於詳情。
+- `pnpm build` 通過。GLB 7,832,032 bytes（約 7.47 MiB）；WebP 與參考照片共約 9.64 MiB。模型內嵌貼圖，網頁不再額外預載所有大圖。JS 約 621 KB，仍有既有的 500 KB bundle 提醒。
+- 桌面 1440 × 960 實際檢查主牆 10 件、西牆 9 件、隔間 4 件、窗旁短牆 3 件及柱畫；紅旗與活動背板皆有真實影像。修正旗幟左下角 UV，排除照片中的牆面。
+- 從目錄逐件切換並解碼全部 27 張詳情圖，均成功；27 → 01 循環正確，兩張背板不進入目錄。29 個網格均有貼圖及頂點顏色。
+- 實際點擊柱畫可開啟「維吉爾」原圖詳情；前往作品位置後焦點回到畫布。簽到桌旁第 19 件改用安全站位 `(-3, 1.65, -3.3)`，鏡頭依作品位置轉向。
+- 手機尺寸 390 × 844：柱畫詳情可完整閱讀，作品定位及入口導覽正常，文件寬度為 390 px，沒有橫向溢出。
+- 正常操作未出現 JavaScript 錯誤。尺寸仍為影像推估，未做真實手機 GPU 效能量測。
+- 再檢查 DJ 影片 0–3、32–35 秒的桌面陳列，仍無足夠證據定位兩張 For Adam 原圖；未任意新增位置。
+
+[主展牆](images/originals-main-wall.png)・[左側展牆](images/originals-west-wall.png)・[隔間與窗旁轉角](images/originals-east-corner.png)・[服務台](images/originals-service.png)・[簽到桌紅旗](images/originals-guestbook.png)・[柱畫](images/originals-column.png)・[原圖詳情](images/originals-artwork-detail.png)・[手機詳情](images/originals-mobile-detail.png)・[手機定位](images/originals-mobile-location.png)・[手機入口](images/originals-mobile-entry.png)
+
+---
+
 日期：2026-09-08。
 
 ## 自動檢查
