@@ -1,34 +1,26 @@
-import './tracker.css'
-import { contactStatuses, contacts, contactTotalArtworkCount, type Contact, type ContactStatus } from './contact-data'
-
-type SavedContactState = {
-  notes?: string
-  status?: ContactStatus
-}
-
-type SavedProgress = Record<string, SavedContactState>
+import { contactStatuses, contacts, contactTotalArtworkCount } from './contact-data.js'
 
 const storageKey = 'cygnus-three-year-contact-tracker:v1'
 
-const byId = <T extends HTMLElement>(id: string) => {
+const byId = (id) => {
   const element = document.getElementById(id)
   if (!element) throw new Error(`Missing required element: #${id}`)
-  return element as T
+  return element
 }
 
-const contactList = byId<HTMLElement>('contact-list')
-const resultCount = byId<HTMLElement>('result-count')
-const progressValue = byId<HTMLElement>('progress-value')
-const progressBar = byId<HTMLElement>('progress-bar')
-const statusSummary = byId<HTMLElement>('status-summary')
-const searchInput = byId<HTMLInputElement>('search-input')
-const statusFilter = byId<HTMLSelectElement>('status-filter')
-const roleFilter = byId<HTMLSelectElement>('role-filter')
-const resetButton = byId<HTMLButtonElement>('reset-button')
-const toast = byId<HTMLElement>('toast')
+const contactList = byId('contact-list')
+const resultCount = byId('result-count')
+const progressValue = byId('progress-value')
+const progressBar = byId('progress-bar')
+const statusSummary = byId('status-summary')
+const searchInput = byId('search-input')
+const statusFilter = byId('status-filter')
+const roleFilter = byId('role-filter')
+const resetButton = byId('reset-button')
+const toast = byId('toast')
 
 let savedProgress = loadProgress()
-let toastTimer: ReturnType<typeof window.setTimeout> | undefined
+let toastTimer
 
 for (const status of contactStatuses) {
   const option = document.createElement('option')
@@ -37,22 +29,21 @@ for (const status of contactStatuses) {
   statusFilter.append(option)
 }
 
-function isContactStatus(value: unknown): value is ContactStatus {
+function isContactStatus(value) {
   return contactStatuses.some((status) => status.key === value)
 }
 
-function loadProgress(): SavedProgress {
+function loadProgress() {
   try {
-    const parsed: unknown = JSON.parse(localStorage.getItem(storageKey) ?? '{}')
+    const parsed = JSON.parse(localStorage.getItem(storageKey) ?? '{}')
     if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return {}
 
     return Object.fromEntries(
       Object.entries(parsed).flatMap(([id, entry]) => {
         if (!entry || typeof entry !== 'object' || Array.isArray(entry)) return []
-        const candidate = entry as { notes?: unknown; status?: unknown }
-        const state: SavedContactState = {}
-        if (typeof candidate.notes === 'string') state.notes = candidate.notes
-        if (isContactStatus(candidate.status)) state.status = candidate.status
+        const state = {}
+        if (typeof entry.notes === 'string') state.notes = entry.notes
+        if (isContactStatus(entry.status)) state.status = entry.status
         return [[id, state]]
       }),
     )
@@ -71,19 +62,20 @@ function saveProgress() {
   }
 }
 
-function statusOf(contact: Contact): ContactStatus {
+function statusOf(contact) {
   return savedProgress[contact.id]?.status ?? contact.defaultStatus ?? 'uncontacted'
 }
 
-function notesOf(contact: Contact) {
+function notesOf(contact) {
   return savedProgress[contact.id]?.notes ?? ''
 }
 
-function assetUrl(path: string) {
-  return `${import.meta.env.BASE_URL}${path}`
+function assetUrl(path) {
+  const viteBase = import.meta.env?.BASE_URL
+  return viteBase ? `${viteBase}${path}` : `./public/${path}`
 }
 
-function escapeHtml(value: string) {
+function escapeHtml(value) {
   return value
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')
@@ -92,14 +84,13 @@ function escapeHtml(value: string) {
     .replaceAll("'", '&#039;')
 }
 
-function messageFor(contact: Contact) {
+function messageFor(contact) {
   const fileNames = contact.artworks.map((artwork) => `「${artwork.sourceFile}」`).join('、')
   const relation = contact.role === '委託粉絲' ? '您先前委託提供的作品' : '您提供的作品'
-
   return `您好，我正在整理「熙歌三周年畫展」的展出候選作品。${relation}${fileNames}，想詢問是否同意用於本次非商業畫展展示？我們會保留原繪師署名與作品來源，不會另作商業使用或印製。若您同意，也想請您確認希望顯示的名稱／帳號；若不方便也完全沒問題，謝謝您。`
 }
 
-function renderCard(contact: Contact) {
+function renderCard(contact) {
   const currentStatus = statusOf(contact)
   const statusButtons = contactStatuses.map((status) => `
     <button class="status-button ${currentStatus === status.key ? 'is-active' : ''}" type="button" data-status="${status.key}" data-contact-id="${contact.id}" aria-pressed="${currentStatus === status.key}" title="${status.description}">
@@ -117,7 +108,7 @@ function renderCard(contact: Contact) {
   const contactAction = contact.xUrl && contact.xHandle
     ? `<a class="x-link" href="${contact.xUrl}" target="_blank" rel="noreferrer">開啟 X ${escapeHtml(contact.xHandle)} ↗</a>
        <button class="copy-message" type="button" data-copy-message="${contact.id}">複製詢問訊息</button>`
-    : `<span class="unavailable-contact">尚未確認公開 X 帳號，請先補上聯絡方式。</span>`
+    : '<span class="unavailable-contact">尚未確認公開 X 帳號，請先補上聯絡方式。</span>'
 
   return `
     <article class="contact-card" data-contact="${contact.id}">
@@ -152,7 +143,7 @@ function renderCard(contact: Contact) {
 }
 
 function renderSummary() {
-  const counts = Object.fromEntries(contactStatuses.map((status) => [status.key, 0])) as Record<ContactStatus, number>
+  const counts = Object.fromEntries(contactStatuses.map((status) => [status.key, 0]))
   for (const contact of contacts) counts[statusOf(contact)] += 1
 
   const startedCount = counts.messaged + counts.approved + counts.declined
@@ -163,7 +154,7 @@ function renderSummary() {
   `).join('')
 }
 
-function matchesSearch(contact: Contact, term: string) {
+function matchesSearch(contact, term) {
   if (!term) return true
   const searchText = [
     contact.contactName,
@@ -173,7 +164,6 @@ function matchesSearch(contact: Contact, term: string) {
     contact.xHandle,
     ...contact.artworks.map((artwork) => artwork.sourceFile),
   ].filter(Boolean).join(' ').toLocaleLowerCase()
-
   return searchText.includes(term)
 }
 
@@ -194,20 +184,20 @@ function renderContacts() {
     : '<p class="empty-state">沒有符合目前篩選條件的聯絡對象。</p>'
 }
 
-function updateState(contactId: string, update: SavedContactState) {
+function updateState(contactId, update) {
   const existing = savedProgress[contactId] ?? {}
   savedProgress = { ...savedProgress, [contactId]: { ...existing, ...update } }
   saveProgress()
 }
 
-function showToast(message: string) {
+function showToast(message) {
   toast.textContent = message
   toast.hidden = false
   if (toastTimer) window.clearTimeout(toastTimer)
   toastTimer = window.setTimeout(() => { toast.hidden = true }, 2600)
 }
 
-async function copyMessage(contactId: string) {
+async function copyMessage(contactId) {
   const contact = contacts.find((item) => item.id === contactId)
   if (!contact) return
 
@@ -229,26 +219,24 @@ async function copyMessage(contactId: string) {
 }
 
 contactList.addEventListener('click', (event) => {
-  const element = event.target as Element
-  const statusButton = element.closest<HTMLButtonElement>('button[data-status][data-contact-id]')
+  const statusButton = event.target.closest('button[data-status][data-contact-id]')
   if (statusButton) {
-    const contactId = statusButton.dataset.contactId
-    const status = statusButton.dataset.status
+    const { contactId, status } = statusButton.dataset
     if (!contactId || !isContactStatus(status)) return
 
     updateState(contactId, { status })
     renderContacts()
-    contactList.querySelector<HTMLButtonElement>(`button[data-contact-id="${contactId}"][data-status="${status}"]`)?.focus()
+    contactList.querySelector(`button[data-contact-id="${contactId}"][data-status="${status}"]`)?.focus()
     showToast('聯絡進度已儲存在這台裝置。')
     return
   }
 
-  const copyButton = element.closest<HTMLButtonElement>('button[data-copy-message]')
+  const copyButton = event.target.closest('button[data-copy-message]')
   if (copyButton?.dataset.copyMessage) void copyMessage(copyButton.dataset.copyMessage)
 })
 
 contactList.addEventListener('change', (event) => {
-  const textarea = event.target as HTMLTextAreaElement
+  const textarea = event.target
   const contactId = textarea.dataset.notes
   if (!contactId) return
   updateState(contactId, { notes: textarea.value })
