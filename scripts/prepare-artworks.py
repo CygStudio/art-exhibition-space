@@ -125,4 +125,4 @@ for directory in [SCENE, THUMBS]:
 (ROOT / 'blender/artwork-assets.json').write_text(
     json.dumps(metadata, ensure_ascii=False, indent=2) + '\n',
 )
-print(f'Prepared {len(metadata) - 2} original artworks and 2 photographic backdrops.')
+print(f'Prepared {len(metadata) - 2} original artworks, 1 vector flag and 1 photographic backdrop.')

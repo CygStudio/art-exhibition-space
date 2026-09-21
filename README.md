@@ -43,13 +43,16 @@ pnpm test      # 碰撞、作品位置、GLB 與圖檔一致性
 
 - `blender/gallery.blend`：可直接開啟編輯的 Blender 原始檔。
 - `blender/build_gallery.py`：建模與資產匯出腳本。
-- `public/models/gallery.glb`：Three.js 實際載入的 GLB，約 7.47 MiB，內嵌全部作品貼圖。
+- `public/models/gallery.glb`：Three.js 實際載入的 GLB，約 1.05 MB，內嵌作品小預覽；清晰貼圖不阻塞進場。
 - `public/gallery.json`：作品資料、安全定位點、碰撞範圍、場地邊界與平面配置。
-- `blender/artwork-layout.json`：作品來源、繪師、尺寸、位置、比對依據與背板 UV。
+- `blender/artwork-layout.json`：作品來源、繪師、尺寸、基準配置與比對依據；建模腳本依加深後的牆面轉換 Z 座標，柱畫不移動。
 - `blender/artwork-assets.json`：原始檔 SHA-256、像素尺寸、色彩轉換及衍生圖紀錄。
-- `blender/textures/*.jpg`：長邊最多 1,024 px 的模型貼圖，打包進 `.blend` 與 GLB。
+- `blender/textures/`：完整模型貼圖，打包進可編輯的 `.blend`。
+- `blender/previews/`：長邊最多 128 px 的作品預覽，打包進網站 GLB；另有三張小型桌上展示圖。
+- `public/artworks/scene/`：長邊最多 1,024 px 的場景貼圖，通常為品質 88／90 的 WebP；紅色細線較多的 lllokkk 直幅保留 JPEG 4:4:4。
+- `public/artworks/thumbnails/`：長邊最多 320 px 的作品目錄縮圖。場景圖及縮圖檔名包含內容雜湊。
 - `public/artworks/*.webp`：長邊最多 2,048 px 的詳情圖，維持原始比例。
-- `public/artworks/*-reference.jpg`：旗幟照片與背板影片影格，模型透過 UV 對位。
+- `public/artworks/guestbook-flag.svg`：依參考簡化的紅黑平面旗幟，不含光影；`service-backdrop.webp` 為已校正四角的背板影格。
 - `refs/column-reference.png`：先前使用的柱畫參考照片，移回參考資料，不再打包至網站。
 
 已使用 Blender 4.5.11 LTS 執行。重新產生：
@@ -66,12 +69,13 @@ pnpm model
 
 這個指令會依作品配置清單與既有貼圖，覆寫 `.blend`、GLB 與 `gallery.json`；不會重新產生示意圖。若已手動修改模型或替換圖片，請先 commit，或先修改產生腳本再執行。
 
-建模腳本內以 Three.js 的 Y-up 座標定義尺寸，轉換至 Blender 的 Z-up 後建立物件。靜態建築依材質合併，作品保留 `artworkId` extras。視角會影響實際繪製量；先前落地窗版本的繪製量見驗證文件；門洞與作品更新後數值會不同。網頁透過 `src/environment.ts` 將建築材質轉為共用的 `MeshToonMaterial`，搭配三階明暗、奶油色牆面、灰紫色梁架／地板與細描邊。原始 GLB 的混凝土材質保留在資產內，網頁不使用其噪點貼圖；接觸陰影改為平塗色塊。作品圖片維持原色，落地窗保留透明玻璃及簡化窗外環境色。
+建模腳本內以 Three.js 的 Y-up 座標定義尺寸，轉換至 Blender 的 Z-up 後建立物件。靜態建築依材質合併，作品保留 `artworkId` extras。網頁透過 `src/environment.ts` 將建築材質轉為共用的 `MeshToonMaterial`，搭配三階明暗、奶油色牆面、灰紫色梁架／地板與細描邊。混凝土噪點只保留在 `.blend`，不匯出至網站；接觸陰影使用平塗色塊。作品與桌上展示圖維持原色，落地窗保留透明玻璃及簡化窗外環境色。
 
 ## 調整導覽與風格
 
 - `src/environment.ts`：共用色票、三階 gradient map、描邊與燈光。
 - `src/artwork.ts`：作品資料契約與 `detailsEnabled` 詳情開關；背板不進入目錄或上下件切換。
+- `src/artwork-textures.ts`：以視野及距離排序清晰貼圖，每次最多三個請求；失敗保留預覽並退避重試，成功後釋放預覽資源。
 - `src/stations.ts`：六個導覽站位與朝向。
 - `src/floor-plan.ts`：以匯出的 `layout` 繪製平面圖與轉換目前位置。
 - `src/navigation.mjs`：攝影機碰撞及地板移動路線；以障礙物外側轉折點建立可通行路線，檢查整段攝影機半徑。
@@ -80,11 +84,11 @@ pnpm model
 ## 更新作品與重新匯出
 
 1. 在 `blender/artwork-layout.json` 更新作品來源、署名、比例、位置與比對依據。
-2. 原始素材變更時，使用含 Pillow、ImageCms 的 Python 執行 `scripts/prepare-artworks.py`，唯一參數為原始素材資料夾路徑；另需 ffmpeg。PNG 透明區域以白底呈現，內嵌 ICC 轉為 sRGB，PSD 讀取合成圖層。原始檔保持不變。
+2. 原始素材變更時，使用含 Pillow、ImageCms 的 Python 執行 `scripts/prepare-artworks.py`，唯一參數為原始素材資料夾路徑；另需 ffmpeg。PNG 透明區域以白底呈現，內嵌 ICC 轉為 sRGB，PSD 讀取合成圖層。原始檔保持不變。旗幟修改後執行 `node scripts/render-flag.mjs`（需可解析的 `sharp` 套件），再執行圖片處理腳本；桌上展示圖可執行 `python3 scripts/prepare-desk-displays.py` 重新擷取。
 3. 執行 `pnpm model`，再執行 `pnpm test` 與 `pnpm build`。配置與網頁資料由同一來源產生，重新建模不會遺失正式圖片。
 4. `detailsEnabled=false` 的兩張背板仍渲染、遮擋射線，但不進入目錄或上下件切換。
 
-Three.js 使用 GLB 已內嵌的貼圖，不再另外載入全部高解析度原圖；作品燈箱使用 WebP 衍生圖。作品名稱沿用檔名，未宣稱為繪師正式命名。
+Three.js 先顯示 GLB 的預覽，展間可操作後依視野載入 `texture`；目錄使用 `thumbnail`，作品燈箱才使用 `image` 詳情圖。GLB 單獨開啟只會顯示小預覽，完整品質保留在 Blender 編輯檔及獨立貼圖。作品名稱沿用檔名，未宣稱為繪師正式命名。
 
 ## 已知範圍
 
@@ -96,4 +100,4 @@ Three.js 使用 GLB 已內嵌的貼圖，不再另外載入全部高解析度原
 - [MeshToonMaterial 官方文件](https://threejs.org/docs/pages/MeshToonMaterial.html)
 - [Blender glTF 匯出文件](https://docs.blender.org/manual/en/latest/addons/import_export/scene_gltf2.html)
 
-所有作品為厚約 3.5 公分的無框畫，正面與四個包覆側面共用圖像；側面頂點顏色稍暗以呈現折角。`depth` 由建模腳本匯出。柱畫現已使用維吉爾原圖與完整 UV，只有兩張背板使用現場照片的局部 UV。
+所有作品為厚約 3.5 公分的無框畫，正面與四個包覆側面共用圖像；側面頂點顏色稍暗以呈現折角，平面 SVG 旗幟則不加側面明暗。`depth` 由建模腳本匯出。柱畫使用維吉爾原圖與完整 UV，服務台背板先校正照片四角再使用完整 UV。
