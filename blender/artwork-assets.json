@@ -16,7 +16,10 @@
       697,
       1024
     ],
-    "modelImage": "textures/egg-01.jpg"
+    "modelImage": "textures/egg-01.jpg",
+    "sceneImage": "artworks/scene/egg-01.ddf4cda04532.webp",
+    "thumbnailImage": "artworks/thumbnails/egg-01.dd471a812e3d.webp",
+    "previewImage": "previews/egg-01.jpg"
   },
   "didi": {
     "sourceFile": "橫式/DiDi.png",
@@ -35,7 +38,10 @@
       1024,
       724
     ],
-    "modelImage": "textures/didi.jpg"
+    "modelImage": "textures/didi.jpg",
+    "sceneImage": "artworks/scene/didi.8499647d5867.webp",
+    "thumbnailImage": "artworks/thumbnails/didi.f1ed2aa76c8f.webp",
+    "previewImage": "previews/didi.jpg"
   },
   "css-portrait": {
     "sourceFile": "直式/奶油醬油 - 1.png",
@@ -54,7 +60,10 @@
       682,
       1024
     ],
-    "modelImage": "textures/css-portrait.jpg"
+    "modelImage": "textures/css-portrait.jpg",
+    "sceneImage": "artworks/scene/css-portrait.7a776ae30aa8.webp",
+    "thumbnailImage": "artworks/thumbnails/css-portrait.458599b88ac7.webp",
+    "previewImage": "previews/css-portrait.jpg"
   },
   "lllokkk-portrait": {
     "sourceFile": "直式/lllokkk - 2.png",
@@ -73,7 +82,10 @@
       724,
       1024
     ],
-    "modelImage": "textures/lllokkk-portrait.jpg"
+    "modelImage": "textures/lllokkk-portrait.jpg",
+    "sceneImage": "artworks/scene/lllokkk-portrait.e12bb542af78.jpg",
+    "thumbnailImage": "artworks/thumbnails/lllokkk-portrait.502b4ee0bf42.webp",
+    "previewImage": "previews/lllokkk-portrait.jpg"
   },
   "hwaguwu": {
     "sourceFile": "花故_熙歌三週年.psd",
@@ -92,7 +104,10 @@
       1024,
       585
     ],
-    "modelImage": "textures/hwaguwu.jpg"
+    "modelImage": "textures/hwaguwu.jpg",
+    "sceneImage": "artworks/scene/hwaguwu.f77d53a8e67f.webp",
+    "thumbnailImage": "artworks/thumbnails/hwaguwu.a75656da528c.webp",
+    "previewImage": "previews/hwaguwu.jpg"
   },
   "yukimura-portrait": {
     "sourceFile": "直式/雪村信 - 1.png",
@@ -111,7 +126,10 @@
       598,
       1024
     ],
-    "modelImage": "textures/yukimura-portrait.jpg"
+    "modelImage": "textures/yukimura-portrait.jpg",
+    "sceneImage": "artworks/scene/yukimura-portrait.c586d559e30e.webp",
+    "thumbnailImage": "artworks/thumbnails/yukimura-portrait.3cf0ca8debd5.webp",
+    "previewImage": "previews/yukimura-portrait.jpg"
   },
   "yukimura-landscape": {
     "sourceFile": "橫式/雪村信 - 2.png",
@@ -130,7 +148,10 @@
       1024,
       457
     ],
-    "modelImage": "textures/yukimura-landscape.jpg"
+    "modelImage": "textures/yukimura-landscape.jpg",
+    "sceneImage": "artworks/scene/yukimura-landscape.ca3bf35f6bd8.webp",
+    "thumbnailImage": "artworks/thumbnails/yukimura-landscape.33a72213a619.webp",
+    "previewImage": "previews/yukimura-landscape.jpg"
   },
   "css-landscape": {
     "sourceFile": "橫式/奶油醬油 - 2.png",
@@ -149,7 +170,10 @@
       1024,
       741
     ],
-    "modelImage": "textures/css-landscape.jpg"
+    "modelImage": "textures/css-landscape.jpg",
+    "sceneImage": "artworks/scene/css-landscape.dca3b6133204.webp",
+    "thumbnailImage": "artworks/thumbnails/css-landscape.76a3f23b4742.webp",
+    "previewImage": "previews/css-landscape.jpg"
   },
   "egg-02": {
     "sourceFile": "直式/荷包蛋 - 2.png",
@@ -168,7 +192,10 @@
       692,
       1024
     ],
-    "modelImage": "textures/egg-02.jpg"
+    "modelImage": "textures/egg-02.jpg",
+    "sceneImage": "artworks/scene/egg-02.54a72fc6b89c.webp",
+    "thumbnailImage": "artworks/thumbnails/egg-02.950d0f54008c.webp",
+    "previewImage": "previews/egg-02.jpg"
   },
   "chill": {
     "sourceFile": "直式/超二流—ChillAru.jpg",
@@ -187,7 +214,10 @@
       724,
       1024
     ],
-    "modelImage": "textures/chill.jpg"
+    "modelImage": "textures/chill.jpg",
+    "sceneImage": "artworks/scene/chill.3d2dc07376ff.webp",
+    "thumbnailImage": "artworks/thumbnails/chill.91289fdc5319.webp",
+    "previewImage": "previews/chill.jpg"
   },
   "bbibinbing": {
     "sourceFile": "方的/BBiBinBing.jpg",
@@ -206,7 +236,10 @@
       1024,
       836
     ],
-    "modelImage": "textures/bbibinbing.jpg"
+    "modelImage": "textures/bbibinbing.jpg",
+    "sceneImage": "artworks/scene/bbibinbing.3d4d53e460e2.webp",
+    "thumbnailImage": "artworks/thumbnails/bbibinbing.adb37f53024c.webp",
+    "previewImage": "previews/bbibinbing.jpg"
   },
   "bird-01": {
     "sourceFile": "直式/鳥語 - 1.png",
@@ -225,7 +258,10 @@
       739,
       1024
     ],
-    "modelImage": "textures/bird-01.jpg"
+    "modelImage": "textures/bird-01.jpg",
+    "sceneImage": "artworks/scene/bird-01.1573b34ae07b.webp",
+    "thumbnailImage": "artworks/thumbnails/bird-01.8f236f103fcb.webp",
+    "previewImage": "previews/bird-01.jpg"
   },
   "zm": {
     "sourceFile": "方的/ZM敏.png",
@@ -244,7 +280,10 @@
       1024,
       954
     ],
-    "modelImage": "textures/zm.jpg"
+    "modelImage": "textures/zm.jpg",
+    "sceneImage": "artworks/scene/zm.0b5bb6c0efbd.webp",
+    "thumbnailImage": "artworks/thumbnails/zm.0085d6d02bb9.webp",
+    "previewImage": "previews/zm.jpg"
   },
   "qb": {
     "sourceFile": "方的/QB.png",
@@ -263,7 +302,10 @@
       1024,
       1024
     ],
-    "modelImage": "textures/qb.jpg"
+    "modelImage": "textures/qb.jpg",
+    "sceneImage": "artworks/scene/qb.4d720e2ce8a0.webp",
+    "thumbnailImage": "artworks/thumbnails/qb.0a664604e939.webp",
+    "previewImage": "previews/qb.jpg"
   },
   "wz": {
     "sourceFile": "橫式/花子.png",
@@ -282,7 +324,10 @@
       1024,
       692
     ],
-    "modelImage": "textures/wz.jpg"
+    "modelImage": "textures/wz.jpg",
+    "sceneImage": "artworks/scene/wz.33775dc250c2.webp",
+    "thumbnailImage": "artworks/thumbnails/wz.e411135ab006.webp",
+    "previewImage": "previews/wz.jpg"
   },
   "toyasan-portrait": {
     "sourceFile": "直式/戶屋 - 1.png",
@@ -301,7 +346,10 @@
       661,
       1024
     ],
-    "modelImage": "textures/toyasan-portrait.jpg"
+    "modelImage": "textures/toyasan-portrait.jpg",
+    "sceneImage": "artworks/scene/toyasan-portrait.c4082a25ad57.webp",
+    "thumbnailImage": "artworks/thumbnails/toyasan-portrait.7e50bfa8259a.webp",
+    "previewImage": "previews/toyasan-portrait.jpg"
   },
   "bird-02": {
     "sourceFile": "直式/鳥語 - 2.png",
@@ -320,7 +368,10 @@
       739,
       1024
     ],
-    "modelImage": "textures/bird-02.jpg"
+    "modelImage": "textures/bird-02.jpg",
+    "sceneImage": "artworks/scene/bird-02.6cce03a5bf93.webp",
+    "thumbnailImage": "artworks/thumbnails/bird-02.3c82a0295d7d.webp",
+    "previewImage": "previews/bird-02.jpg"
   },
   "medo": {
     "sourceFile": "橫式/MEDO.png",
@@ -339,7 +390,10 @@
       1024,
       711
     ],
-    "modelImage": "textures/medo.jpg"
+    "modelImage": "textures/medo.jpg",
+    "sceneImage": "artworks/scene/medo.17fb70179bf1.webp",
+    "thumbnailImage": "artworks/thumbnails/medo.c7d2617350da.webp",
+    "previewImage": "previews/medo.jpg"
   },
   "toyasan-square": {
     "sourceFile": "方的/戶屋 - 2.png",
@@ -358,7 +412,10 @@
       1024,
       1024
     ],
-    "modelImage": "textures/toyasan-square.jpg"
+    "modelImage": "textures/toyasan-square.jpg",
+    "sceneImage": "artworks/scene/toyasan-square.debcc84100f2.webp",
+    "thumbnailImage": "artworks/thumbnails/toyasan-square.bc8675976dd6.webp",
+    "previewImage": "previews/toyasan-square.jpg"
   },
   "virgil": {
     "sourceFile": "直式/維吉爾.png",
@@ -377,7 +434,10 @@
       406,
       1024
     ],
-    "modelImage": "textures/virgil.jpg"
+    "modelImage": "textures/virgil.jpg",
+    "sceneImage": "artworks/scene/virgil.091bec68e73f.webp",
+    "thumbnailImage": "artworks/thumbnails/virgil.e449d56bb071.webp",
+    "previewImage": "previews/virgil.jpg"
   },
   "shiris": {
     "sourceFile": "橫式/Shiris 惜霖.png",
@@ -396,7 +456,10 @@
       1024,
       724
     ],
-    "modelImage": "textures/shiris.jpg"
+    "modelImage": "textures/shiris.jpg",
+    "sceneImage": "artworks/scene/shiris.e336d10e71d4.webp",
+    "thumbnailImage": "artworks/thumbnails/shiris.57cd4269bb42.webp",
+    "previewImage": "previews/shiris.jpg"
   },
   "kakult-portrait": {
     "sourceFile": "直式/翔 kakult2017 - 2.png",
@@ -415,7 +478,10 @@
       724,
       1024
     ],
-    "modelImage": "textures/kakult-portrait.jpg"
+    "modelImage": "textures/kakult-portrait.jpg",
+    "sceneImage": "artworks/scene/kakult-portrait.47bf0962c4fa.webp",
+    "thumbnailImage": "artworks/thumbnails/kakult-portrait.b511eeb72729.webp",
+    "previewImage": "previews/kakult-portrait.jpg"
   },
   "chejan": {
     "sourceFile": "橫式/成江.png",
@@ -434,7 +500,10 @@
       1024,
       576
     ],
-    "modelImage": "textures/chejan.jpg"
+    "modelImage": "textures/chejan.jpg",
+    "sceneImage": "artworks/scene/chejan.cf49510e8a5a.webp",
+    "thumbnailImage": "artworks/thumbnails/chejan.e2d96c90a240.webp",
+    "previewImage": "previews/chejan.jpg"
   },
   "lllokkk-landscape": {
     "sourceFile": "橫式/lllokkk - 1.png",
@@ -453,7 +522,10 @@
       1024,
       576
     ],
-    "modelImage": "textures/lllokkk-landscape.jpg"
+    "modelImage": "textures/lllokkk-landscape.jpg",
+    "sceneImage": "artworks/scene/lllokkk-landscape.2e7114904a56.webp",
+    "thumbnailImage": "artworks/thumbnails/lllokkk-landscape.baf888d1aea7.webp",
+    "previewImage": "previews/lllokkk-landscape.jpg"
   },
   "jen": {
     "sourceFile": "橫式/JENˇ荏.png",
@@ -472,7 +544,10 @@
       1024,
       576
     ],
-    "modelImage": "textures/jen.jpg"
+    "modelImage": "textures/jen.jpg",
+    "sceneImage": "artworks/scene/jen.2e5fc6e1275a.webp",
+    "thumbnailImage": "artworks/thumbnails/jen.805dcae91eee.webp",
+    "previewImage": "previews/jen.jpg"
   },
   "kakult-landscape": {
     "sourceFile": "橫式/翔 kakult2017 - 1.png",
@@ -491,7 +566,10 @@
       1024,
       702
     ],
-    "modelImage": "textures/kakult-landscape.jpg"
+    "modelImage": "textures/kakult-landscape.jpg",
+    "sceneImage": "artworks/scene/kakult-landscape.0752fb5a4761.webp",
+    "thumbnailImage": "artworks/thumbnails/kakult-landscape.631d1e544077.webp",
+    "previewImage": "previews/kakult-landscape.jpg"
   },
   "enruzero": {
     "sourceFile": "緣流.jpg",
@@ -510,12 +588,21 @@
       1024,
       819
     ],
-    "modelImage": "textures/enruzero.jpg"
+    "modelImage": "textures/enruzero.jpg",
+    "sceneImage": "artworks/scene/enruzero.e98cbefac2d2.webp",
+    "thumbnailImage": "artworks/thumbnails/enruzero.5dca7974642e.webp",
+    "previewImage": "previews/enruzero.jpg"
   },
   "guestbook-flag": {
-    "modelImage": "../public/artworks/guestbook-reference.jpg"
+    "modelImage": "textures/guestbook-flag.png",
+    "sceneImage": "artworks/guestbook-flag.svg",
+    "thumbnailImage": "artworks/thumbnails/guestbook-flag.432c82b72e8c.webp",
+    "previewImage": "previews/guestbook-flag.jpg"
   },
   "service-backdrop": {
-    "modelImage": "../public/artworks/service-reference.jpg"
+    "modelImage": "textures/service-backdrop.jpg",
+    "sceneImage": "artworks/scene/service-backdrop.e73e11dafbac.webp",
+    "thumbnailImage": "artworks/thumbnails/service-backdrop.c692082d64a4.webp",
+    "previewImage": "previews/service-backdrop.jpg"
   }
 }

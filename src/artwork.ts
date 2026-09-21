@@ -5,12 +5,14 @@ export interface Artwork {
   title: string
   zone: Zone
   image: string
+  texture: string
+  thumbnail: string
   position: [number, number, number]
   rotation: number
   width: number
   height: number
   depth: number
-  imageKind: 'reference-photo' | 'original-artwork'
+  imageKind: 'reference-photo' | 'original-artwork' | 'flat-vector'
   artist: string
   sourceFile: string
   sourceSize?: [number, number]

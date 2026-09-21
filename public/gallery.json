@@ -25,6 +25,8 @@
       "image": "artworks/egg-01.webp",
       "title": "荷包蛋 - 1",
       "depth": 0.035,
+      "texture": "artworks/scene/egg-01.ddf4cda04532.webp",
+      "thumbnail": "artworks/thumbnails/egg-01.dd471a812e3d.webp",
       "medium": "數位插畫・無框畫",
       "description": "荷包蛋的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -57,6 +59,8 @@
       "image": "artworks/didi.webp",
       "title": "DiDi",
       "depth": 0.035,
+      "texture": "artworks/scene/didi.8499647d5867.webp",
+      "thumbnail": "artworks/thumbnails/didi.f1ed2aa76c8f.webp",
       "medium": "數位插畫・無框畫",
       "description": "DiDi的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -89,6 +93,8 @@
       "image": "artworks/css-portrait.webp",
       "title": "奶油醬油 - 1",
       "depth": 0.035,
+      "texture": "artworks/scene/css-portrait.7a776ae30aa8.webp",
+      "thumbnail": "artworks/thumbnails/css-portrait.458599b88ac7.webp",
       "medium": "數位插畫・無框畫",
       "description": "奶油醬油的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -121,6 +127,8 @@
       "image": "artworks/lllokkk-portrait.webp",
       "title": "lllokkk - 2",
       "depth": 0.035,
+      "texture": "artworks/scene/lllokkk-portrait.e12bb542af78.jpg",
+      "thumbnail": "artworks/thumbnails/lllokkk-portrait.502b4ee0bf42.webp",
       "medium": "數位插畫・無框畫",
       "description": "lllokkk的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -153,6 +161,8 @@
       "image": "artworks/hwaguwu.webp",
       "title": "花故｜熙歌三週年",
       "depth": 0.035,
+      "texture": "artworks/scene/hwaguwu.f77d53a8e67f.webp",
+      "thumbnail": "artworks/thumbnails/hwaguwu.a75656da528c.webp",
       "medium": "數位插畫・無框畫",
       "description": "花故的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -185,6 +195,8 @@
       "image": "artworks/yukimura-portrait.webp",
       "title": "雪村信 - 1",
       "depth": 0.035,
+      "texture": "artworks/scene/yukimura-portrait.c586d559e30e.webp",
+      "thumbnail": "artworks/thumbnails/yukimura-portrait.3cf0ca8debd5.webp",
       "medium": "數位插畫・無框畫",
       "description": "雪村信的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -217,6 +229,8 @@
       "image": "artworks/yukimura-landscape.webp",
       "title": "雪村信 - 2",
       "depth": 0.035,
+      "texture": "artworks/scene/yukimura-landscape.ca3bf35f6bd8.webp",
+      "thumbnail": "artworks/thumbnails/yukimura-landscape.33a72213a619.webp",
       "medium": "數位插畫・無框畫",
       "description": "雪村信的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -249,6 +263,8 @@
       "image": "artworks/css-landscape.webp",
       "title": "奶油醬油 - 2",
       "depth": 0.035,
+      "texture": "artworks/scene/css-landscape.dca3b6133204.webp",
+      "thumbnail": "artworks/thumbnails/css-landscape.76a3f23b4742.webp",
       "medium": "數位插畫・無框畫",
       "description": "奶油醬油的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -281,6 +297,8 @@
       "image": "artworks/egg-02.webp",
       "title": "荷包蛋 - 2",
       "depth": 0.035,
+      "texture": "artworks/scene/egg-02.54a72fc6b89c.webp",
+      "thumbnail": "artworks/thumbnails/egg-02.950d0f54008c.webp",
       "medium": "數位插畫・無框畫",
       "description": "荷包蛋的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -313,6 +331,8 @@
       "image": "artworks/chill.webp",
       "title": "超二流—ChillAru",
       "depth": 0.035,
+      "texture": "artworks/scene/chill.3d2dc07376ff.webp",
+      "thumbnail": "artworks/thumbnails/chill.91289fdc5319.webp",
       "medium": "數位插畫・無框畫",
       "description": "超二流—ChillAru的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -340,6 +360,8 @@
       "image": "artworks/bbibinbing.webp",
       "title": "BBiBinBing",
       "depth": 0.035,
+      "texture": "artworks/scene/bbibinbing.3d4d53e460e2.webp",
+      "thumbnail": "artworks/thumbnails/bbibinbing.adb37f53024c.webp",
       "medium": "數位插畫・無框畫",
       "description": "BBiBinBing的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -367,6 +389,8 @@
       "image": "artworks/bird-01.webp",
       "title": "鳥語 - 1",
       "depth": 0.035,
+      "texture": "artworks/scene/bird-01.1573b34ae07b.webp",
+      "thumbnail": "artworks/thumbnails/bird-01.8f236f103fcb.webp",
       "medium": "數位插畫・無框畫",
       "description": "鳥語的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -394,6 +418,8 @@
       "image": "artworks/zm.webp",
       "title": "ZM敏",
       "depth": 0.035,
+      "texture": "artworks/scene/zm.0b5bb6c0efbd.webp",
+      "thumbnail": "artworks/thumbnails/zm.0085d6d02bb9.webp",
       "medium": "數位插畫・無框畫",
       "description": "ZM敏的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -421,6 +447,8 @@
       "image": "artworks/qb.webp",
       "title": "QB",
       "depth": 0.035,
+      "texture": "artworks/scene/qb.4d720e2ce8a0.webp",
+      "thumbnail": "artworks/thumbnails/qb.0a664604e939.webp",
       "medium": "數位插畫・無框畫",
       "description": "QB的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -448,6 +476,8 @@
       "image": "artworks/wz.webp",
       "title": "花子",
       "depth": 0.035,
+      "texture": "artworks/scene/wz.33775dc250c2.webp",
+      "thumbnail": "artworks/thumbnails/wz.e411135ab006.webp",
       "medium": "數位插畫・無框畫",
       "description": "花子的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -475,6 +505,8 @@
       "image": "artworks/toyasan-portrait.webp",
       "title": "戶屋 - 1",
       "depth": 0.035,
+      "texture": "artworks/scene/toyasan-portrait.c4082a25ad57.webp",
+      "thumbnail": "artworks/thumbnails/toyasan-portrait.7e50bfa8259a.webp",
       "medium": "數位插畫・無框畫",
       "description": "戶屋的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -502,6 +534,8 @@
       "image": "artworks/bird-02.webp",
       "title": "鳥語 - 2",
       "depth": 0.035,
+      "texture": "artworks/scene/bird-02.6cce03a5bf93.webp",
+      "thumbnail": "artworks/thumbnails/bird-02.3c82a0295d7d.webp",
       "medium": "數位插畫・無框畫",
       "description": "鳥語的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -529,6 +563,8 @@
       "image": "artworks/medo.webp",
       "title": "MEDO",
       "depth": 0.035,
+      "texture": "artworks/scene/medo.17fb70179bf1.webp",
+      "thumbnail": "artworks/thumbnails/medo.c7d2617350da.webp",
       "medium": "數位插畫・無框畫",
       "description": "MEDO的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -561,6 +597,8 @@
         -3.3
       ],
       "depth": 0.035,
+      "texture": "artworks/scene/toyasan-square.debcc84100f2.webp",
+      "thumbnail": "artworks/thumbnails/toyasan-square.bc8675976dd6.webp",
       "medium": "數位插畫・無框畫",
       "description": "戶屋的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -593,6 +631,8 @@
       "image": "artworks/virgil.webp",
       "title": "維吉爾",
       "depth": 0.035,
+      "texture": "artworks/scene/virgil.091bec68e73f.webp",
+      "thumbnail": "artworks/thumbnails/virgil.e449d56bb071.webp",
       "medium": "數位插畫・無框畫",
       "description": "維吉爾的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -620,6 +660,8 @@
       "image": "artworks/shiris.webp",
       "title": "Shiris 惜霖",
       "depth": 0.035,
+      "texture": "artworks/scene/shiris.e336d10e71d4.webp",
+      "thumbnail": "artworks/thumbnails/shiris.57cd4269bb42.webp",
       "medium": "數位插畫・無框畫",
       "description": "Shiris 惜霖的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -647,6 +689,8 @@
       "image": "artworks/kakult-portrait.webp",
       "title": "翔 kakult2017 - 2",
       "depth": 0.035,
+      "texture": "artworks/scene/kakult-portrait.47bf0962c4fa.webp",
+      "thumbnail": "artworks/thumbnails/kakult-portrait.b511eeb72729.webp",
       "medium": "數位插畫・無框畫",
       "description": "翔 kakult2017的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -674,6 +718,8 @@
       "image": "artworks/chejan.webp",
       "title": "成江",
       "depth": 0.035,
+      "texture": "artworks/scene/chejan.cf49510e8a5a.webp",
+      "thumbnail": "artworks/thumbnails/chejan.e2d96c90a240.webp",
       "medium": "數位插畫・無框畫",
       "description": "成江的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -701,6 +747,8 @@
       "image": "artworks/lllokkk-landscape.webp",
       "title": "lllokkk - 1",
       "depth": 0.035,
+      "texture": "artworks/scene/lllokkk-landscape.2e7114904a56.webp",
+      "thumbnail": "artworks/thumbnails/lllokkk-landscape.baf888d1aea7.webp",
       "medium": "數位插畫・無框畫",
       "description": "lllokkk的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -728,6 +776,8 @@
       "image": "artworks/jen.webp",
       "title": "JENˇ荏",
       "depth": 0.035,
+      "texture": "artworks/scene/jen.2e5fc6e1275a.webp",
+      "thumbnail": "artworks/thumbnails/jen.805dcae91eee.webp",
       "medium": "數位插畫・無框畫",
       "description": "JENˇ荏的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -755,6 +805,8 @@
       "image": "artworks/kakult-landscape.webp",
       "title": "翔 kakult2017 - 1",
       "depth": 0.035,
+      "texture": "artworks/scene/kakult-landscape.0752fb5a4761.webp",
+      "thumbnail": "artworks/thumbnails/kakult-landscape.631d1e544077.webp",
       "medium": "數位插畫・無框畫",
       "description": "翔 kakult2017的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -782,6 +834,8 @@
       "image": "artworks/enruzero.webp",
       "title": "緣流",
       "depth": 0.035,
+      "texture": "artworks/scene/enruzero.e98cbefac2d2.webp",
+      "thumbnail": "artworks/thumbnails/enruzero.5dca7974642e.webp",
       "medium": "數位插畫・無框畫",
       "description": "緣流的作品，依原始圖檔完整比例呈現。",
       "sourceSize": [
@@ -792,8 +846,8 @@
     {
       "id": "28",
       "key": "guestbook-flag",
-      "image": "artworks/guestbook-reference.jpg",
-      "imageKind": "reference-photo",
+      "image": "artworks/guestbook-flag.svg",
+      "imageKind": "flat-vector",
       "title": "簽到桌後方紅色旗幟",
       "artist": "",
       "position": [
@@ -814,13 +868,15 @@
       "evidence": "IMG_9426.jpg; DJ 30–31s",
       "sourceFile": "refs/IMG_9426.jpg",
       "depth": 0.035,
-      "medium": "現場影像對位",
-      "description": "依現場影像對位的展示背板。"
+      "texture": "artworks/guestbook-flag.svg",
+      "thumbnail": "artworks/thumbnails/guestbook-flag.432c82b72e8c.webp",
+      "medium": "平面向量旗幟",
+      "description": "依現場可見圖案簡化的平面 SVG 旗幟。"
     },
     {
       "id": "29",
       "key": "service-backdrop",
-      "image": "artworks/service-reference.jpg",
+      "image": "artworks/service-backdrop.webp",
       "imageKind": "reference-photo",
       "title": "服務台活動背板",
       "artist": "",
@@ -842,6 +898,8 @@
       "evidence": "studio 42s; IMG_9426.jpg",
       "sourceFile": "refs/studio-video@42s",
       "depth": 0.035,
+      "texture": "artworks/scene/service-backdrop.e73e11dafbac.webp",
+      "thumbnail": "artworks/thumbnails/service-backdrop.c692082d64a4.webp",
       "medium": "現場影像對位",
       "description": "依現場影像對位的展示背板。"
     }

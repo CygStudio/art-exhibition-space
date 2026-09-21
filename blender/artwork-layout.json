@@ -605,8 +605,8 @@
     {
       "id": "28",
       "key": "guestbook-flag",
-      "image": "artworks/guestbook-reference.jpg",
-      "imageKind": "reference-photo",
+      "image": "artworks/guestbook-flag.svg",
+      "imageKind": "flat-vector",
       "title": "簽到桌後方紅色旗幟",
       "artist": "",
       "position": [
@@ -624,31 +624,13 @@
         1.65,
         -2.7
       ],
-      "uvCorners": [
-        [
-          0.01888888888888889,
-          0.491609081934847
-        ],
-        [
-          0.2972222222222222,
-          0.491609081934847
-        ],
-        [
-          0.28555555555555556,
-          0.1885488647581441
-        ],
-        [
-          0.0044444444444444444,
-          0.16189536031589338
-        ]
-      ],
       "evidence": "IMG_9426.jpg; DJ 30–31s",
       "sourceFile": "refs/IMG_9426.jpg"
     },
     {
       "id": "29",
       "key": "service-backdrop",
-      "image": "artworks/service-reference.jpg",
+      "image": "artworks/service-backdrop.webp",
       "imageKind": "reference-photo",
       "title": "服務台活動背板",
       "artist": "",
@@ -666,24 +648,6 @@
         0.1,
         1.65,
         -2.2
-      ],
-      "uvCorners": [
-        [
-          0.075,
-          0.7666666666666667
-        ],
-        [
-          0.909375,
-          0.8611111111111112
-        ],
-        [
-          0.921875,
-          0.08611111111111111
-        ],
-        [
-          0.06015625,
-          0.1375
-        ]
       ],
       "evidence": "studio 42s; IMG_9426.jpg",
       "sourceFile": "refs/studio-video@42s"

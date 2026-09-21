@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="690" viewBox="0 0 1180 690">
+  <title>簽到桌紅旗：依現場可見圖案簡化的平面版本</title>
+  <rect width="1180" height="690" fill="#bc2749"/>
+  <g fill="#252b2c" transform="translate(590 350) rotate(-14)">
+    <circle r="194"/>
+    <ellipse rx="367" ry="72" fill="none" stroke="#252b2c" stroke-width="38"/>
+    <path d="M-171 8 Q-40 4 110-48 Q166-60 181-57 Q93-6-31 24 Q-110 43-171 45Z" fill="#bc2749"/>
+    <path d="M-147 77 Q-17 65 133 13 Q97 125 0 164 Q-83 149-147 77Z" fill="#bc2749"/>
+    <path d="M-79 65 Q-12 68 47 94 L21 118 Q-40 90-105 85Z"/>
+    <path d="M-5-8 20 39 68 56 21 72 3 122-14 76-69 56-20 33Z"/>
+  </g>
+  <g fill="#252b2c">
+    <path d="m273 224 11 31 30 12-30 12-11 31-12-31-30-12 30-12Z"/>
+    <path d="m263 243 5 14 14 5-14 5-5 14-5-14-14-5 14-5Z" fill="#bc2749"/>
+    <path d="m864 392 16 42 31 18-31 16-16 44-15-44-32-16 32-18Z"/>
+  </g>
+</svg>

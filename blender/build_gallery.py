@@ -223,7 +223,7 @@ def art(spec):
     # Adding a color layer reallocates CustomData; reacquire the UV layer.
     uv=mesh.uv_layers.active
     for polygon,coords in zip(mesh.polygons,face_uvs):
-        shade=1 if polygon.index==0 else .72
+        shade=1 if polygon.index==0 or spec['imageKind']=='flat-vector' else .72
         for loop,co in zip(polygon.loop_indices,coords):
             uv.data[loop].uv=image_uv(*co)
             colors.data[loop].color=(shade,shade,shade,1)
@@ -245,8 +245,13 @@ def art(spec):
         for dx in [-w*.32,w*.32]: rod('Picture wire',local(dx,h/2+.02,-.025),local(dx,2.53-pos[1],-.025),.003,steel)
     entry={k:v for k,v in spec.items() if k not in ['columnMounted','labelSide','uvCorners']}
     entry['depth']=depth
+    entry['texture']=assets[spec['key']]['sceneImage']
+    entry['thumbnail']=assets[spec['key']]['thumbnailImage']
     entry['medium']='現場影像對位' if spec['imageKind']=='reference-photo' else '數位插畫・無框畫'
     entry['description']='依現場影像對位的展示背板。' if spec['imageKind']=='reference-photo' else f"{spec['artist']}的作品，依原始圖檔完整比例呈現。"
+    if spec['imageKind']=='flat-vector':
+        entry['medium']='平面向量旗幟'
+        entry['description']='依現場可見圖案簡化的平面 SVG 旗幟。'
     if spec['imageKind']=='original-artwork':
         entry['sourceSize']=assets[spec['key']]['sourceSize']
     arts.append(entry)
@@ -308,6 +313,14 @@ for p in [(-2,2.6,-3),(2,2.6,2)]:
 scene.render.engine='CYCLES'; scene.cycles.samples=24
 scene.render.resolution_x=1440; scene.render.resolution_y=900; scene.render.resolution_percentage=100
 bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'blender'/'gallery.blend'))
+# Web export embeds only small previews. Full materials remain in the saved .blend.
+for spec in placements['artworks']:
+    material=bpy.data.materials['Artwork image '+spec['key']]
+    for node in material.node_tree.nodes:
+        if node.type=='TEX_IMAGE':
+            node.image=bpy.data.images.load(str(ROOT/'blender'/assets[spec['key']]['previewImage']),check_existing=True)
+for node in list(concrete.node_tree.nodes):
+    if node.type=='TEX_IMAGE': concrete.node_tree.nodes.remove(node)
 bpy.ops.export_scene.gltf(filepath=str(OUT/'models'/'gallery.glb'),export_format='GLB',export_vertex_color='ACTIVE',export_all_vertex_colors=False,export_extras=True,export_cameras=False,export_lights=False,export_yup=True)
 (OUT/'gallery.json').write_text(json.dumps({'artworks':arts,'colliders':colliders,'bounds':{'minX':-4.95,'maxX':4.95,'minZ':-4.65,'maxZ':4.65},'layout':layout,'unplacedArtworks':placements['unplaced']},ensure_ascii=False,indent=2))
 triangles=sum(len(o.data.polygons) for o in bpy.data.objects if o.type=='MESH')

@@ -28,7 +28,7 @@ test('all 27 identified originals retain their image proportions and source attr
   assert.equal(assets.hwaguwu.convertedICC, true)
 })
 
-test('every GLB canvas embeds the corresponding real texture without relying on the web app', () => {
+test('every GLB canvas embeds an authentic preview and has an independent full texture', () => {
   for (const art of gallery.artworks) {
     const node = model.nodes.find(n => n.extras?.artworkId === art.id)
     assert.equal(node.extras.sourceKey, art.key)
@@ -39,9 +39,22 @@ test('every GLB canvas embeds the corresponding real texture without relying on 
     assert.equal(image.mimeType, 'image/jpeg')
     const view = model.bufferViews[image.bufferView]
     const embedded = glb.subarray(binaryStart + view.byteOffset, binaryStart + view.byteOffset + view.byteLength)
-    assert.equal(digest(embedded), digest(read('blender/' + assets[art.key].modelImage)), art.key)
+    assert.equal(digest(embedded), digest(read('blender/' + assets[art.key].previewImage)), art.key)
+    assert.ok(read('public/' + art.texture).length > 0, art.key)
+    assert.ok(read('public/' + art.thumbnail).length > 0, art.key)
     assert.ok(primitive.attributes.COLOR_0 !== undefined, art.key)
   }
+})
+
+test('the initial scene stays within the preview budget and the flag remains flat SVG', () => {
+  assert.ok(glb.length < 1_300_000, `${glb.length} bytes`)
+  const embeddedBytes = model.images.reduce((sum, image) => sum + model.bufferViews[image.bufferView].byteLength, 0)
+  assert.ok(embeddedBytes < 130_000, `${embeddedBytes} embedded image bytes`)
+  assert.equal(model.images.length, gallery.artworks.length)
+  const flag = gallery.artworks.find(a => a.key === 'guestbook-flag')
+  assert.equal(flag.imageKind, 'flat-vector')
+  assert.match(flag.texture, /\.svg$/)
+  assert.doesNotMatch(read('public/' + flag.texture).toString(), /<image|<filter|<.*Gradient/)
 })
 
 test('wall sequences follow the photographed viewing direction', () => {

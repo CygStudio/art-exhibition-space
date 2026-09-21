@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { canOccupy, findWalkPath, movePosition } from './navigation.mjs'
 import { createCelEnvironment } from './environment'
+import { createArtworkTextures } from './artwork-textures'
 
 import { stations, type Zone } from './stations'
 import { drawFloorPlan, mapPoint, type Layout } from './floor-plan'
@@ -27,6 +28,7 @@ let detailArtworks: Artwork[] = []
 let yaw = .16, pitch = 0
 let ready = false
 let sceneAvailable = false
+let artworkTextures: ReturnType<typeof createArtworkTextures> | undefined
 let highQuality = false
 let returnFocus: HTMLElement | null = null
 let activeZone: Zone | null = null
@@ -110,7 +112,7 @@ function buildCatalog() {
   detailArtworks.forEach(a=>{
     const b=document.createElement('button'); b.className='catalog-card'; b.dataset.artId=a.id
     const thumb=document.createElement('div');thumb.className='catalog-thumb'
-    const img=document.createElement('img');img.src=base+a.image;img.alt='';img.loading='lazy';thumb.append(img)
+    const img=document.createElement('img');img.src=base+a.thumbnail;img.alt='';img.loading='lazy';thumb.append(img)
     const p=document.createElement('p');const num=document.createElement('span');num.textContent=a.id;p.append(num,document.createTextNode(a.title))
     const small=document.createElement('small');small.textContent=`${zoneNames[a.zone]} / ${a.artist || '現場參考照片'}`
     b.append(thumb,p,small);b.addEventListener('click',()=>openArt(a.id));frag.append(b)
@@ -229,12 +231,13 @@ function animate() {
     }
   }
   camera.rotation.set(pitch,yaw,0,'YXZ')
+  if(!modalOpen())artworkTextures?.update(camera)
   const {x:mx,y:mz}=mapPoint(camera.position.x,camera.position.z,data.layout)
   $('#map-marker').setAttribute('transform',`translate(${mx} ${mz}) rotate(${-yaw*180/Math.PI})`)
   renderer.render(scene,camera)
 }
 function failScene(error:unknown) {
-  console.error(error);sceneAvailable=false;renderer?.setAnimationLoop(null)
+  console.error(error);sceneAvailable=false;artworkTextures?.stop();renderer?.setAnimationLoop(null)
   $('#loading-text').textContent=ready?'3D 空間暫時無法開啟，仍可瀏覽作品目錄。':'展覽資料暫時無法載入，請重新載入。'
   $<HTMLProgressElement>('#load-progress').hidden=true
   if(!$('#retry-scene')){const b=document.createElement('button');b.id='retry-scene';b.className='primary-button';b.style.width='180px';b.style.marginTop='20px';b.textContent='重新載入展間';b.onclick=()=>location.reload();$('#loading').append(b)}
@@ -260,6 +263,7 @@ async function init() {
         texture.colorSpace=THREE.SRGBColorSpace
         texture.anisotropy=Math.min(4,renderer!.capabilities.getMaxAnisotropy())
         o.material=new THREE.MeshBasicMaterial({map:texture,vertexColors:true})
+        o.userData.textureQuality='preview'
         original.dispose()
         o.userData.detailsEnabled=canOpenDetails(data.artworks.find(a=>a.id===id))
         artworks.set(id,o)
@@ -267,8 +271,10 @@ async function init() {
     })
     environment.apply(gltf.scene)
     scene.add(gltf.scene);sceneAvailable=true
+    artworkTextures=createArtworkTextures(data.artworks,artworks,base,Math.min(4,renderer.capabilities.getMaxAnisotropy()))
     $<HTMLProgressElement>('#load-progress').value=100
     await renderer.compileAsync(scene,camera)
+    performance.mark('gallery-interactive')
     renderer.setAnimationLoop(animate);$('#loading').classList.add('done')
     canvas.dataset.loaded='true'
     // Minimal diagnostics useful for model/interaction verification, no personal data.
