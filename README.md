@@ -51,7 +51,8 @@ pnpm test      # 碰撞、作品位置、GLB 與圖檔一致性
 - `blender/previews/`：長邊最多 128 px 的作品預覽，打包進網站 GLB；另有三張小型桌上展示圖。
 - `public/artworks/scene/`：長邊最多 1,024 px 的場景貼圖，通常為品質 88／90 的 WebP；紅色細線較多的 lllokkk 直幅保留 JPEG 4:4:4。
 - `public/artworks/thumbnails/`：長邊最多 320 px 的作品目錄縮圖。場景圖及縮圖檔名包含內容雜湊。
-- `public/artworks/*.webp`：長邊最多 2,048 px 的詳情圖，維持原始比例。
+- `public/artworks/details/`：長邊最多 640／1,440 px 的詳情圖；1,024 px 版本重用場景貼圖。通常使用 WebP，lllokkk 直幅採 JPEG 4:4:4 保留紅色細線。
+- `public/artworks/*.webp`：保留既有長邊最多 2,048 px 的詳情圖，作為舊版資料的相容來源。
 - `public/artworks/guestbook-flag.svg`：依參考簡化的紅黑平面旗幟，不含光影；`service-backdrop.webp` 為已校正四角的背板影格。
 - `refs/column-reference.png`：先前使用的柱畫參考照片，移回參考資料，不再打包至網站。
 
@@ -76,6 +77,7 @@ pnpm model
 - `src/environment.ts`：共用色票、三階 gradient map、描邊與燈光。
 - `src/artwork.ts`：作品資料契約與 `detailsEnabled` 詳情開關；背板不進入目錄或上下件切換。
 - `src/artwork-textures.ts`：以視野及距離排序清晰貼圖，每次最多三個請求；失敗保留預覽並退避重試，成功後釋放預覽資源。
+- `src/detail-image-loader.ts`、`src/detail-image-view.ts`：詳情尺寸選擇、解碼快取、請求取消、逾時重試與有限預載；切換作品立即清除舊圖，只有目前作品的回應能更新畫面。
 - `src/stations.ts`：六個導覽站位與朝向。
 - `src/floor-plan.ts`：以匯出的 `layout` 繪製平面圖與轉換目前位置。
 - `src/navigation.mjs`：攝影機碰撞及地板移動路線；以障礙物外側轉折點建立可通行路線，檢查整段攝影機半徑。
@@ -88,7 +90,7 @@ pnpm model
 3. 執行 `pnpm model`，再執行 `pnpm test` 與 `pnpm build`。配置與網頁資料由同一來源產生，重新建模不會遺失正式圖片。
 4. `detailsEnabled=false` 的兩張背板仍渲染、遮擋射線，但不進入目錄或上下件切換。
 
-Three.js 先顯示 GLB 的預覽，展間可操作後依視野載入 `texture`；目錄使用 `thumbnail`，作品燈箱才使用 `image` 詳情圖。GLB 單獨開啟只會顯示小預覽，完整品質保留在 Blender 編輯檔及獨立貼圖。作品名稱沿用檔名，未宣稱為繪師正式命名。
+Three.js 先顯示 GLB 的預覽，展間可操作後依視野載入 `texture`；目錄使用 `thumbnail`，作品燈箱依實際顯示面積與最多 2 倍像素密度選擇 `detailImages`，缺少分級資料時才使用 `image`。目前圖片完成後才依序預載前後兩件；省流量及慢速連線停用預載。GLB 單獨開啟只會顯示小預覽，完整品質保留在 Blender 編輯檔及獨立貼圖。作品名稱沿用檔名，未宣稱為繪師正式命名。詳情載入設計與實測見 [詳情圖片切換與載入修正](docs/detail-image-loading.md)。
 
 ## 已知範圍
 
