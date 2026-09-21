@@ -4,6 +4,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
 import { canOccupy, findWalkPath, movePosition } from './navigation.mjs'
 import { createCelEnvironment } from './environment'
 import { createArtworkTextures } from './artwork-textures'
+import { createDetailImageView } from './detail-image-view'
 
 import { stations, type Zone } from './stations'
 import { drawFloorPlan, mapPoint, type Layout } from './floor-plan'
@@ -12,6 +13,7 @@ interface GalleryData { layout: Layout; artworks: Artwork[]; colliders: {x:numbe
 const $ = <T extends HTMLElement = HTMLElement>(selector: string) => document.querySelector<T>(selector)!
 const canvas = $<HTMLCanvasElement>('#scene')
 const artDialog = $<HTMLDialogElement>('#art-dialog')
+const detailImage = createDetailImageView(artDialog)
 const catalogDialog = $<HTMLDialogElement>('#catalog-dialog')
 const aboutDialog = $<HTMLDialogElement>('#about-dialog')
 const zoneNames: Record<Zone,string> = {south:'主展牆',west:'左側展牆',east:'隔間外展牆',reception:'服務台・人員協助',guestbook:'簽到簿',windows:'對外落地窗'}
@@ -75,32 +77,33 @@ function resetInput() { stopWalking();keys.clear(); drag=null; canvas.classList.
 function showModal(dialog:HTMLDialogElement) {
   resetInput()
   if (!modalOpen()) returnFocus=document.activeElement as HTMLElement
-  document.querySelectorAll<HTMLDialogElement>('dialog[open]').forEach(d=>d.close())
-  dialog.showModal()
+  document.querySelectorAll<HTMLDialogElement>('dialog[open]').forEach(d=>{if(d!==dialog)d.close()})
+  if(!dialog.open)dialog.showModal()
 }
 function closeModal(dialog:HTMLDialogElement) { dialog.close() }
 for (const dialog of document.querySelectorAll<HTMLDialogElement>('dialog')) {
   dialog.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(dialog)))
   dialog.addEventListener('click',e=>{ if(e.target===dialog){ const r=dialog.getBoundingClientRect(); if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom) closeModal(dialog) } })
-  dialog.addEventListener('close',()=>{ resetInput(); if(!modalOpen()) returnFocus?.focus({preventScroll:true}) })
+  dialog.addEventListener('close',()=>{ resetInput(); if(dialog===artDialog&&!artDialog.open){detailImage.close();artDialog.removeAttribute('data-artwork-id')} if(!modalOpen()) returnFocus?.focus({preventScroll:true}) })
 }
 $('#about-button').addEventListener('click',()=>showModal(aboutDialog))
 $('#catalog-button').addEventListener('click',()=>{if(ready)showModal(catalogDialog)})
 function renderArt() {
   const a=detailArtworks[selected]
+  artDialog.dataset.artworkId=a.id
   $('#art-title').textContent=a.title
-  $<HTMLImageElement>('#art-image').src=base+a.image
-  $<HTMLImageElement>('#art-image').alt=a.imageKind==='reference-photo'?`${a.title}：現場參考照片`:`${a.title}，繪師：${a.artist}`
   $('#art-index').textContent=a.id
   $('#art-medium').textContent=a.medium
-  $('.art-image-wrap > span').textContent=a.imageKind==='reference-photo'?'ON-SITE REFERENCE PHOTO':a.artist
+  $('#art-image-artist').textContent=a.imageKind==='reference-photo'?'ON-SITE REFERENCE PHOTO':a.artist
   $('#art-status').textContent=a.imageKind==='reference-photo'?'現場參考照片':'原始圖檔'
   $('#art-description').textContent=a.description
   $('#art-zone').textContent=zoneNames[a.zone]
   $('#art-page').textContent=`${selected+1} / ${detailArtworks.length}`
   $<HTMLButtonElement>('#locate-art').disabled=!sceneAvailable
+  $('#locate-art').dataset.artworkId=a.id
+  detailImage.show(a,detailArtworks,base)
 }
-function openArt(id:string) { const index=detailArtworks.findIndex(a=>a.id===id); if(index<0)return; selected=index; renderArt(); showModal(artDialog) }
+function openArt(id:string) { const index=detailArtworks.findIndex(a=>a.id===id); if(index<0)return; selected=index; showModal(artDialog); renderArt() }
 function stepArt(delta:number) { if(!detailArtworks.length)return; selected=(selected+delta+detailArtworks.length)%detailArtworks.length; renderArt() }
 $('#prev-art').addEventListener('click',()=>stepArt(-1))
 $('#next-art').addEventListener('click',()=>stepArt(1))
@@ -111,6 +114,10 @@ function buildCatalog() {
   const frag=document.createDocumentFragment()
   detailArtworks.forEach(a=>{
     const b=document.createElement('button'); b.className='catalog-card'; b.dataset.artId=a.id
+    b.addEventListener('pointerenter',()=>detailImage.prepare(a,base))
+    b.addEventListener('focus',()=>detailImage.prepare(a,base))
+    b.addEventListener('pointerleave',()=>detailImage.cancelIntent())
+    b.addEventListener('blur',()=>detailImage.cancelIntent())
     const thumb=document.createElement('div');thumb.className='catalog-thumb'
     const img=document.createElement('img');img.src=base+a.thumbnail;img.alt='';img.loading='lazy';thumb.append(img)
     const p=document.createElement('p');const num=document.createElement('span');num.textContent=a.id;p.append(num,document.createTextNode(a.title))
@@ -238,6 +245,7 @@ function animate() {
 }
 function failScene(error:unknown) {
   console.error(error);sceneAvailable=false;artworkTextures?.stop();renderer?.setAnimationLoop(null)
+  $<HTMLButtonElement>('#locate-art').disabled=true
   $('#loading-text').textContent=ready?'3D 空間暫時無法開啟，仍可瀏覽作品目錄。':'展覽資料暫時無法載入，請重新載入。'
   $<HTMLProgressElement>('#load-progress').hidden=true
   if(!$('#retry-scene')){const b=document.createElement('button');b.id='retry-scene';b.className='primary-button';b.style.width='180px';b.style.marginTop='20px';b.textContent='重新載入展間';b.onclick=()=>location.reload();$('#loading').append(b)}
@@ -271,6 +279,7 @@ async function init() {
     })
     environment.apply(gltf.scene)
     scene.add(gltf.scene);sceneAvailable=true
+    if(artDialog.open)$<HTMLButtonElement>('#locate-art').disabled=false
     artworkTextures=createArtworkTextures(data.artworks,artworks,base,Math.min(4,renderer.capabilities.getMaxAnisotropy()))
     $<HTMLProgressElement>('#load-progress').value=100
     await renderer.compileAsync(scene,camera)

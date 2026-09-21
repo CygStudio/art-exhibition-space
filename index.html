@@ -46,7 +46,7 @@
     </main>
     <dialog id="art-dialog" aria-labelledby="art-title">
       <button class="dialog-close" data-close aria-label="關閉作品詳情">×</button>
-      <div class="art-image-wrap"><img id="art-image" alt="" /><span>ORIGINAL ARTWORK</span></div>
+      <div class="art-image-wrap"><div id="art-image-stage" class="art-image-stage" aria-busy="false"></div><div class="art-image-feedback"><p id="art-image-status" role="status" aria-live="polite"></p><button id="retry-art-image" type="button" hidden>重新載入圖片</button></div><span id="art-image-artist">ORIGINAL ARTWORK</span></div>
       <div class="art-details"><p class="eyebrow">THE COLLECTION <span id="art-index"></span></p><h2 id="art-title"></h2><p id="art-medium" class="medium"></p><div class="detail-rule"></div><p id="art-description"></p><dl><div><dt>展區</dt><dd id="art-zone"></dd></div><div><dt>作品狀態</dt><dd id="art-status">原始圖檔</dd></div></dl><button id="locate-art" class="primary-button">前往作品位置 <span>↗</span></button><div class="art-pagination"><button id="prev-art" aria-label="上一件作品">← 上一件</button><span id="art-page"></span><button id="next-art" aria-label="下一件作品">下一件 →</button></div></div>
     </dialog>
     <dialog id="catalog-dialog" aria-labelledby="catalog-title"><div class="catalog-header"><div><p class="eyebrow">THE COLLECTION</p><h2 id="catalog-title">作品目錄</h2></div><button class="dialog-close" data-close aria-label="關閉作品目錄">×</button></div><p class="catalog-note">27 件可瀏覽詳情的作品，另有 2 張大型背板於場景中展示。</p><div id="catalog-grid"></div></dialog>

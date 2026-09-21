@@ -311,6 +311,7 @@ def art(spec):
     entry['depth']=depth
     entry['texture']=assets[spec['key']]['sceneImage']
     entry['thumbnail']=assets[spec['key']]['thumbnailImage']
+    if details_enabled: entry['detailImages']=assets[spec['key']]['detailImages']
     entry['medium']='現場影像對位' if spec['imageKind']=='reference-photo' else '數位插畫・無框畫'
     entry['description']='依現場影像對位的展示背板。' if spec['imageKind']=='reference-photo' else f"{spec['artist']}的作品，依原始圖檔完整比例呈現。"
     if spec['imageKind']=='flat-vector':

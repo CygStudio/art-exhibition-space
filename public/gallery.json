@@ -32,6 +32,23 @@
       "sourceSize": [
         1749,
         2570
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/egg-01.7aa6d47cda91.webp",
+          "width": 436,
+          "height": 640
+        },
+        {
+          "src": "artworks/scene/egg-01.ddf4cda04532.webp",
+          "width": 697,
+          "height": 1024
+        },
+        {
+          "src": "artworks/details/egg-01.bf827326efe7.webp",
+          "width": 980,
+          "height": 1440
+        }
       ]
     },
     {
@@ -66,6 +83,23 @@
       "sourceSize": [
         4093,
         2894
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/didi.3ebf333cc27d.webp",
+          "width": 640,
+          "height": 453
+        },
+        {
+          "src": "artworks/scene/didi.8499647d5867.webp",
+          "width": 1024,
+          "height": 724
+        },
+        {
+          "src": "artworks/details/didi.3f941b489ef6.webp",
+          "width": 1440,
+          "height": 1018
+        }
       ]
     },
     {
@@ -100,6 +134,23 @@
       "sourceSize": [
         1400,
         2100
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/css-portrait.66ffeca2bb14.webp",
+          "width": 427,
+          "height": 640
+        },
+        {
+          "src": "artworks/scene/css-portrait.7a776ae30aa8.webp",
+          "width": 682,
+          "height": 1024
+        },
+        {
+          "src": "artworks/details/css-portrait.86a4e7e503c2.webp",
+          "width": 960,
+          "height": 1440
+        }
       ]
     },
     {
@@ -134,6 +185,23 @@
       "sourceSize": [
         3508,
         4961
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/lllokkk-portrait.28635cda65b0.jpg",
+          "width": 452,
+          "height": 640
+        },
+        {
+          "src": "artworks/scene/lllokkk-portrait.e12bb542af78.jpg",
+          "width": 724,
+          "height": 1024
+        },
+        {
+          "src": "artworks/details/lllokkk-portrait.74db62f17304.jpg",
+          "width": 1018,
+          "height": 1440
+        }
       ]
     },
     {
@@ -168,6 +236,23 @@
       "sourceSize": [
         7234,
         4134
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/hwaguwu.f1e7ac08eb3a.webp",
+          "width": 640,
+          "height": 366
+        },
+        {
+          "src": "artworks/scene/hwaguwu.f77d53a8e67f.webp",
+          "width": 1024,
+          "height": 585
+        },
+        {
+          "src": "artworks/details/hwaguwu.221fbb631436.webp",
+          "width": 1440,
+          "height": 823
+        }
       ]
     },
     {
@@ -202,6 +287,23 @@
       "sourceSize": [
         2048,
         3508
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/yukimura-portrait.a5448d64777c.webp",
+          "width": 374,
+          "height": 640
+        },
+        {
+          "src": "artworks/scene/yukimura-portrait.c586d559e30e.webp",
+          "width": 598,
+          "height": 1024
+        },
+        {
+          "src": "artworks/details/yukimura-portrait.d8e71bedc8aa.webp",
+          "width": 841,
+          "height": 1440
+        }
       ]
     },
     {
@@ -236,6 +338,23 @@
       "sourceSize": [
         4732,
         2112
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/yukimura-landscape.a96672f37274.webp",
+          "width": 640,
+          "height": 286
+        },
+        {
+          "src": "artworks/scene/yukimura-landscape.ca3bf35f6bd8.webp",
+          "width": 1024,
+          "height": 457
+        },
+        {
+          "src": "artworks/details/yukimura-landscape.d234c16b79c3.webp",
+          "width": 1440,
+          "height": 643
+        }
       ]
     },
     {
@@ -270,6 +389,23 @@
       "sourceSize": [
         4140,
         2996
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/css-landscape.d1915bdf0bde.webp",
+          "width": 640,
+          "height": 463
+        },
+        {
+          "src": "artworks/scene/css-landscape.dca3b6133204.webp",
+          "width": 1024,
+          "height": 741
+        },
+        {
+          "src": "artworks/details/css-landscape.c22113178bd7.webp",
+          "width": 1440,
+          "height": 1042
+        }
       ]
     },
     {
@@ -304,6 +440,23 @@
       "sourceSize": [
         1181,
         1748
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/egg-02.43fc1f30a715.webp",
+          "width": 432,
+          "height": 640
+        },
+        {
+          "src": "artworks/scene/egg-02.54a72fc6b89c.webp",
+          "width": 692,
+          "height": 1024
+        },
+        {
+          "src": "artworks/details/egg-02.b5150b882d23.webp",
+          "width": 973,
+          "height": 1440
+        }
       ]
     },
     {
@@ -338,6 +491,23 @@
       "sourceSize": [
         3508,
         4961
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/chill.ed141b12195b.webp",
+          "width": 452,
+          "height": 640
+        },
+        {
+          "src": "artworks/scene/chill.3d2dc07376ff.webp",
+          "width": 724,
+          "height": 1024
+        },
+        {
+          "src": "artworks/details/chill.d699b67dbaf1.webp",
+          "width": 1018,
+          "height": 1440
+        }
       ]
     },
     {
@@ -367,6 +537,23 @@
       "sourceSize": [
         1111,
         907
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/bbibinbing.0fad72a23dea.webp",
+          "width": 640,
+          "height": 522
+        },
+        {
+          "src": "artworks/scene/bbibinbing.3d4d53e460e2.webp",
+          "width": 1024,
+          "height": 836
+        },
+        {
+          "src": "artworks/details/bbibinbing.e02eeda47431.webp",
+          "width": 1111,
+          "height": 907
+        }
       ]
     },
     {
@@ -396,6 +583,23 @@
       "sourceSize": [
         1535,
         2126
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/bird-01.7816eac92b11.webp",
+          "width": 462,
+          "height": 640
+        },
+        {
+          "src": "artworks/scene/bird-01.1573b34ae07b.webp",
+          "width": 739,
+          "height": 1024
+        },
+        {
+          "src": "artworks/details/bird-01.328dbe21a629.webp",
+          "width": 1040,
+          "height": 1440
+        }
       ]
     },
     {
@@ -425,6 +629,23 @@
       "sourceSize": [
         5972,
         5560
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/zm.837097b2e411.webp",
+          "width": 640,
+          "height": 596
+        },
+        {
+          "src": "artworks/scene/zm.0b5bb6c0efbd.webp",
+          "width": 1024,
+          "height": 954
+        },
+        {
+          "src": "artworks/details/zm.460dff772933.webp",
+          "width": 1440,
+          "height": 1341
+        }
       ]
     },
     {
@@ -454,6 +675,18 @@
       "sourceSize": [
         1024,
         1024
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/qb.60a924f5117d.webp",
+          "width": 640,
+          "height": 640
+        },
+        {
+          "src": "artworks/scene/qb.4d720e2ce8a0.webp",
+          "width": 1024,
+          "height": 1024
+        }
       ]
     },
     {
@@ -483,6 +716,23 @@
       "sourceSize": [
         3059,
         2067
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/wz.15a1432d3a44.webp",
+          "width": 640,
+          "height": 433
+        },
+        {
+          "src": "artworks/scene/wz.33775dc250c2.webp",
+          "width": 1024,
+          "height": 692
+        },
+        {
+          "src": "artworks/details/wz.e40f1ed0fa33.webp",
+          "width": 1440,
+          "height": 973
+        }
       ]
     },
     {
@@ -512,6 +762,23 @@
       "sourceSize": [
         724,
         1122
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/toyasan-portrait.c5a2d2b8ca49.webp",
+          "width": 413,
+          "height": 640
+        },
+        {
+          "src": "artworks/scene/toyasan-portrait.c4082a25ad57.webp",
+          "width": 661,
+          "height": 1024
+        },
+        {
+          "src": "artworks/details/toyasan-portrait.adf63babbc8c.webp",
+          "width": 724,
+          "height": 1122
+        }
       ]
     },
     {
@@ -541,6 +808,23 @@
       "sourceSize": [
         1535,
         2126
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/bird-02.441c183d2dc1.webp",
+          "width": 462,
+          "height": 640
+        },
+        {
+          "src": "artworks/scene/bird-02.6cce03a5bf93.webp",
+          "width": 739,
+          "height": 1024
+        },
+        {
+          "src": "artworks/details/bird-02.13051d34113d.webp",
+          "width": 1040,
+          "height": 1440
+        }
       ]
     },
     {
@@ -570,6 +854,23 @@
       "sourceSize": [
         1800,
         1250
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/medo.834352e977fd.webp",
+          "width": 640,
+          "height": 444
+        },
+        {
+          "src": "artworks/scene/medo.17fb70179bf1.webp",
+          "width": 1024,
+          "height": 711
+        },
+        {
+          "src": "artworks/details/medo.b4bb1d6ecc84.webp",
+          "width": 1440,
+          "height": 1000
+        }
       ]
     },
     {
@@ -604,6 +905,23 @@
       "sourceSize": [
         1034,
         1034
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/toyasan-square.68c5c8a6db48.webp",
+          "width": 640,
+          "height": 640
+        },
+        {
+          "src": "artworks/scene/toyasan-square.debcc84100f2.webp",
+          "width": 1024,
+          "height": 1024
+        },
+        {
+          "src": "artworks/details/toyasan-square.511b4bb2b3c7.webp",
+          "width": 1034,
+          "height": 1034
+        }
       ]
     },
     {
@@ -638,6 +956,23 @@
       "sourceSize": [
         1786,
         4502
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/virgil.42bd8da5ce60.webp",
+          "width": 254,
+          "height": 640
+        },
+        {
+          "src": "artworks/scene/virgil.091bec68e73f.webp",
+          "width": 406,
+          "height": 1024
+        },
+        {
+          "src": "artworks/details/virgil.8a3752d5509e.webp",
+          "width": 571,
+          "height": 1440
+        }
       ]
     },
     {
@@ -667,6 +1002,23 @@
       "sourceSize": [
         6083,
         4299
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/shiris.25e6fdb273cf.webp",
+          "width": 640,
+          "height": 452
+        },
+        {
+          "src": "artworks/scene/shiris.e336d10e71d4.webp",
+          "width": 1024,
+          "height": 724
+        },
+        {
+          "src": "artworks/details/shiris.294a704e2b3a.webp",
+          "width": 1440,
+          "height": 1017
+        }
       ]
     },
     {
@@ -696,6 +1048,23 @@
       "sourceSize": [
         3307,
         4677
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/kakult-portrait.5e781fe59957.webp",
+          "width": 452,
+          "height": 640
+        },
+        {
+          "src": "artworks/scene/kakult-portrait.47bf0962c4fa.webp",
+          "width": 724,
+          "height": 1024
+        },
+        {
+          "src": "artworks/details/kakult-portrait.3af06cbcc6ee.webp",
+          "width": 1018,
+          "height": 1440
+        }
       ]
     },
     {
@@ -725,6 +1094,23 @@
       "sourceSize": [
         2560,
         1440
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/chejan.5dafc951aca4.webp",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "src": "artworks/scene/chejan.cf49510e8a5a.webp",
+          "width": 1024,
+          "height": 576
+        },
+        {
+          "src": "artworks/details/chejan.fe95d2bf1b79.webp",
+          "width": 1440,
+          "height": 810
+        }
       ]
     },
     {
@@ -754,6 +1140,23 @@
       "sourceSize": [
         6236,
         3508
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/lllokkk-landscape.e9810c09e523.webp",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "src": "artworks/scene/lllokkk-landscape.2e7114904a56.webp",
+          "width": 1024,
+          "height": 576
+        },
+        {
+          "src": "artworks/details/lllokkk-landscape.1144ac623b65.webp",
+          "width": 1440,
+          "height": 810
+        }
       ]
     },
     {
@@ -783,6 +1186,23 @@
       "sourceSize": [
         2880,
         1620
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/jen.e8e8266302ed.webp",
+          "width": 640,
+          "height": 360
+        },
+        {
+          "src": "artworks/scene/jen.2e5fc6e1275a.webp",
+          "width": 1024,
+          "height": 576
+        },
+        {
+          "src": "artworks/details/jen.721f482b2d03.webp",
+          "width": 1440,
+          "height": 810
+        }
       ]
     },
     {
@@ -812,6 +1232,23 @@
       "sourceSize": [
         4827,
         3307
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/kakult-landscape.74997b9cfaa5.webp",
+          "width": 640,
+          "height": 438
+        },
+        {
+          "src": "artworks/scene/kakult-landscape.0752fb5a4761.webp",
+          "width": 1024,
+          "height": 702
+        },
+        {
+          "src": "artworks/details/kakult-landscape.ee0ea0ecef93.webp",
+          "width": 1440,
+          "height": 986
+        }
       ]
     },
     {
@@ -841,6 +1278,23 @@
       "sourceSize": [
         8268,
         6614
+      ],
+      "detailImages": [
+        {
+          "src": "artworks/details/enruzero.cf181939afa1.webp",
+          "width": 640,
+          "height": 512
+        },
+        {
+          "src": "artworks/scene/enruzero.e98cbefac2d2.webp",
+          "width": 1024,
+          "height": 819
+        },
+        {
+          "src": "artworks/details/enruzero.c979c22c722c.webp",
+          "width": 1440,
+          "height": 1152
+        }
       ]
     },
     {

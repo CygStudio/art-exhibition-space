@@ -1,5 +1,7 @@
 import type { Zone } from './stations'
 
+export interface ArtworkImage { src: string; width: number; height: number }
+
 export interface Artwork {
   id: string
   title: string
@@ -7,6 +9,7 @@ export interface Artwork {
   image: string
   texture: string
   thumbnail: string
+  detailImages?: ArtworkImage[]
   position: [number, number, number]
   rotation: number
   width: number

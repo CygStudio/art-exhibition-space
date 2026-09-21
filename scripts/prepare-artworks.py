@@ -23,7 +23,8 @@ PREVIEWS = ROOT / 'blender/previews'
 PREVIEWS.mkdir(exist_ok=True)
 SCENE = DISPLAY / 'scene'
 THUMBS = DISPLAY / 'thumbnails'
-for directory in [SCENE, THUMBS]:
+DETAILS = DISPLAY / 'details'
+for directory in [SCENE, THUMBS, DETAILS]:
     directory.mkdir(exist_ok=True)
 SRGB = ImageCms.createProfile('sRGB')
 
@@ -74,6 +75,23 @@ def tiers(image, key):
     return {'sceneImage': scene, 'thumbnailImage': thumb, 'previewImage': f'previews/{key}.jpg'}
 
 
+def detail_variants(image, key, scene):
+    candidates = []
+    previous_size = None
+    for edge in [640, 1024, 1440]:
+        resized = image.copy()
+        resized.thumbnail((edge, edge), Image.Resampling.LANCZOS)
+        if resized.size == previous_size:
+            continue
+        # Reuse the exact URL already used by Three.js at the middle tier.
+        fmt = 'JPEG' if key == 'lllokkk-portrait' else 'WEBP'
+        quality = 82 if fmt == 'JPEG' else 86 if edge == 640 else 88
+        src = scene if edge == 1024 else variant(image, DETAILS, key, edge, quality, fmt)
+        candidates.append({'src': src, 'width': resized.width, 'height': resized.height})
+        previous_size = resized.size
+    return candidates
+
+
 metadata = {}
 for art in LAYOUT['artworks']:
     if art['imageKind'] != 'original-artwork':
@@ -84,6 +102,7 @@ for art in LAYOUT['artworks']:
     image.save(ROOT / 'public' / art['image'], 'WEBP', quality=92, method=6)
     display_size = image.size
     variants = tiers(image, art['key'])
+    details = detail_variants(image, art['key'], variants['sceneImage'])
     image.thumbnail((1024, 1024), Image.Resampling.LANCZOS)
     image.save(TEXTURES / f"{art['key']}.jpg", quality=90, subsampling=0, optimize=True)
     metadata[art['key']] = {
@@ -93,6 +112,7 @@ for art in LAYOUT['artworks']:
         'displaySize': display_size, 'modelSize': image.size,
         'modelImage': f"textures/{art['key']}.jpg",
         **variants,
+        'detailImages': details,
     }
 
 # The vector source is rendered once for the editable Blender material.
@@ -117,7 +137,8 @@ with tempfile.TemporaryDirectory() as temporary:
 
 # Prune only generated variants; original artwork files are never modified.
 used = {entry[field] for entry in metadata.values() for field in ['sceneImage', 'thumbnailImage']}
-for directory in [SCENE, THUMBS]:
+used.update(image['src'] for entry in metadata.values() for image in entry.get('detailImages', []))
+for directory in [SCENE, THUMBS, DETAILS]:
     for path in directory.iterdir():
         if str(path.relative_to(ROOT / 'public')) not in used:
             path.unlink()
@@ -125,4 +146,12 @@ for directory in [SCENE, THUMBS]:
 (ROOT / 'blender/artwork-assets.json').write_text(
     json.dumps(metadata, ensure_ascii=False, indent=2) + '\n',
 )
+# Detail-only asset changes do not require rebuilding Blender geometry.
+gallery_path = ROOT / 'public/gallery.json'
+if gallery_path.exists():
+    gallery = json.loads(gallery_path.read_text())
+    for art in gallery['artworks']:
+        if art['detailsEnabled']:
+            art['detailImages'] = metadata[art['key']]['detailImages']
+    gallery_path.write_text(json.dumps(gallery, ensure_ascii=False, indent=2))
 print(f'Prepared {len(metadata) - 2} original artworks, 1 vector flag and 1 photographic backdrop.')

@@ -19,7 +19,24 @@
     "modelImage": "textures/egg-01.jpg",
     "sceneImage": "artworks/scene/egg-01.ddf4cda04532.webp",
     "thumbnailImage": "artworks/thumbnails/egg-01.dd471a812e3d.webp",
-    "previewImage": "previews/egg-01.jpg"
+    "previewImage": "previews/egg-01.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/egg-01.7aa6d47cda91.webp",
+        "width": 436,
+        "height": 640
+      },
+      {
+        "src": "artworks/scene/egg-01.ddf4cda04532.webp",
+        "width": 697,
+        "height": 1024
+      },
+      {
+        "src": "artworks/details/egg-01.bf827326efe7.webp",
+        "width": 980,
+        "height": 1440
+      }
+    ]
   },
   "didi": {
     "sourceFile": "橫式/DiDi.png",
@@ -41,7 +58,24 @@
     "modelImage": "textures/didi.jpg",
     "sceneImage": "artworks/scene/didi.8499647d5867.webp",
     "thumbnailImage": "artworks/thumbnails/didi.f1ed2aa76c8f.webp",
-    "previewImage": "previews/didi.jpg"
+    "previewImage": "previews/didi.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/didi.3ebf333cc27d.webp",
+        "width": 640,
+        "height": 453
+      },
+      {
+        "src": "artworks/scene/didi.8499647d5867.webp",
+        "width": 1024,
+        "height": 724
+      },
+      {
+        "src": "artworks/details/didi.3f941b489ef6.webp",
+        "width": 1440,
+        "height": 1018
+      }
+    ]
   },
   "css-portrait": {
     "sourceFile": "直式/奶油醬油 - 1.png",
@@ -63,7 +97,24 @@
     "modelImage": "textures/css-portrait.jpg",
     "sceneImage": "artworks/scene/css-portrait.7a776ae30aa8.webp",
     "thumbnailImage": "artworks/thumbnails/css-portrait.458599b88ac7.webp",
-    "previewImage": "previews/css-portrait.jpg"
+    "previewImage": "previews/css-portrait.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/css-portrait.66ffeca2bb14.webp",
+        "width": 427,
+        "height": 640
+      },
+      {
+        "src": "artworks/scene/css-portrait.7a776ae30aa8.webp",
+        "width": 682,
+        "height": 1024
+      },
+      {
+        "src": "artworks/details/css-portrait.86a4e7e503c2.webp",
+        "width": 960,
+        "height": 1440
+      }
+    ]
   },
   "lllokkk-portrait": {
     "sourceFile": "直式/lllokkk - 2.png",
@@ -85,7 +136,24 @@
     "modelImage": "textures/lllokkk-portrait.jpg",
     "sceneImage": "artworks/scene/lllokkk-portrait.e12bb542af78.jpg",
     "thumbnailImage": "artworks/thumbnails/lllokkk-portrait.502b4ee0bf42.webp",
-    "previewImage": "previews/lllokkk-portrait.jpg"
+    "previewImage": "previews/lllokkk-portrait.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/lllokkk-portrait.28635cda65b0.jpg",
+        "width": 452,
+        "height": 640
+      },
+      {
+        "src": "artworks/scene/lllokkk-portrait.e12bb542af78.jpg",
+        "width": 724,
+        "height": 1024
+      },
+      {
+        "src": "artworks/details/lllokkk-portrait.74db62f17304.jpg",
+        "width": 1018,
+        "height": 1440
+      }
+    ]
   },
   "hwaguwu": {
     "sourceFile": "花故_熙歌三週年.psd",
@@ -107,7 +175,24 @@
     "modelImage": "textures/hwaguwu.jpg",
     "sceneImage": "artworks/scene/hwaguwu.f77d53a8e67f.webp",
     "thumbnailImage": "artworks/thumbnails/hwaguwu.a75656da528c.webp",
-    "previewImage": "previews/hwaguwu.jpg"
+    "previewImage": "previews/hwaguwu.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/hwaguwu.f1e7ac08eb3a.webp",
+        "width": 640,
+        "height": 366
+      },
+      {
+        "src": "artworks/scene/hwaguwu.f77d53a8e67f.webp",
+        "width": 1024,
+        "height": 585
+      },
+      {
+        "src": "artworks/details/hwaguwu.221fbb631436.webp",
+        "width": 1440,
+        "height": 823
+      }
+    ]
   },
   "yukimura-portrait": {
     "sourceFile": "直式/雪村信 - 1.png",
@@ -129,7 +214,24 @@
     "modelImage": "textures/yukimura-portrait.jpg",
     "sceneImage": "artworks/scene/yukimura-portrait.c586d559e30e.webp",
     "thumbnailImage": "artworks/thumbnails/yukimura-portrait.3cf0ca8debd5.webp",
-    "previewImage": "previews/yukimura-portrait.jpg"
+    "previewImage": "previews/yukimura-portrait.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/yukimura-portrait.a5448d64777c.webp",
+        "width": 374,
+        "height": 640
+      },
+      {
+        "src": "artworks/scene/yukimura-portrait.c586d559e30e.webp",
+        "width": 598,
+        "height": 1024
+      },
+      {
+        "src": "artworks/details/yukimura-portrait.d8e71bedc8aa.webp",
+        "width": 841,
+        "height": 1440
+      }
+    ]
   },
   "yukimura-landscape": {
     "sourceFile": "橫式/雪村信 - 2.png",
@@ -151,7 +253,24 @@
     "modelImage": "textures/yukimura-landscape.jpg",
     "sceneImage": "artworks/scene/yukimura-landscape.ca3bf35f6bd8.webp",
     "thumbnailImage": "artworks/thumbnails/yukimura-landscape.33a72213a619.webp",
-    "previewImage": "previews/yukimura-landscape.jpg"
+    "previewImage": "previews/yukimura-landscape.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/yukimura-landscape.a96672f37274.webp",
+        "width": 640,
+        "height": 286
+      },
+      {
+        "src": "artworks/scene/yukimura-landscape.ca3bf35f6bd8.webp",
+        "width": 1024,
+        "height": 457
+      },
+      {
+        "src": "artworks/details/yukimura-landscape.d234c16b79c3.webp",
+        "width": 1440,
+        "height": 643
+      }
+    ]
   },
   "css-landscape": {
     "sourceFile": "橫式/奶油醬油 - 2.png",
@@ -173,7 +292,24 @@
     "modelImage": "textures/css-landscape.jpg",
     "sceneImage": "artworks/scene/css-landscape.dca3b6133204.webp",
     "thumbnailImage": "artworks/thumbnails/css-landscape.76a3f23b4742.webp",
-    "previewImage": "previews/css-landscape.jpg"
+    "previewImage": "previews/css-landscape.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/css-landscape.d1915bdf0bde.webp",
+        "width": 640,
+        "height": 463
+      },
+      {
+        "src": "artworks/scene/css-landscape.dca3b6133204.webp",
+        "width": 1024,
+        "height": 741
+      },
+      {
+        "src": "artworks/details/css-landscape.c22113178bd7.webp",
+        "width": 1440,
+        "height": 1042
+      }
+    ]
   },
   "egg-02": {
     "sourceFile": "直式/荷包蛋 - 2.png",
@@ -195,7 +331,24 @@
     "modelImage": "textures/egg-02.jpg",
     "sceneImage": "artworks/scene/egg-02.54a72fc6b89c.webp",
     "thumbnailImage": "artworks/thumbnails/egg-02.950d0f54008c.webp",
-    "previewImage": "previews/egg-02.jpg"
+    "previewImage": "previews/egg-02.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/egg-02.43fc1f30a715.webp",
+        "width": 432,
+        "height": 640
+      },
+      {
+        "src": "artworks/scene/egg-02.54a72fc6b89c.webp",
+        "width": 692,
+        "height": 1024
+      },
+      {
+        "src": "artworks/details/egg-02.b5150b882d23.webp",
+        "width": 973,
+        "height": 1440
+      }
+    ]
   },
   "chill": {
     "sourceFile": "直式/超二流—ChillAru.jpg",
@@ -217,7 +370,24 @@
     "modelImage": "textures/chill.jpg",
     "sceneImage": "artworks/scene/chill.3d2dc07376ff.webp",
     "thumbnailImage": "artworks/thumbnails/chill.91289fdc5319.webp",
-    "previewImage": "previews/chill.jpg"
+    "previewImage": "previews/chill.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/chill.ed141b12195b.webp",
+        "width": 452,
+        "height": 640
+      },
+      {
+        "src": "artworks/scene/chill.3d2dc07376ff.webp",
+        "width": 724,
+        "height": 1024
+      },
+      {
+        "src": "artworks/details/chill.d699b67dbaf1.webp",
+        "width": 1018,
+        "height": 1440
+      }
+    ]
   },
   "bbibinbing": {
     "sourceFile": "方的/BBiBinBing.jpg",
@@ -239,7 +409,24 @@
     "modelImage": "textures/bbibinbing.jpg",
     "sceneImage": "artworks/scene/bbibinbing.3d4d53e460e2.webp",
     "thumbnailImage": "artworks/thumbnails/bbibinbing.adb37f53024c.webp",
-    "previewImage": "previews/bbibinbing.jpg"
+    "previewImage": "previews/bbibinbing.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/bbibinbing.0fad72a23dea.webp",
+        "width": 640,
+        "height": 522
+      },
+      {
+        "src": "artworks/scene/bbibinbing.3d4d53e460e2.webp",
+        "width": 1024,
+        "height": 836
+      },
+      {
+        "src": "artworks/details/bbibinbing.e02eeda47431.webp",
+        "width": 1111,
+        "height": 907
+      }
+    ]
   },
   "bird-01": {
     "sourceFile": "直式/鳥語 - 1.png",
@@ -261,7 +448,24 @@
     "modelImage": "textures/bird-01.jpg",
     "sceneImage": "artworks/scene/bird-01.1573b34ae07b.webp",
     "thumbnailImage": "artworks/thumbnails/bird-01.8f236f103fcb.webp",
-    "previewImage": "previews/bird-01.jpg"
+    "previewImage": "previews/bird-01.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/bird-01.7816eac92b11.webp",
+        "width": 462,
+        "height": 640
+      },
+      {
+        "src": "artworks/scene/bird-01.1573b34ae07b.webp",
+        "width": 739,
+        "height": 1024
+      },
+      {
+        "src": "artworks/details/bird-01.328dbe21a629.webp",
+        "width": 1040,
+        "height": 1440
+      }
+    ]
   },
   "zm": {
     "sourceFile": "方的/ZM敏.png",
@@ -283,7 +487,24 @@
     "modelImage": "textures/zm.jpg",
     "sceneImage": "artworks/scene/zm.0b5bb6c0efbd.webp",
     "thumbnailImage": "artworks/thumbnails/zm.0085d6d02bb9.webp",
-    "previewImage": "previews/zm.jpg"
+    "previewImage": "previews/zm.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/zm.837097b2e411.webp",
+        "width": 640,
+        "height": 596
+      },
+      {
+        "src": "artworks/scene/zm.0b5bb6c0efbd.webp",
+        "width": 1024,
+        "height": 954
+      },
+      {
+        "src": "artworks/details/zm.460dff772933.webp",
+        "width": 1440,
+        "height": 1341
+      }
+    ]
   },
   "qb": {
     "sourceFile": "方的/QB.png",
@@ -305,7 +526,19 @@
     "modelImage": "textures/qb.jpg",
     "sceneImage": "artworks/scene/qb.4d720e2ce8a0.webp",
     "thumbnailImage": "artworks/thumbnails/qb.0a664604e939.webp",
-    "previewImage": "previews/qb.jpg"
+    "previewImage": "previews/qb.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/qb.60a924f5117d.webp",
+        "width": 640,
+        "height": 640
+      },
+      {
+        "src": "artworks/scene/qb.4d720e2ce8a0.webp",
+        "width": 1024,
+        "height": 1024
+      }
+    ]
   },
   "wz": {
     "sourceFile": "橫式/花子.png",
@@ -327,7 +560,24 @@
     "modelImage": "textures/wz.jpg",
     "sceneImage": "artworks/scene/wz.33775dc250c2.webp",
     "thumbnailImage": "artworks/thumbnails/wz.e411135ab006.webp",
-    "previewImage": "previews/wz.jpg"
+    "previewImage": "previews/wz.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/wz.15a1432d3a44.webp",
+        "width": 640,
+        "height": 433
+      },
+      {
+        "src": "artworks/scene/wz.33775dc250c2.webp",
+        "width": 1024,
+        "height": 692
+      },
+      {
+        "src": "artworks/details/wz.e40f1ed0fa33.webp",
+        "width": 1440,
+        "height": 973
+      }
+    ]
   },
   "toyasan-portrait": {
     "sourceFile": "直式/戶屋 - 1.png",
@@ -349,7 +599,24 @@
     "modelImage": "textures/toyasan-portrait.jpg",
     "sceneImage": "artworks/scene/toyasan-portrait.c4082a25ad57.webp",
     "thumbnailImage": "artworks/thumbnails/toyasan-portrait.7e50bfa8259a.webp",
-    "previewImage": "previews/toyasan-portrait.jpg"
+    "previewImage": "previews/toyasan-portrait.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/toyasan-portrait.c5a2d2b8ca49.webp",
+        "width": 413,
+        "height": 640
+      },
+      {
+        "src": "artworks/scene/toyasan-portrait.c4082a25ad57.webp",
+        "width": 661,
+        "height": 1024
+      },
+      {
+        "src": "artworks/details/toyasan-portrait.adf63babbc8c.webp",
+        "width": 724,
+        "height": 1122
+      }
+    ]
   },
   "bird-02": {
     "sourceFile": "直式/鳥語 - 2.png",
@@ -371,7 +638,24 @@
     "modelImage": "textures/bird-02.jpg",
     "sceneImage": "artworks/scene/bird-02.6cce03a5bf93.webp",
     "thumbnailImage": "artworks/thumbnails/bird-02.3c82a0295d7d.webp",
-    "previewImage": "previews/bird-02.jpg"
+    "previewImage": "previews/bird-02.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/bird-02.441c183d2dc1.webp",
+        "width": 462,
+        "height": 640
+      },
+      {
+        "src": "artworks/scene/bird-02.6cce03a5bf93.webp",
+        "width": 739,
+        "height": 1024
+      },
+      {
+        "src": "artworks/details/bird-02.13051d34113d.webp",
+        "width": 1040,
+        "height": 1440
+      }
+    ]
   },
   "medo": {
     "sourceFile": "橫式/MEDO.png",
@@ -393,7 +677,24 @@
     "modelImage": "textures/medo.jpg",
     "sceneImage": "artworks/scene/medo.17fb70179bf1.webp",
     "thumbnailImage": "artworks/thumbnails/medo.c7d2617350da.webp",
-    "previewImage": "previews/medo.jpg"
+    "previewImage": "previews/medo.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/medo.834352e977fd.webp",
+        "width": 640,
+        "height": 444
+      },
+      {
+        "src": "artworks/scene/medo.17fb70179bf1.webp",
+        "width": 1024,
+        "height": 711
+      },
+      {
+        "src": "artworks/details/medo.b4bb1d6ecc84.webp",
+        "width": 1440,
+        "height": 1000
+      }
+    ]
   },
   "toyasan-square": {
     "sourceFile": "方的/戶屋 - 2.png",
@@ -415,7 +716,24 @@
     "modelImage": "textures/toyasan-square.jpg",
     "sceneImage": "artworks/scene/toyasan-square.debcc84100f2.webp",
     "thumbnailImage": "artworks/thumbnails/toyasan-square.bc8675976dd6.webp",
-    "previewImage": "previews/toyasan-square.jpg"
+    "previewImage": "previews/toyasan-square.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/toyasan-square.68c5c8a6db48.webp",
+        "width": 640,
+        "height": 640
+      },
+      {
+        "src": "artworks/scene/toyasan-square.debcc84100f2.webp",
+        "width": 1024,
+        "height": 1024
+      },
+      {
+        "src": "artworks/details/toyasan-square.511b4bb2b3c7.webp",
+        "width": 1034,
+        "height": 1034
+      }
+    ]
   },
   "virgil": {
     "sourceFile": "直式/維吉爾.png",
@@ -437,7 +755,24 @@
     "modelImage": "textures/virgil.jpg",
     "sceneImage": "artworks/scene/virgil.091bec68e73f.webp",
     "thumbnailImage": "artworks/thumbnails/virgil.e449d56bb071.webp",
-    "previewImage": "previews/virgil.jpg"
+    "previewImage": "previews/virgil.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/virgil.42bd8da5ce60.webp",
+        "width": 254,
+        "height": 640
+      },
+      {
+        "src": "artworks/scene/virgil.091bec68e73f.webp",
+        "width": 406,
+        "height": 1024
+      },
+      {
+        "src": "artworks/details/virgil.8a3752d5509e.webp",
+        "width": 571,
+        "height": 1440
+      }
+    ]
   },
   "shiris": {
     "sourceFile": "橫式/Shiris 惜霖.png",
@@ -459,7 +794,24 @@
     "modelImage": "textures/shiris.jpg",
     "sceneImage": "artworks/scene/shiris.e336d10e71d4.webp",
     "thumbnailImage": "artworks/thumbnails/shiris.57cd4269bb42.webp",
-    "previewImage": "previews/shiris.jpg"
+    "previewImage": "previews/shiris.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/shiris.25e6fdb273cf.webp",
+        "width": 640,
+        "height": 452
+      },
+      {
+        "src": "artworks/scene/shiris.e336d10e71d4.webp",
+        "width": 1024,
+        "height": 724
+      },
+      {
+        "src": "artworks/details/shiris.294a704e2b3a.webp",
+        "width": 1440,
+        "height": 1017
+      }
+    ]
   },
   "kakult-portrait": {
     "sourceFile": "直式/翔 kakult2017 - 2.png",
@@ -481,7 +833,24 @@
     "modelImage": "textures/kakult-portrait.jpg",
     "sceneImage": "artworks/scene/kakult-portrait.47bf0962c4fa.webp",
     "thumbnailImage": "artworks/thumbnails/kakult-portrait.b511eeb72729.webp",
-    "previewImage": "previews/kakult-portrait.jpg"
+    "previewImage": "previews/kakult-portrait.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/kakult-portrait.5e781fe59957.webp",
+        "width": 452,
+        "height": 640
+      },
+      {
+        "src": "artworks/scene/kakult-portrait.47bf0962c4fa.webp",
+        "width": 724,
+        "height": 1024
+      },
+      {
+        "src": "artworks/details/kakult-portrait.3af06cbcc6ee.webp",
+        "width": 1018,
+        "height": 1440
+      }
+    ]
   },
   "chejan": {
     "sourceFile": "橫式/成江.png",
@@ -503,7 +872,24 @@
     "modelImage": "textures/chejan.jpg",
     "sceneImage": "artworks/scene/chejan.cf49510e8a5a.webp",
     "thumbnailImage": "artworks/thumbnails/chejan.e2d96c90a240.webp",
-    "previewImage": "previews/chejan.jpg"
+    "previewImage": "previews/chejan.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/chejan.5dafc951aca4.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "src": "artworks/scene/chejan.cf49510e8a5a.webp",
+        "width": 1024,
+        "height": 576
+      },
+      {
+        "src": "artworks/details/chejan.fe95d2bf1b79.webp",
+        "width": 1440,
+        "height": 810
+      }
+    ]
   },
   "lllokkk-landscape": {
     "sourceFile": "橫式/lllokkk - 1.png",
@@ -525,7 +911,24 @@
     "modelImage": "textures/lllokkk-landscape.jpg",
     "sceneImage": "artworks/scene/lllokkk-landscape.2e7114904a56.webp",
     "thumbnailImage": "artworks/thumbnails/lllokkk-landscape.baf888d1aea7.webp",
-    "previewImage": "previews/lllokkk-landscape.jpg"
+    "previewImage": "previews/lllokkk-landscape.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/lllokkk-landscape.e9810c09e523.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "src": "artworks/scene/lllokkk-landscape.2e7114904a56.webp",
+        "width": 1024,
+        "height": 576
+      },
+      {
+        "src": "artworks/details/lllokkk-landscape.1144ac623b65.webp",
+        "width": 1440,
+        "height": 810
+      }
+    ]
   },
   "jen": {
     "sourceFile": "橫式/JENˇ荏.png",
@@ -547,7 +950,24 @@
     "modelImage": "textures/jen.jpg",
     "sceneImage": "artworks/scene/jen.2e5fc6e1275a.webp",
     "thumbnailImage": "artworks/thumbnails/jen.805dcae91eee.webp",
-    "previewImage": "previews/jen.jpg"
+    "previewImage": "previews/jen.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/jen.e8e8266302ed.webp",
+        "width": 640,
+        "height": 360
+      },
+      {
+        "src": "artworks/scene/jen.2e5fc6e1275a.webp",
+        "width": 1024,
+        "height": 576
+      },
+      {
+        "src": "artworks/details/jen.721f482b2d03.webp",
+        "width": 1440,
+        "height": 810
+      }
+    ]
   },
   "kakult-landscape": {
     "sourceFile": "橫式/翔 kakult2017 - 1.png",
@@ -569,7 +989,24 @@
     "modelImage": "textures/kakult-landscape.jpg",
     "sceneImage": "artworks/scene/kakult-landscape.0752fb5a4761.webp",
     "thumbnailImage": "artworks/thumbnails/kakult-landscape.631d1e544077.webp",
-    "previewImage": "previews/kakult-landscape.jpg"
+    "previewImage": "previews/kakult-landscape.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/kakult-landscape.74997b9cfaa5.webp",
+        "width": 640,
+        "height": 438
+      },
+      {
+        "src": "artworks/scene/kakult-landscape.0752fb5a4761.webp",
+        "width": 1024,
+        "height": 702
+      },
+      {
+        "src": "artworks/details/kakult-landscape.ee0ea0ecef93.webp",
+        "width": 1440,
+        "height": 986
+      }
+    ]
   },
   "enruzero": {
     "sourceFile": "緣流.jpg",
@@ -591,7 +1028,24 @@
     "modelImage": "textures/enruzero.jpg",
     "sceneImage": "artworks/scene/enruzero.e98cbefac2d2.webp",
     "thumbnailImage": "artworks/thumbnails/enruzero.5dca7974642e.webp",
-    "previewImage": "previews/enruzero.jpg"
+    "previewImage": "previews/enruzero.jpg",
+    "detailImages": [
+      {
+        "src": "artworks/details/enruzero.cf181939afa1.webp",
+        "width": 640,
+        "height": 512
+      },
+      {
+        "src": "artworks/scene/enruzero.e98cbefac2d2.webp",
+        "width": 1024,
+        "height": 819
+      },
+      {
+        "src": "artworks/details/enruzero.c979c22c722c.webp",
+        "width": 1440,
+        "height": 1152
+      }
+    ]
   },
   "guestbook-flag": {
     "modelImage": "textures/guestbook-flag.png",
