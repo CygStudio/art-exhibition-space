@@ -9,7 +9,8 @@ const gallery=JSON.parse(readFileSync(new URL('../public/gallery.json',import.me
 const {bounds,colliders}=gallery
 
 test('room boundaries stop the camera at every wall',()=>{
-  for(const [x,z] of [[-5.4,0],[5.4,0],[0,-5.1],[0,5.1]])assert.equal(canOccupy(x,z,bounds,colliders),false)
+  const o=gallery.layout.outer
+  for(const [x,z] of [[o.minX,0],[o.maxX,0],[0,o.minZ],[0,o.maxZ]])assert.equal(canOccupy(x,z,bounds,colliders),false)
   assert.equal(canOccupy(1.25,4.1,bounds,colliders),true)
 })
 test('camera cannot tunnel through a pillar on a delayed frame',()=>{
@@ -128,11 +129,23 @@ test('window panes survive GLB export with transparent material',()=>{
 })
 test('floor plan uses the model proportions and keeps annotated areas oriented correctly',()=>{
   const l=gallery.layout
-  assert.deepEqual(mapPoint(l.outer.minX,l.outer.minZ,l),{x:8,y:8})
-  assert.ok(Math.abs(mapPoint(l.outer.maxX,0,l).x-112)<1e-9)
+  const topLeft=mapPoint(l.outer.minX,l.outer.minZ,l),bottomRight=mapPoint(l.outer.maxX,l.outer.maxZ,l)
+  assert.ok(topLeft.x>=8&&topLeft.y>=8)
+  assert.ok(bottomRight.x<=112&&bottomRight.y<=108)
+  assert.ok(Math.abs((bottomRight.x-topLeft.x)/(bottomRight.y-topLeft.y)-(l.outer.maxX-l.outer.minX)/(l.outer.maxZ-l.outer.minZ))<1e-9)
   assert.ok(mapPoint(l.guestbook.x,l.guestbook.z,l).x<mapPoint(l.serviceDesk.x,l.serviceDesk.z,l).x)
   const room=mapPoint(l.entranceLobby.x,l.entranceLobby.z,l)
   assert.ok(room.x>60&&room.y<55)
+})
+
+test('both end walls leave more space around the unchanged columns and the larger service desk',()=>{
+  const {outer,columns,serviceDesk}=gallery.layout
+  assert.deepEqual(columns.map(c=>[c.x,c.z]),[[-1.25,-2.94],[-1.25,3]])
+  assert.ok(columns[0].z-columns[0].depth/2-outer.minZ>=3)
+  assert.ok(outer.maxZ-columns[1].z-columns[1].depth/2>=3)
+  assert.ok(serviceDesk.width>=3.4&&serviceDesk.depth>=1)
+  assert.ok(columns[0].z-columns[0].depth/2-(serviceDesk.z+serviceDesk.depth/2)>1)
+  assert.ok(canOccupy(serviceDesk.x,serviceDesk.z+.95,bounds,colliders))
 })
 
 test('only the two large desk backdrops disable details in JSON and GLB',()=>{

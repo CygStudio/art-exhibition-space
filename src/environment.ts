@@ -23,6 +23,10 @@ export function createCelEnvironment() {
     'Ruler yellow': '#f4c340',
     'Ruler ink': '#382c1b',
     'Ruler spots': '#bc6a32',
+    'Computer charcoal': '#24232d',
+    'Computer glass': '#392c46',
+    'Computer magenta': '#e943b9',
+    'Computer cyan': '#58cbe7',
   }
   const materials = new Map<string, THREE.MeshToonMaterial>()
   const ink = new THREE.LineBasicMaterial({ color: '#635c72', transparent: true, opacity: .28, depthWrite: false })
@@ -47,6 +51,14 @@ export function createCelEnvironment() {
         material.emissive.set('#fff1c7')
         material.emissiveIntensity = .45
       }
+      if (source.name === 'Computer magenta' || source.name === 'Computer cyan') {
+        material.emissive.set(palette[source.name]!)
+        material.emissiveIntensity = .7
+      }
+      if (source.name === 'Computer glass') {
+        material.transparent = true
+        material.opacity = .48
+      }
       materials.set(source.name, material)
     }
     return material
@@ -58,6 +70,11 @@ export function createCelEnvironment() {
     // Do not add children while traversing. Outlines never participate in picking.
     for (const mesh of meshes) {
       const original = Array.isArray(mesh.material) ? mesh.material : [mesh.material]
+      if (mesh.userData.preserveImage) {
+        mesh.material = new THREE.MeshBasicMaterial({map: (original[0] as THREE.MeshStandardMaterial).map})
+        original.forEach(material => material.dispose())
+        continue
+      }
       mesh.userData.walkable = original.some(m => m.name === 'Concrete')
       mesh.material = original.length === 1 ? materialFor(original[0]) : original.map(materialFor)
       if (original.some(m => ['Paper labels', 'Lamp diffuser', 'Concrete', 'Window glass', 'Exterior ambient', 'Ruler ink', 'Ruler yellow', 'Ruler spots'].includes(m.name))) continue

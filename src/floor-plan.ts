@@ -11,13 +11,17 @@ export interface Layout {
 }
 
 // Use the exported model coordinates for both plan shapes and the live position marker.
+function mapScale(layout: Layout) {
+  return Math.min(104 / (layout.outer.maxX - layout.outer.minX), 100 / (layout.outer.maxZ - layout.outer.minZ))
+}
 export function mapPoint(x: number, z: number, layout: Layout) {
-  const { minX, minZ, maxX } = layout.outer
-  const scale = 104 / (maxX - minX)
-  return { x: 8 + (x - minX) * scale, y: 8 + (z - minZ) * scale }
+  const { minX, minZ, maxX, maxZ } = layout.outer
+  const scale = mapScale(layout)
+  return { x: (120 - (maxX - minX) * scale) / 2 + (x - minX) * scale,
+    y: (116 - (maxZ - minZ) * scale) / 2 + (z - minZ) * scale }
 }
 export function drawFloorPlan(group: SVGGElement, layout: Layout) {
-  const scale = 104 / (layout.outer.maxX - layout.outer.minX)
+  const scale = mapScale(layout)
   function rect(area: Footprint, fill: string, stroke = 'none') {
     const p = mapPoint(area.x - area.width / 2, area.z - area.depth / 2, layout)
     return `<rect x="${p.x}" y="${p.y}" width="${area.width * scale}" height="${area.depth * scale}" fill="${fill}" stroke="${stroke}" stroke-width="1.4"/>`

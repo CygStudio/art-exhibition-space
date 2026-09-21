@@ -50,7 +50,7 @@ test('the initial scene stays within the preview budget and the flag remains fla
   assert.ok(glb.length < 1_300_000, `${glb.length} bytes`)
   const embeddedBytes = model.images.reduce((sum, image) => sum + model.bufferViews[image.bufferView].byteLength, 0)
   assert.ok(embeddedBytes < 130_000, `${embeddedBytes} embedded image bytes`)
-  assert.equal(model.images.length, gallery.artworks.length)
+  assert.equal(model.images.length, gallery.artworks.length + 3)
   const flag = gallery.artworks.find(a => a.key === 'guestbook-flag')
   assert.equal(flag.imageKind, 'flat-vector')
   assert.match(flag.texture, /\.svg$/)
@@ -75,7 +75,9 @@ test('canvases on the same wall have clearance and fit inside the available wall
     const normal = along === 2 ? 0 : 2
     assert.ok(a.position[1] - a.height / 2 > .4, a.key)
     assert.ok(a.position[1] + a.height / 2 < 2.9, a.key)
-    assert.ok(Math.abs(a.position[along]) + a.width / 2 < (along === 0 ? 5.3 : 5), a.key)
+    const low = along === 0 ? gallery.layout.outer.minX : gallery.layout.outer.minZ
+    const high = along === 0 ? gallery.layout.outer.maxX : gallery.layout.outer.maxZ
+    assert.ok(a.position[along] - a.width / 2 > low + .1 && a.position[along] + a.width / 2 < high - .1, a.key)
     if (a.rotation === -90) {
       assert.ok(a.position[2] - a.width / 2 > -1.65, a.key)
       assert.ok(a.position[2] + a.width / 2 < gallery.layout.window.z - gallery.layout.window.depth / 2, a.key)

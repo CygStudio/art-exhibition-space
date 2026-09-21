@@ -8,7 +8,7 @@
       "position": [
         4.795,
         1.72,
-        4.885
+        6.085
       ],
       "width": 0.65,
       "height": 0.955117,
@@ -19,7 +19,7 @@
       "viewPosition": [
         4.795,
         1.65,
-        3.85
+        5.050000000000001
       ],
       "imageKind": "original-artwork",
       "image": "artworks/egg-01.webp",
@@ -42,7 +42,7 @@
       "position": [
         3.705,
         1.72,
-        4.885
+        6.085
       ],
       "width": 0.97,
       "height": 0.685849,
@@ -53,7 +53,7 @@
       "viewPosition": [
         3.705,
         1.65,
-        3.85
+        5.050000000000001
       ],
       "imageKind": "original-artwork",
       "image": "artworks/didi.webp",
@@ -76,7 +76,7 @@
       "position": [
         2.63,
         1.72,
-        4.885
+        6.085
       ],
       "width": 0.62,
       "height": 0.93,
@@ -87,7 +87,7 @@
       "viewPosition": [
         2.63,
         1.65,
-        3.85
+        5.050000000000001
       ],
       "imageKind": "original-artwork",
       "image": "artworks/css-portrait.webp",
@@ -110,7 +110,7 @@
       "position": [
         1.715,
         1.72,
-        4.885
+        6.085
       ],
       "width": 0.65,
       "height": 0.919227,
@@ -121,7 +121,7 @@
       "viewPosition": [
         1.715,
         1.65,
-        3.85
+        5.050000000000001
       ],
       "imageKind": "original-artwork",
       "image": "artworks/lllokkk-portrait.webp",
@@ -144,7 +144,7 @@
       "position": [
         0.585,
         1.83,
-        4.885
+        6.085
       ],
       "width": 1.05,
       "height": 0.600041,
@@ -155,7 +155,7 @@
       "viewPosition": [
         0.585,
         1.65,
-        3.85
+        5.050000000000001
       ],
       "imageKind": "original-artwork",
       "image": "artworks/hwaguwu.webp",
@@ -178,7 +178,7 @@
       "position": [
         -0.54,
         1.72,
-        4.885
+        6.085
       ],
       "width": 0.64,
       "height": 1.09625,
@@ -189,7 +189,7 @@
       "viewPosition": [
         -0.54,
         1.65,
-        3.85
+        5.050000000000001
       ],
       "imageKind": "original-artwork",
       "image": "artworks/yukimura-portrait.webp",
@@ -212,7 +212,7 @@
       "position": [
         -1.65,
         1.83,
-        4.885
+        6.085
       ],
       "width": 1.02,
       "height": 0.455249,
@@ -223,7 +223,7 @@
       "viewPosition": [
         -1.65,
         1.65,
-        3.85
+        5.050000000000001
       ],
       "imageKind": "original-artwork",
       "image": "artworks/yukimura-landscape.webp",
@@ -246,7 +246,7 @@
       "position": [
         -2.87,
         1.72,
-        4.885
+        6.085
       ],
       "width": 0.86,
       "height": 0.622357,
@@ -257,7 +257,7 @@
       "viewPosition": [
         -2.87,
         1.65,
-        3.85
+        5.050000000000001
       ],
       "imageKind": "original-artwork",
       "image": "artworks/css-landscape.webp",
@@ -280,7 +280,7 @@
       "position": [
         -3.89,
         1.72,
-        4.885
+        6.085
       ],
       "width": 0.62,
       "height": 0.917663,
@@ -291,7 +291,7 @@
       "viewPosition": [
         -3.89,
         1.65,
-        3.85
+        5.050000000000001
       ],
       "imageKind": "original-artwork",
       "image": "artworks/egg-02.webp",
@@ -314,7 +314,7 @@
       "position": [
         -4.8,
         1.72,
-        4.885
+        6.085
       ],
       "width": 0.64,
       "height": 0.905086,
@@ -325,7 +325,7 @@
       "viewPosition": [
         -4.8,
         1.65,
-        3.85
+        5.050000000000001
       ],
       "imageKind": "original-artwork",
       "image": "artworks/chill.webp",
@@ -348,7 +348,7 @@
       "position": [
         -5.185,
         1.72,
-        4.095
+        5.253409090909091
       ],
       "width": 0.69,
       "height": 0.563303,
@@ -377,7 +377,7 @@
       "position": [
         -5.185,
         1.72,
-        3.145
+        4.173863636363636
       ],
       "width": 0.63,
       "height": 0.87256,
@@ -406,7 +406,7 @@
       "position": [
         -5.185,
         1.72,
-        2.15
+        3.0431818181818184
       ],
       "width": 0.78,
       "height": 0.726189,
@@ -435,7 +435,7 @@
       "position": [
         -5.185,
         1.72,
-        1.08
+        1.8272727272727274
       ],
       "width": 0.78,
       "height": 0.78,
@@ -464,7 +464,7 @@
       "position": [
         -5.185,
         1.72,
-        -0.05
+        0.5431818181818182
       ],
       "width": 0.9,
       "height": 0.60814,
@@ -493,7 +493,7 @@
       "position": [
         -5.185,
         1.72,
-        -1.08
+        -0.6272727272727273
       ],
       "width": 0.58,
       "height": 0.89884,
@@ -522,7 +522,7 @@
       "position": [
         -5.185,
         1.72,
-        -1.975
+        -1.6443181818181818
       ],
       "width": 0.63,
       "height": 0.87256,
@@ -551,7 +551,7 @@
       "position": [
         -5.185,
         1.72,
-        -3.01
+        -2.8204545454545453
       ],
       "width": 0.86,
       "height": 0.597222,
@@ -580,7 +580,7 @@
       "position": [
         -5.185,
         1.72,
-        -4.085
+        -4.0420454545454545
       ],
       "width": 0.71,
       "height": 0.71,
@@ -853,7 +853,7 @@
       "position": [
         -3.92,
         1.98,
-        -4.965
+        -6.165
       ],
       "width": 2.36,
       "height": 1.38,
@@ -863,7 +863,7 @@
       "viewPosition": [
         -3.8,
         1.65,
-        -2.7
+        -3.9000000000000004
       ],
       "evidence": "IMG_9426.jpg; DJ 30–31s",
       "sourceFile": "refs/IMG_9426.jpg",
@@ -883,7 +883,7 @@
       "position": [
         -0.43,
         1.7,
-        -4.965
+        -6.165
       ],
       "width": 4.14,
       "height": 2.12,
@@ -893,7 +893,7 @@
       "viewPosition": [
         0.1,
         1.65,
-        -2.2
+        -3.4000000000000004
       ],
       "evidence": "studio 42s; IMG_9426.jpg",
       "sourceFile": "refs/studio-video@42s",
@@ -908,9 +908,9 @@
     {
       "name": "Entry lobby west upper partition",
       "x": 2.05,
-      "z": -4.0375,
+      "z": -4.6375,
       "width": 0.16,
-      "depth": 2.1249999999999996
+      "depth": 3.3249999999999997
     },
     {
       "name": "Entry lobby west lower pier",
@@ -949,36 +949,36 @@
     },
     {
       "name": "Staff service counter",
-      "x": 0.075,
-      "z": -3.95,
-      "width": 3.25,
-      "depth": 0.82
+      "x": 0.15,
+      "z": -4.85,
+      "width": 3.4,
+      "depth": 1.08
     },
     {
       "name": "Folding chair",
-      "x": -0.7,
-      "z": -4.72,
+      "x": -0.55,
+      "z": -5.78,
       "width": 0.46,
       "depth": 0.48
     },
     {
       "name": "Folding chair",
       "x": 0.85,
-      "z": -4.72,
+      "z": -5.78,
       "width": 0.46,
       "depth": 0.48
     },
     {
       "name": "Guestbook table",
-      "x": -3.8,
-      "z": -4.55,
-      "width": 2.8,
-      "depth": 0.72
+      "x": -3.85,
+      "z": -5.72,
+      "width": 2.65,
+      "depth": 0.82
     },
     {
       "name": "Folding chair",
       "x": -4.65,
-      "z": -3.65,
+      "z": -4.75,
       "width": 0.46,
       "depth": 0.48
     }
@@ -986,39 +986,39 @@
   "bounds": {
     "minX": -4.95,
     "maxX": 4.95,
-    "minZ": -4.65,
-    "maxZ": 4.65
+    "minZ": -5.85,
+    "maxZ": 5.85
   },
   "layout": {
     "outer": {
       "minX": -5.4,
       "maxX": 5.4,
-      "minZ": -5.1,
-      "maxZ": 5.1
+      "minZ": -6.3,
+      "maxZ": 6.3
     },
     "entranceLobby": {
       "x": 3.725,
-      "z": -3.375,
+      "z": -3.9749999999999996,
       "width": 3.35,
-      "depth": 3.45
+      "depth": 4.65
     },
     "serviceDesk": {
-      "x": 0.075,
-      "z": -3.95,
-      "width": 3.25,
-      "depth": 0.82
+      "x": 0.15,
+      "z": -4.85,
+      "width": 3.4,
+      "depth": 1.08
     },
     "guestbook": {
-      "x": -3.8,
-      "z": -4.55,
-      "width": 2.8,
-      "depth": 0.72
+      "x": -3.85,
+      "z": -5.72,
+      "width": 2.65,
+      "depth": 0.82
     },
     "window": {
       "x": 5.4,
-      "z": 3.025,
+      "z": 3.625,
       "width": 0.12,
-      "depth": 3.35
+      "depth": 4.55
     },
     "entrance": {
       "position": [
